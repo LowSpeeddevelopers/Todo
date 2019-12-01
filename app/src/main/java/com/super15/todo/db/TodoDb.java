@@ -77,7 +77,7 @@ public class TodoDb extends DbHelper {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(DbHelper.COL_TITLE, todoModels.getTitle() );
+        contentValues.put(DbHelper.COL_TITLE, todoModels.getTitle());
         contentValues.put(DbHelper.COL_DATE, todoModels.getDate() );
         contentValues.put(DbHelper.COL_TIME, todoModels.getTime());
         contentValues.put(DbHelper.COL_NOTE, todoModels.getNote());
