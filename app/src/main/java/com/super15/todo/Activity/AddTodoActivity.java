@@ -1,35 +1,27 @@
 package com.super15.todo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.super15.todo.BroadcustReceiver.AlarmReceiver;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
-
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddTodoActivity extends AppCompatActivity {
 
@@ -68,9 +60,11 @@ public class AddTodoActivity extends AppCompatActivity {
         minute=calendar.get(Calendar.MINUTE);
         hour=calendar.get(Calendar.HOUR_OF_DAY);
 
-        tvDate.setText(day + "/" +month+"/" +year);
+        dateFormater(day,month,year);
 
-        tvTime.setText(hour + ":" +minute );
+        timeFormater(hour, minute);
+
+
 
 
 
@@ -88,12 +82,10 @@ public class AddTodoActivity extends AppCompatActivity {
                         Log.e("month",String.valueOf(month));
                         Log.e("year",String.valueOf(year));
 
-                        String date= dayOfMonth + "/" +month+"/" +year;
+                        dateFormater(dayOfMonth,month,year);
 
                         cal.set(year,month,dayOfMonth);
 
-
-                        tvDate.setText(date);
 
 
                     }
@@ -113,7 +105,8 @@ public class AddTodoActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(AddTodoActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        tvTime.setText(hourOfDay + ":" +minute );
+
+                        timeFormater(hourOfDay, minute);
                         
                         cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         cal.set(Calendar.MINUTE,minute);
@@ -161,6 +154,50 @@ public class AddTodoActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void dateFormater(int day, int month, int year){
+
+        String sDay, sMonth, sYear;
+
+        if (day<10){
+            sDay = "0"+day;
+        } else {
+            sDay = ""+day;
+        }
+
+        if (month<10){
+            sMonth = "0"+month;
+        } else {
+            sMonth = ""+month;
+        }
+
+        sYear = ""+year;
+
+
+        String date= sDay + "/" +sMonth+"/" +sYear;
+
+        tvDate.setText(date);
+    }
+
+    private void timeFormater(int hour, int minute){
+
+        String sMinute, sHour;
+
+        if (minute < 10){
+            sMinute="0"+minute;
+        } else {
+            sMinute=""+minute;
+        }
+
+        if (hour < 10){
+            sHour="0"+hour;
+        } else {
+            sHour=""+hour;
+        }
+
+        tvTime.setText(sHour + ":" +sMinute );
 
     }
 
