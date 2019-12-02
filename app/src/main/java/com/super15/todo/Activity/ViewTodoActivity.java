@@ -41,7 +41,7 @@ public class ViewTodoActivity extends AppCompatActivity {
         rvTodo.setHasFixedSize(true);
         rvTodo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        todoAdapter = new TodoAdapter(getApplicationContext(),todoModels);
+        todoAdapter = new TodoAdapter(ViewTodoActivity.this,todoModels);
 
         Log.e("data 1",todoModels.toString());
 
