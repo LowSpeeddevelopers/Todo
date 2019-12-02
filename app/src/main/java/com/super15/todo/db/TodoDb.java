@@ -47,8 +47,6 @@ public class TodoDb extends DbHelper {
 
         Cursor c = db.query(TABLE_NAME,null,null,null,null,null,null);
 
-        c.moveToFirst();
-
         while (c.moveToNext()){
             String id = c.getString(c.getColumnIndex(COL_ID));
             String title = c.getString(c.getColumnIndex(COL_TITLE));

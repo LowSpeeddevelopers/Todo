@@ -32,8 +32,6 @@ public class AddTodoActivity extends AppCompatActivity {
 
     TodoDb todoDb;
 
-    DatePickerDialog.OnDateSetListener Datesetsistener;
-    TimePickerDialog.OnTimeSetListener timeSetListener;
     int hour, minute;
 
     @Override
@@ -128,10 +126,6 @@ public class AddTodoActivity extends AppCompatActivity {
                 String note = edtNote.getText().toString();
                 String date = tvDate.getText().toString();
                 String time = tvTime.getText().toString();
-
-
-
-
 
                 if (title.isEmpty() || note.isEmpty() || date.isEmpty() || time.isEmpty()){
                     Toast.makeText(AddTodoActivity.this, "Empty not allowed", Toast.LENGTH_SHORT).show();
