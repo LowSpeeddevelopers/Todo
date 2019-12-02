@@ -65,13 +65,9 @@ public class AddTodoActivity extends AppCompatActivity {
         timeFormater(hour, minute);
 
 
-
-
-
         tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AddTodoActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -85,8 +81,6 @@ public class AddTodoActivity extends AppCompatActivity {
                         dateFormater(dayOfMonth,month,year);
 
                         cal.set(year,month,dayOfMonth);
-
-
 
                     }
                 }, year,month,day);
