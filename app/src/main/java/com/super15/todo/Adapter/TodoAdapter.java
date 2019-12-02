@@ -164,6 +164,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         update_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String date= update_date.getText().toString();
+                String[] strDate=date.split("/",3);
+                int day=Integer.parseInt(strDate[0]);
+                int month=Integer.parseInt(strDate[1]);
+                int year=Integer.parseInt(strDate[2]);
+
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -190,6 +196,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         update_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String time= update_time.getText().toString();
+                String[] strTime=time.split(":",2);
+                int hour=Integer.parseInt(strTime[0]);
+                int minute=Integer.parseInt(strTime[1]);
+
+
 
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
@@ -205,7 +217,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                     }
                 },hour,minute, DateFormat.is24HourFormat(mContext));
                 timePickerDialog.show();
-                //String times= ;
+
 
 
             }
