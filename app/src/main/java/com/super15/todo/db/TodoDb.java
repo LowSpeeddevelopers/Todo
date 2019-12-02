@@ -65,6 +65,8 @@ public class TodoDb extends DbHelper {
 
         Log.e("data 2", data.toString());
 
+
+
         return data;
     }
 

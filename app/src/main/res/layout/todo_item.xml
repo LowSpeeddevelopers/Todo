@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textSize="25sp"
-        android:padding="8dp"
-        android:id="@+id/tv_title"
-        android:layout_margin="4dp"
-        android:text="Title"/>
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textSize="18sp"
-        android:padding="8dp"
-        android:id="@+id/tv_note"
-        android:layout_margin="4dp"
-        android:text="Note"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:padding="8dp"
-            android:id="@+id/tv_date"
-            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="Date"/>
+            android:layout_alignParentLeft="true"
+            android:padding="8dp"
+            android:text="Title"
+            android:textSize="25sp" />
 
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:text="Date"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:text="Note"
+            android:layout_alignParentLeft="true"
+            android:textSize="25sp" />
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
@@ -44,9 +54,36 @@
             android:layout_alignParentRight="true"
             android:padding="8dp"
             android:text="Time"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
+
 
     </RelativeLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:background=""/>
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:background=""/>
+
+    </LinearLayout>
 
 
 
