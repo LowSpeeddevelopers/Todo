@@ -63,14 +63,14 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         minute=calendar.get(Calendar.MINUTE);
         hour=calendar.get(Calendar.HOUR_OF_DAY);
-       currentdate= dateFormater(day,month,year);
+        currentdate= dateFormater(day,month,year);
         currenttime=timeFormater(hour, minute);
 
         cal=Calendar.getInstance();
 
         todoDb = new TodoDb(getApplicationContext());
 
-         todoModels = todoDb.getData();
+        todoModels = todoDb.getData();
 
         rvTodo.setHasFixedSize(true);
         rvTodo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

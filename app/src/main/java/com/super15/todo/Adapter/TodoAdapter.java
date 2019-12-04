@@ -171,11 +171,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                         TodoDb todoDb = new TodoDb(mContext);
                         todoDb.deleteData(mTodos.get(position).getId());
                         mTodos.remove(position);
-                        synchronized (mTodos){
-                            mTodos.notifyAll();
-                        }
-                       // mTodos.notifyAll();
+
                         notifyItemRemoved(position);
+                        notifyDataSetChanged();
                         return true;
 
                     default:
@@ -269,6 +267,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                         alertDialog.cancel();
                         mTodos.set(position, model);
                         notifyItemChanged(position, model);
+                        notifyDataSetChanged();
 
                     }
                 }
