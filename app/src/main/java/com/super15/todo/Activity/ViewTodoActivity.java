@@ -2,6 +2,8 @@ package com.super15.todo.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +25,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.super15.todo.Adapter.TodoAdapter;
 import com.super15.todo.BroadcustReceiver.AlarmReceiver;
 import com.super15.todo.Model.TodoModel;
@@ -44,6 +48,7 @@ public class ViewTodoActivity extends AppCompatActivity {
     int hour, minute;
     int year,month,day;
     Calendar cal;
+    private FlowingDrawer mDrawer;
     ArrayList<TodoModel> todoModels;
 
     String userdate,usertime,currenttime,currentdate;
@@ -66,6 +71,8 @@ public class ViewTodoActivity extends AppCompatActivity {
         currentdate= dateFormater(day,month,year);
         currenttime=timeFormater(hour, minute);
 
+        mDrawer=findViewById(R.id.drawerlayout);
+
         cal=Calendar.getInstance();
 
         todoDb = new TodoDb(getApplicationContext());
@@ -80,6 +87,7 @@ public class ViewTodoActivity extends AppCompatActivity {
         Log.e("data 1",todoModels.toString());
 
 
+        setupToolbar();
 
         rvTodo.setAdapter(todoAdapter);
 
@@ -286,4 +294,23 @@ public class ViewTodoActivity extends AppCompatActivity {
         Log.e("alarm","Alarm has been saved");
 
     }
+
+
+    protected void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.menuwhite);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawer.toggleMenu();
+            }
+        });
+    }
+
+
+
+
+
 }

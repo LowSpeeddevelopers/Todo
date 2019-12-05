@@ -1,53 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:padding="8dp">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9CD7DF"
+        android:orientation="vertical">
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="UPDATE ALARM"
         android:textSize="25sp"
-        android:gravity="center"/>
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/edt_update_title"
-        android:textSize="20dp"
-        android:hint="Title"/>
+        android:textColor="#000"
+        android:layout_margin="8dp"
+        android:textAlignment="center"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edt_update_title"
 
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/edt_update_note"
-        android:textSize="20dp"
-        android:hint="Note"/>
+                android:hint="Title"
+                android:layout_height="wrap_content"/>
 
-    <RelativeLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edt_update_note"
+
+                android:hint="Time"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
         android:layout_height="wrap_content" >
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/tv_update_date"
-            android:layout_alignParentLeft="true"
-            android:textSize="30dp"
+
+            android:textSize="30sp"
             android:text="Date"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/tv_update_time"
-            android:layout_alignParentRight="true"
-            android:textSize="30dp"
+            android:textColor="#000"
+
+            android:textSize="30sp"
             android:text="Time"/>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:layout_height="wrap_content"
@@ -55,4 +97,8 @@
         android:id="@+id/btn_update"
         android:text="update"
         android:layout_gravity="center"/>
-</LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

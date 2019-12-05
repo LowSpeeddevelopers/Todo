@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.textfield.TextInputEditText;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
@@ -37,14 +39,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private Context mContext;
     private ArrayList<TodoModel> mTodos;
 
-    Calendar cal;
+    private Calendar cal;
 
-    TodoModel todoModel;
+    private TodoModel todoModel;
 
-    EditText update_title, update_note;
+    private TextInputEditText update_title, update_note;
 
-    TextView update_date, update_time;
-    ViewHolder holder;
+    private TextView update_date, update_time;
+    private ViewHolder holder;
 
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodos) {
         this.mContext = mContext;
@@ -288,5 +290,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         if(hour<10){sHour="0"+hour;}else{sHour=""+hour;}
         update_time.setText(sHour + ":" +sMinute );
     }
+
+
 
 }
