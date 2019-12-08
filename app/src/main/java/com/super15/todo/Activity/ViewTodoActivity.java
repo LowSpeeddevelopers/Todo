@@ -44,6 +44,8 @@ public class ViewTodoActivity extends AppCompatActivity {
     int year,month,day;
     Calendar cal;
     private FlowingDrawer mDrawer;
+
+    TextView home, setting, share, aboutus, help, contact;
     ArrayList<TodoModel> todoModels;
 
     String userdate,usertime,currenttime,currentdate;
@@ -67,6 +69,15 @@ public class ViewTodoActivity extends AppCompatActivity {
         currenttime=timeFormater(hour, minute);
 
         mDrawer=findViewById(R.id.drawerlayout);
+
+        home=findViewById(R.id.barighor);
+        share=findViewById(R.id.choriyedao);
+        setting=findViewById(R.id.genjam);
+        help=findViewById(R.id.sahajjo);
+        contact=findViewById(R.id.jogajog);
+        aboutus=findViewById(R.id.amaderbepare);
+
+
 
         cal=Calendar.getInstance();
 
@@ -93,7 +104,114 @@ public class ViewTodoActivity extends AppCompatActivity {
                 showDialoguebox();
             }
         });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showhomeDialoguebox();
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showshareDialoguebox();
+            }
+        });
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showsettingDialoguebox();
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showhelpDialoguebox();
+            }
+        });
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showcontactDialoguebox();
+            }
+        });
+        aboutus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showaboutDialoguebox();
+            }
+        });
     }
+
+    void showhomeDialoguebox(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
+        View DialogueView = getLayoutInflater().inflate(R.layout.homeactivity, null);
+        builder.setView(DialogueView);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialog.show();
+
+    }
+
+    void showshareDialoguebox(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
+        View DialogueView = getLayoutInflater().inflate(R.layout.share, null);
+        builder.setView(DialogueView);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialog.show();
+
+    }
+
+    void showsettingDialoguebox(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
+        View DialogueView = getLayoutInflater().inflate(R.layout.setting, null);
+        builder.setView(DialogueView);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialog.show();
+
+    }
+
+    void showhelpDialoguebox(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
+        View DialogueView = getLayoutInflater().inflate(R.layout.help, null);
+        builder.setView(DialogueView);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialog.show();
+
+    }
+
+    void showcontactDialoguebox(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
+        View DialogueView = getLayoutInflater().inflate(R.layout.contact, null);
+        builder.setView(DialogueView);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialog.show();
+
+    }
+
+    void showaboutDialoguebox(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
+        View DialogueView = getLayoutInflater().inflate(R.layout.aboutus, null);
+        builder.setView(DialogueView);
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialog.show();
+
+    }
+
+
+
+
+
 
     void showDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
@@ -305,6 +423,11 @@ public class ViewTodoActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
 
 
 
