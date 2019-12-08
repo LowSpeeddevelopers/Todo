@@ -119,8 +119,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:text="Home"
+                android:id="@+id/barighor"
                 android:layout_margin="8dp"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_home_black_24dp"
@@ -130,10 +131,55 @@
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
                 android:layout_gravity="left"
-                android:text="Home"
+                android:text="Share"
+                android:id="@+id/choriyedao"
                 android:layout_margin="8dp"
                 android:drawablePadding="8dp"
-                android:drawableStart="@drawable/ic_home_black_24dp"
+                android:drawableStart="@drawable/ic_share_black_24dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_gravity="left"
+                android:text="Setting"
+                android:id="@+id/genjam"
+                android:layout_margin="8dp"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_settings_black_24dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_gravity="left"
+                android:text="Help"
+                android:id="@+id/sahajjo"
+                android:layout_margin="8dp"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_help_black_24dp"
+                />
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_gravity="left"
+            android:text="Contact"
+                android:id="@+id/jogajog"
+            android:layout_margin="8dp"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_contact_mail_black_24dp"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_gravity="left"
+                android:text="About US"
+                android:id="@+id/amaderbepare"
+                android:layout_margin="8dp"
+                android:drawablePadding="8dp"
+                android:drawableStart="@drawable/ic_about_us_black_24dp"
                 />
         </LinearLayout>
     </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
