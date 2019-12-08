@@ -14,7 +14,7 @@
         android:textSize="25sp"
         android:text="Title"/>
     <TextView
-        android:id="@+id/item_descripton"
+        android:id="@+id/item_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -58,7 +58,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
         <ImageView
-            android:id="@+id/item_img_ring"
+            android:id="@+id/img_item_ring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/alert_black"
@@ -68,7 +68,7 @@
             android:layout_height="0dp"
             android:layout_weight=".5"/>
         <ImageView
-            android:id="@+id/item_img_vibrate"
+            android:id="@+id/img_item_vibrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/vib_black"
@@ -93,7 +93,7 @@
         <Button
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/item_btn_update"
+            android:id="@+id/btn_item_update"
             android:text="update"
             android:layout_gravity="center"/>
 
@@ -105,7 +105,7 @@
         <Button
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/item_btn_delete"
+            android:id="@+id/btn_item_delete"
             android:text="Delete"
             android:layout_gravity="center"/>
         <View

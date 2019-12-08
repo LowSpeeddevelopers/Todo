@@ -3,10 +3,8 @@ package com.super15.todo.Activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -21,11 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -34,9 +29,9 @@ import com.super15.todo.BroadcustReceiver.AlarmReceiver;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
-
 import java.util.ArrayList;
 import java.util.Calendar;
+
 
 public class ViewTodoActivity extends AppCompatActivity {
 
@@ -272,6 +267,8 @@ public class ViewTodoActivity extends AppCompatActivity {
         sYear = ""+year;
 
 
+
+
         String date= sDay + "/" +sMonth+"/" +sYear;
 
 
@@ -308,8 +305,6 @@ public class ViewTodoActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 

@@ -8,14 +8,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.super15.todo.R;
 
-public class Splash_Activity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash);
+        setContentView(R.layout.activity_splash);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(Splash_Activity.this, ViewTodoActivity.class);
+                Intent intent=new Intent(SplashActivity.this, ViewTodoActivity.class);
                 startActivity(intent);
             }
         },5000);

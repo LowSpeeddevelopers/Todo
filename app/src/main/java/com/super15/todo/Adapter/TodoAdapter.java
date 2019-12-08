@@ -79,6 +79,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewTodoItem(position);
+            }
+        });
+
         holder.alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,15 +174,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.update:
-                        showDialoguebox(position);
-                        return true;
-                    case R.id.remove:
-                        TodoDb todoDb = new TodoDb(mContext);
-                        todoDb.deleteData(mTodos.get(position).getId());
-                        mTodos.remove(position);
 
-                        notifyItemRemoved(position);
-                        notifyDataSetChanged();
+                        updateTodoItem(position);
+
+                        return true;
+
+                    case R.id.remove:
+
+                        deleteTodoItem(position);
+
                         return true;
 
                     default:
@@ -187,8 +194,42 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         popup.show();
     }
 
+    private void deleteTodoItem(final int position) {
 
-    private void showDialoguebox(final int position){
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(mContext)
+                // set message & title
+                .setTitle("Delete")
+                .setMessage("Do you want to Delete")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        TodoDb todoDb = new TodoDb(mContext);
+                        todoDb.deleteData(mTodos.get(position).getId());
+                        mTodos.remove(position);
+
+                        notifyItemRemoved(position);
+                        notifyDataSetChanged();
+
+                        dialog.dismiss();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+
+        myQuittingDialogBox.show();
+
+    }
+
+
+    private void updateTodoItem(final int position){
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View dialogueView = li.inflate(R.layout.update_dialoge_box,null);
@@ -276,6 +317,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             }
         });
     }
+
     private void dateFormater(int day, int month, int year){
         String sDay, sMonth, sYear;
         if (day<10){sDay="0"+day;}else{sDay=""+day; }
@@ -284,6 +326,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         String date= sDay + "/" +sMonth+"/" +sYear;
         update_date.setText(date);
     }
+
     private void timeFormater(int hour, int minute){
         String sMinute, sHour;
         if(minute < 10){sMinute="0"+minute;}else{sMinute=""+minute;}
@@ -291,6 +334,46 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         update_time.setText(sHour + ":" +sMinute );
     }
 
+    private void viewTodoItem(final int position){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View dialogueView = li.inflate(R.layout.itemview_dialoge_box,null);
 
+        TextView itemTitle = dialogueView.findViewById(R.id.item_title);
+        TextView itemNote = dialogueView.findViewById(R.id.item_note);
+        TextView itemDate = dialogueView.findViewById(R.id.item_date);
+        TextView itemTime = dialogueView.findViewById(R.id.item_time);
+        Button btnItemUpdate = dialogueView.findViewById(R.id.btn_item_update);
+        Button btnItemDelete = dialogueView.findViewById(R.id.btn_item_delete);
+
+
+        itemTitle.setText(mTodos.get(position).getTitle());
+        itemNote.setText(mTodos.get(position).getNote());
+        itemDate.setText(mTodos.get(position).getDate());
+        itemTime.setText(mTodos.get(position).getTime());
+
+        builder.setView(dialogueView);
+
+        final AlertDialog alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+        alertDialog.show();
+
+
+        btnItemUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                updateTodoItem(position);
+            }
+        });
+
+        btnItemDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                deleteTodoItem(position);
+            }
+        });
+    }
 
 }
