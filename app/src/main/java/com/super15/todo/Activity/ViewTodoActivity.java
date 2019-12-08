@@ -210,7 +210,7 @@ public class ViewTodoActivity extends AppCompatActivity {
                     todoAdapter.notifyDataSetChanged();
 
 
-                    SetAlarm(cal);
+                    SetAlarm(cal, todoModel);
 
                     alertDialog.dismiss();
                 }else {
@@ -279,9 +279,18 @@ public class ViewTodoActivity extends AppCompatActivity {
         return date;
     }
 
-    private void SetAlarm(Calendar calender){
+    private void SetAlarm(Calendar calender, TodoModel todoModel){
         AlarmManager alarmManager=(AlarmManager) ViewTodoActivity.this.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(ViewTodoActivity.this, AlarmReceiver.class);
+
+        Bundle b = new Bundle();
+        b.putString("id",todoModel.getId());
+        b.putString("title",todoModel.getTitle());
+        b.putString("note",todoModel.getNote());
+        b.putString("time",todoModel.getTime());
+        b.putString("date",todoModel.getDate());
+        i.putExtras(b);
+
         PendingIntent pi=PendingIntent.getBroadcast(ViewTodoActivity.this,1,i,0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP,calender.getTimeInMillis(),pi);
 
