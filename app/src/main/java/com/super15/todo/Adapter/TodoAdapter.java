@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +28,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.google.android.material.textfield.TextInputEditText;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
@@ -35,33 +40,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
-
     private Context mContext;
     private ArrayList<TodoModel> mTodos;
-
     private Calendar cal;
-
     private TodoModel todoModel;
-
     private TextInputEditText update_title, update_note;
-
     private TextView update_date, update_time;
     private ViewHolder holder;
-
+    private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodos) {
         this.mContext = mContext;
         this.mTodos = mTodos;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(mContext).inflate(R.layout.todoitem,parent,false);
-
         return new TodoAdapter.ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         todoModel = mTodos.get(position);
@@ -70,71 +66,32 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         holder.title.setText(title);
         cal=Calendar.getInstance();
         this.holder=holder;
-
-
-        holder.settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopup(holder.settings,position);
-            }
-        });
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 viewTodoItem(position);
             }
         });
+        if (mTodos != null && 0 <= position && position < mTodos.size()) {
+//            TodoModel data = mTodos.get(position);
+//
+            // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
+            // put an unique string id as value, can be any string which uniquely define the data
+            viewBinderHelper.bind(holder.swipeRevealLayout, String.valueOf(position));
 
-        holder.alarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        holder.vib.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        holder.ring.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        holder.text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        holder.calender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+            // Bind your data here
+            holder.bind(position);
+        }
 
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    }
 
-            }
-        });
+    public void saveStates(Bundle outState) {
+        viewBinderHelper.saveStates(outState);
+    }
 
-        holder.activatior.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    public void restoreStates(Bundle inState) {
+        viewBinderHelper.restoreStates(inState);
     }
 
     @Override
@@ -144,16 +101,21 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title;
-        ImageView settings,alarm,vib,ring,text,calender,activatior;
+        SwipeRevealLayout swipeRevealLayout;
+        TextView title, tvDelete, tvUpdate;
+        ImageView alarm,vib,ring,text,calender,activatior;
         LinearLayout layout;
+        View sideView;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            sideView = itemView.findViewById(R.id.side_view);
+            swipeRevealLayout = itemView.findViewById(R.id.swipe_layout);
+            tvDelete = itemView.findViewById(R.id.tv_delete);
+            tvUpdate = itemView.findViewById(R.id.tv_update);
             title = itemView.findViewById(R.id.tvTitle);
-            settings=itemView.findViewById(R.id.settings);
             alarm=itemView.findViewById(R.id.imgAlarm);
             vib=itemView.findViewById(R.id.imgVibrate);
             ring=itemView.findViewById(R.id.imgRing);
@@ -163,36 +125,25 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             layout=itemView.findViewById(R.id.mylayout);
 
         }
-    }
 
-    private void showPopup(View v, final int position){
-        PopupMenu popup = new PopupMenu(mContext,v);
-        popup.getMenuInflater().inflate(R.menu.popupmenu, popup.getMenu());
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.update:
-
-                        updateTodoItem(position);
-
-                        return true;
-
-                    case R.id.remove:
-
-                        deleteTodoItem(position);
-
-                        return true;
-
-                    default:
-                        return false;
+        public void bind(final int data) {
+            tvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteTodoItem(data);
                 }
-            }
-        });
+            });
 
-        popup.show();
+            tvUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateTodoItem(data);
+                }
+            });
+        }
     }
+
+
 
     private void deleteTodoItem(final int position) {
 
@@ -304,6 +255,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
                     TodoModel model = new TodoModel(mTodos.get(position).getId(),title,note,date,time);
 
+                    Log.e("mTodos", model.getId()+" "+model.getTitle()+" "+model.getNote()+" "+model.getDate()+" "+model.getTime());
+
+                    Log.e("Position & ID",position+"   "+mTodos.get(position).getId());
+
                     if (todoDb.updateData(model) != 1){
                         Toast.makeText(mContext, "Someting went wrong!!", Toast.LENGTH_SHORT).show();
                     } else {
@@ -311,7 +266,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                         mTodos.set(position, model);
                         notifyItemChanged(position, model);
                         notifyDataSetChanged();
-
                     }
                 }
             }

@@ -72,4 +72,9 @@ public class AlarmActivity extends AppCompatActivity {
         player.stop();
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

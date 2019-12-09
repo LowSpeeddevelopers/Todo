@@ -3,6 +3,7 @@ package com.super15.todo.Activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlarmManager;
@@ -21,6 +22,8 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -97,6 +100,13 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         rvTodo.setAdapter(todoAdapter);
 
+
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+//        itemTouchHelper.attachToRecyclerView(rvTodo);
+
+
+
+
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +152,25 @@ public class ViewTodoActivity extends AppCompatActivity {
         });
     }
 
+
+    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            Toast.makeText(ViewTodoActivity.this, "on Move", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            Toast.makeText(ViewTodoActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
+            //Remove swiped item from list and notify the RecyclerView
+            int position = viewHolder.getAdapterPosition();
+            todoModels.remove(position);
+            todoAdapter.notifyDataSetChanged();
+
+        }
+    };
     void showhomeDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.homeactivity, null);
