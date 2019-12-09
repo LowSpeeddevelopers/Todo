@@ -72,12 +72,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 viewTodoItem(position);
             }
         });
+
+
+
+
         if (mTodos != null && 0 <= position && position < mTodos.size()) {
 //            TodoModel data = mTodos.get(position);
 //
             // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
             // put an unique string id as value, can be any string which uniquely define the data
             viewBinderHelper.bind(holder.swipeRevealLayout, String.valueOf(position));
+
+            viewBinderHelper.setOpenOnlyOne(true);
+
 
             // Bind your data here
             holder.bind(position);
@@ -138,6 +145,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 @Override
                 public void onClick(View v) {
                     updateTodoItem(data);
+                    holder.swipeRevealLayout.close(true);
                 }
             });
         }

@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class AlarmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
+
 
         Intent intent = getIntent();
 
@@ -57,7 +60,7 @@ public class AlarmActivity extends AppCompatActivity {
         tvDate.setText(date);
         tvTime.setText(time);
 
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         player = MediaPlayer.create(this, notification);
         player.setLooping(true);
         player.start();
@@ -75,22 +78,4 @@ public class AlarmActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            Log.d("Test", "Back button pressed!");
-        }
-        else if(keyCode == KeyEvent.KEYCODE_HOME)
-        {
-            Log.d("Test", "Home button pressed!");
-        }
-        return false;
-    }
 }
