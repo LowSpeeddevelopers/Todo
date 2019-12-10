@@ -120,18 +120,6 @@ public class ViewTodoActivity extends AppCompatActivity {
                 showhomeDialoguebox();
             }
         });
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showshareDialoguebox();
-            }
-        });
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showsettingDialoguebox();
-            }
-        });
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,37 +160,13 @@ public class ViewTodoActivity extends AppCompatActivity {
         }
     };
     void showhomeDialoguebox(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
-        View DialogueView = getLayoutInflater().inflate(R.layout.homeactivity, null);
-        builder.setView(DialogueView);
-        final AlertDialog alertDialog=builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-
-        alertDialog.show();
+        Intent i = new Intent(getApplicationContext(),ViewTodoActivity.class);
+        startActivity(i);
 
     }
 
-    void showshareDialoguebox(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
-        View DialogueView = getLayoutInflater().inflate(R.layout.share, null);
-        builder.setView(DialogueView);
-        final AlertDialog alertDialog=builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
 
-        alertDialog.show();
 
-    }
-
-    void showsettingDialoguebox(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
-        View DialogueView = getLayoutInflater().inflate(R.layout.setting, null);
-        builder.setView(DialogueView);
-        final AlertDialog alertDialog=builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-
-        alertDialog.show();
-
-    }
 
     void showhelpDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
