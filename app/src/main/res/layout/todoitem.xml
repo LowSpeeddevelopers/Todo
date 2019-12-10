@@ -5,6 +5,7 @@
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
     app:dragEdge="right"
     app:mode="same_level">
 
@@ -55,29 +56,19 @@
 
             <View
                 android:id="@+id/side_view"
-                android:layout_width="12dp"
+                android:layout_width="10dp"
                 android:layout_height="match_parent"
                 android:background="#1E7090" />
 
-
-            <ImageView
-                android:id="@+id/activator"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/buttonon" />
 
             <LinearLayout
                 android:id="@+id/mylayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:gravity="center|left"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
+                android:paddingLeft="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -85,8 +76,7 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Title"
-                    android:textColor="#000"
+                    android:textColor="@color/colorBlack"
                     android:textSize="22sp" />
 
                 <LinearLayout
@@ -96,54 +86,34 @@
 
                     <ImageView
                         android:id="@+id/imgRing"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
                         android:src="@drawable/alert_black" />
 
                     <ImageView
                         android:id="@+id/imgVibrate"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="4dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
                         android:src="@drawable/vib_black" />
 
-                    <ImageView
-                        android:id="@+id/imgAlarm"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/alarm_black" />
-
-                    <ImageView
-                        android:id="@+id/imgCalender"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/calender_black" />
-
-                    <ImageView
-                        android:id="@+id/imgText"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/text_black" />
                 </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/activator"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/buttonon" />
+
         </LinearLayout>
     </FrameLayout>
 </com.chauthai.swipereveallayout.SwipeRevealLayout>

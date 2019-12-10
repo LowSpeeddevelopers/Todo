@@ -14,87 +14,123 @@
     tools:context=".Activity.ViewTodoActivity">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="#fff"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ToDo"
-
-                android:textSize="25dp"
-                android:textColor="@color/colorWhite"/>
-
-        </androidx.appcompat.widget.Toolbar>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_todo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bar"
-        style="@style/Widget.MaterialComponents.BottomAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
-        android:scrollbarStyle="insideInset"
-        app:fabAlignmentMode="center"
-        app:fabCradleMargin="6dp"
-        app:fabCradleRoundedCornerRadius="5dp"
-        app:fabCradleVerticalOffset="0dp"
-        >
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="15dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Low"
-                android:layout_gravity="center"
-                android:textColor="#fff"
-                android:textSize="25sp"
-                android:gravity="center"/>
-            <View
-                android:layout_width="2dp"
-                android:layout_height="match_parent"
-                android:background="#fff"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="High"
-                android:layout_gravity="center"
-                android:textColor="#fff"
-                android:textSize="25sp"
-                android:gravity="center"/>
-        </LinearLayout>
-    </com.google.android.material.bottomappbar.BottomAppBar>
+            android:orientation="vertical"
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="top"
+                android:background="@color/colorPrimary"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_margin="16dp"
-        app:fabSize="normal"
-        app:layout_anchor="@id/bar"
-        app:srcCompat="@drawable/fab_plus"
-        android:layout_alignParentBottom="true"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_todo"
+                android:layout_width="match_parent"
+                android:layout_height="612dp" />
+        </LinearLayout>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bar"
+            style="@style/Widget.MaterialComponents.BottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="bottom"
+            app:backgroundTint="@color/colorPrimary"
+            android:scrollbarStyle="insideInset"
+            app:fabAlignmentMode="center"
+            app:fabCradleMargin="6dp"
+            app:fabCradleRoundedCornerRadius="5dp"
+            app:fabCradleVerticalOffset="0dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Low"
+                    android:layout_gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="25sp"
+                    android:gravity="center"/>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="#fff"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="High"
+                    android:layout_gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="25sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <RelativeLayout
+            android:id="@+id/fab_priority"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:paddingBottom="30dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_high"
+                    android:background="@drawable/round_shape"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="High"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/btn_low"
+                    android:background="@drawable/round_shape"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="Low"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="16dp"
+            app:fabSize="normal"
+            app:layout_anchor="@id/bar"
+            app:srcCompat="@drawable/fab_plus"
+            android:layout_alignParentBottom="true"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

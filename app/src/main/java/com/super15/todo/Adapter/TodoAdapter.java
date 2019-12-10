@@ -65,7 +65,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         holder.title.setText(title);
         cal=Calendar.getInstance();
         this.holder=holder;
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.myLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 viewTodoItem(position);
@@ -109,8 +109,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         SwipeRevealLayout swipeRevealLayout;
         TextView title, tvDelete, tvUpdate;
-        ImageView alarm,vib,ring,text,calender,activatior;
-        LinearLayout layout;
+        ImageView vib,ring, activatior;
+        LinearLayout myLayout;
         View sideView;
 
 
@@ -122,13 +122,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             tvDelete = itemView.findViewById(R.id.tv_delete);
             tvUpdate = itemView.findViewById(R.id.tv_update);
             title = itemView.findViewById(R.id.tvTitle);
-            alarm=itemView.findViewById(R.id.imgAlarm);
             vib=itemView.findViewById(R.id.imgVibrate);
             ring=itemView.findViewById(R.id.imgRing);
-            text=itemView.findViewById(R.id.imgText);
-            calender=itemView.findViewById(R.id.imgCalender);
             activatior=itemView.findViewById(R.id.activator);
-            layout=itemView.findViewById(R.id.mylayout);
+            myLayout=itemView.findViewById(R.id.mylayout);
 
         }
 

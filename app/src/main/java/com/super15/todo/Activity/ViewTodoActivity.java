@@ -3,7 +3,6 @@ package com.super15.todo.Activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlarmManager;
@@ -21,15 +20,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.super15.todo.Adapter.TodoAdapter;
 import com.super15.todo.BroadcustReceiver.AlarmReceiver;
+import com.super15.todo.BuildConfig;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
@@ -41,6 +41,7 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     private RecyclerView rvTodo;
     private FloatingActionButton fabAdd;
+    private RelativeLayout fabPriority;
 
     private TodoAdapter todoAdapter;
     private TodoDb todoDb;
@@ -49,10 +50,12 @@ public class ViewTodoActivity extends AppCompatActivity {
     Calendar cal;
     private FlowingDrawer mDrawer;
 
-    TextView home, setting, share, aboutus, help, contact;
+    int priorityVisible;
+
+    TextView home, setting, share, aboutUs, help, contact, btnHigh, btnLow;
     ArrayList<TodoModel> todoModels;
 
-    String userdate,usertime,currenttime,currentdate;
+    String userDate, userTime, currentTime, currentDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,9 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         rvTodo = findViewById(R.id.rv_todo);
         fabAdd = findViewById(R.id.fab_add);
+        fabPriority = findViewById(R.id.fab_priority);
+        btnHigh = findViewById(R.id.btn_high);
+        btnLow = findViewById(R.id.btn_low);
 
 
         Calendar calendar = Calendar.getInstance();
@@ -69,8 +75,8 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         minute=calendar.get(Calendar.MINUTE);
         hour=calendar.get(Calendar.HOUR_OF_DAY);
-        currentdate= dateFormater(day,month,year);
-        currenttime=timeFormater(hour, minute);
+        currentDate = dateFormatter(day,month,year);
+        currentTime = timeFormatter(hour, minute);
 
         mDrawer=findViewById(R.id.drawerlayout);
 
@@ -79,7 +85,7 @@ public class ViewTodoActivity extends AppCompatActivity {
         setting=findViewById(R.id.genjam);
         help=findViewById(R.id.sahajjo);
         contact=findViewById(R.id.jogajog);
-        aboutus=findViewById(R.id.amaderbepare);
+        aboutUs =findViewById(R.id.amaderbepare);
 
 
 
@@ -101,75 +107,74 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         rvTodo.setAdapter(todoAdapter);
 
-
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-//        itemTouchHelper.attachToRecyclerView(rvTodo);
-
-
+        priorityVisible = 0;
 
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(ViewTodoActivity.this,AddTodoActivity.class));
-                showDialoguebox();
+                if (priorityVisible == 0){
+                    priorityVisible = 1;
+                    fabPriority.setVisibility(View.VISIBLE);
+                } else {
+                    priorityVisible = 0;
+                    fabPriority.setVisibility(View.GONE);
+                }
+            }
+        });
+        btnHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddTodoDialogueBox();
+            }
+        });
+        btnLow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddTodoDialogueBox();
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showhomeDialoguebox();
+                showHomeDialogueBox();
             }
         });
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showhelpDialoguebox();
+                showHelpDialogueBox();
             }
         });
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showcontactDialoguebox();
+                showContactDialogueBox();
             }
         });
-        aboutus.setOnClickListener(new View.OnClickListener() {
+        aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showaboutDialoguebox();
+                showAboutDialogueBox();
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showShareIntent();
             }
         });
     }
 
 
-    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
 
-        @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            Toast.makeText(ViewTodoActivity.this, "on Move", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-            Toast.makeText(ViewTodoActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
-            //Remove swiped item from list and notify the RecyclerView
-            int position = viewHolder.getAdapterPosition();
-            todoModels.remove(position);
-            todoAdapter.notifyDataSetChanged();
-
-        }
-    };
-    void showhomeDialoguebox(){
+    void showHomeDialogueBox(){
         Intent i = new Intent(getApplicationContext(),ViewTodoActivity.class);
         startActivity(i);
 
     }
 
-
-
-
-    void showhelpDialoguebox(){
+    void showHelpDialogueBox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.help, null);
         builder.setView(DialogueView);
@@ -180,7 +185,7 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     }
 
-    void showcontactDialoguebox(){
+    void showContactDialogueBox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.contact, null);
         builder.setView(DialogueView);
@@ -191,7 +196,7 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     }
 
-    void showaboutDialoguebox(){
+    void showAboutDialogueBox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.aboutus, null);
         builder.setView(DialogueView);
@@ -202,12 +207,22 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     }
 
+    void showShareIntent(){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+        String shareMessage= "\nLet me recommend you this application\n\n";
+        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+        startActivity(Intent.createChooser(shareIntent, "Choose One"));
+    }
 
 
 
 
 
-    void showDialoguebox(){
+
+    void showAddTodoDialogueBox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.add_dialoguebox,null);
         final TextInputEditText titletext,description;
@@ -224,8 +239,8 @@ public class ViewTodoActivity extends AppCompatActivity {
         timesetter=DialogueView.findViewById(R.id.timesetter);
         datesetter=DialogueView.findViewById(R.id.daetsetter);
 
-        timesetter.setText(currenttime);
-        datesetter.setText(currentdate);
+        timesetter.setText(currentTime);
+        datesetter.setText(currentDate);
 
 
 
@@ -236,15 +251,15 @@ public class ViewTodoActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                        timeFormater(hourOfDay, minute);
+                        timeFormatter(hourOfDay, minute);
 
                         cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         cal.set(Calendar.MINUTE,minute);
                         cal.set(Calendar.SECOND,0);
 
-                        usertime = timeFormater(hourOfDay, minute);
+                        userTime = timeFormatter(hourOfDay, minute);
 
-                        timesetter.setText(usertime);
+                        timesetter.setText(userTime);
 
 
 
@@ -267,12 +282,12 @@ public class ViewTodoActivity extends AppCompatActivity {
                         Log.e("month",String.valueOf(month));
                         Log.e("year",String.valueOf(year));
 
-                        userdate = dateFormater(dayOfMonth,month,year);
+                        userDate = dateFormatter(dayOfMonth,month,year);
 
                         cal.set(year,month,dayOfMonth);
 
 
-                        datesetter.setText(userdate);
+                        datesetter.setText(userDate);
 
                     }
                 }, year,month,day);
@@ -337,9 +352,9 @@ public class ViewTodoActivity extends AppCompatActivity {
 
 
 
-    private String timeFormater(int hour, int minute){
+    private String timeFormatter(int hour, int minute){
 
-        String temptime;
+        String tempTime;
         String sMinute, sHour;
 
         if (minute < 10){
@@ -354,13 +369,13 @@ public class ViewTodoActivity extends AppCompatActivity {
             sHour=""+hour;
         }
 
-        temptime=sHour + ":" +sMinute;
+        tempTime=sHour + ":" +sMinute;
         //tvTime.setText(sHour + ":" +sMinute );
 
-        return temptime;
+        return tempTime;
 
     }
-    private String dateFormater(int day, int month, int year){
+    private String dateFormatter(int day, int month, int year){
 
         String sDay, sMonth, sYear;
 
