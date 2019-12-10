@@ -1,12 +1,401 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About Us"
-        android:layout_gravity="center"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</LinearLayout>
+    <LinearLayout
+        android:background="#E7E7E7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"/>
+
+<androidx.cardview.widget.CardView
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="5dp"
+    android:padding="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="101dp"
+            android:layout_height="88dp"
+            android:src="@drawable/icon" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Afroz hossain"
+            android:textColor="#000"
+            android:textSize="25dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/call_afroz"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:src="@drawable/call_icon" />
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:src="@drawable/email_icon" />
+            <ImageView
+                android:id="@+id/fb_afroz"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:padding="5dp"
+                android:src="@drawable/fb_icon" />
+
+            <ImageView
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:padding="5dp"
+                    android:src="@drawable/linkedin_icon" />
+                <ImageView
+                    android:layout_width="43dp"
+                    android:layout_height="43dp"
+                    android:padding="5dp"
+                    android:src="@drawable/github_icon" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="5dp"
+            android:padding="8dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="101dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hridoy Mahmmod"
+                        android:textColor="#000"
+                        android:textSize="25dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/call_hridoy"
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/call_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/email_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/fb_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/linkedin_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/github_icon" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="5dp"
+            android:padding="8dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="101dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Noyon Chakroborty"
+                        android:textColor="#000"
+                        android:textSize="25dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/call_nayon"
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/call_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/email_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/fb_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/linkedin_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/github_icon" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="5dp"
+            android:padding="8dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="101dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shahariar Newaz Taki"
+                        android:textColor="#000"
+                        android:textSize="25dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/call_taki"
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/call_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/email_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/fb_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/linkedin_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/github_icon" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1"/>
+
+        <androidx.cardview.widget.CardView
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="5dp"
+            android:padding="8dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="101dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GK Snigdha"
+                        android:textColor="#000"
+                        android:textSize="25dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/call_gk"
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/call_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:src="@drawable/email_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/fb_icon" />
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/linkedin_icon" />
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:padding="5dp"
+                            android:src="@drawable/github_icon" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+    </LinearLayout>
+
+</ScrollView>

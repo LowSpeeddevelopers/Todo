@@ -3,15 +3,20 @@ package com.super15.todo.Activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -20,16 +25,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.super15.todo.Adapter.TodoAdapter;
 import com.super15.todo.BroadcustReceiver.AlarmReceiver;
-import com.super15.todo.BuildConfig;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
@@ -41,7 +45,6 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     private RecyclerView rvTodo;
     private FloatingActionButton fabAdd;
-    private RelativeLayout fabPriority;
 
     private TodoAdapter todoAdapter;
     private TodoDb todoDb;
@@ -50,12 +53,10 @@ public class ViewTodoActivity extends AppCompatActivity {
     Calendar cal;
     private FlowingDrawer mDrawer;
 
-    int priorityVisible;
-
-    TextView home, setting, share, aboutUs, help, contact, btnHigh, btnLow;
+    TextView home, setting, share, aboutus, help, contact;
     ArrayList<TodoModel> todoModels;
 
-    String userDate, userTime, currentTime, currentDate;
+    String userdate,usertime,currenttime,currentdate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +64,6 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         rvTodo = findViewById(R.id.rv_todo);
         fabAdd = findViewById(R.id.fab_add);
-        fabPriority = findViewById(R.id.fab_priority);
-        btnHigh = findViewById(R.id.btn_high);
-        btnLow = findViewById(R.id.btn_low);
 
 
         Calendar calendar = Calendar.getInstance();
@@ -75,8 +73,8 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         minute=calendar.get(Calendar.MINUTE);
         hour=calendar.get(Calendar.HOUR_OF_DAY);
-        currentDate = dateFormatter(day,month,year);
-        currentTime = timeFormatter(hour, minute);
+        currentdate= dateFormater(day,month,year);
+        currenttime=timeFormater(hour, minute);
 
         mDrawer=findViewById(R.id.drawerlayout);
 
@@ -85,7 +83,7 @@ public class ViewTodoActivity extends AppCompatActivity {
         setting=findViewById(R.id.genjam);
         help=findViewById(R.id.sahajjo);
         contact=findViewById(R.id.jogajog);
-        aboutUs =findViewById(R.id.amaderbepare);
+        aboutus=findViewById(R.id.amaderbepare);
 
 
 
@@ -107,74 +105,75 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         rvTodo.setAdapter(todoAdapter);
 
-        priorityVisible = 0;
+
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+//        itemTouchHelper.attachToRecyclerView(rvTodo);
+
+
 
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (priorityVisible == 0){
-                    priorityVisible = 1;
-                    fabPriority.setVisibility(View.VISIBLE);
-                } else {
-                    priorityVisible = 0;
-                    fabPriority.setVisibility(View.GONE);
-                }
-            }
-        });
-        btnHigh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAddTodoDialogueBox();
-            }
-        });
-        btnLow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAddTodoDialogueBox();
+                //startActivity(new Intent(ViewTodoActivity.this,AddTodoActivity.class));
+                showDialoguebox();
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showHomeDialogueBox();
+                showhomeDialoguebox();
             }
         });
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showHelpDialogueBox();
+                showhelpDialoguebox();
             }
         });
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showContactDialogueBox();
+                showcontactDialoguebox();
             }
         });
-        aboutUs.setOnClickListener(new View.OnClickListener() {
+        aboutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAboutDialogueBox();
-            }
-        });
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showShareIntent();
+                showaboutDialoguebox();
             }
         });
     }
 
 
+    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
 
-    void showHomeDialogueBox(){
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            Toast.makeText(ViewTodoActivity.this, "on Move", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            Toast.makeText(ViewTodoActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
+            //Remove swiped item from list and notify the RecyclerView
+            int position = viewHolder.getAdapterPosition();
+            todoModels.remove(position);
+            todoAdapter.notifyDataSetChanged();
+
+        }
+    };
+    void showhomeDialoguebox(){
         Intent i = new Intent(getApplicationContext(),ViewTodoActivity.class);
         startActivity(i);
 
     }
 
-    void showHelpDialogueBox(){
+
+
+
+    void showhelpDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.help, null);
         builder.setView(DialogueView);
@@ -185,7 +184,7 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     }
 
-    void showContactDialogueBox(){
+    void showcontactDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.contact, null);
         builder.setView(DialogueView);
@@ -196,33 +195,123 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     }
 
-    void showAboutDialogueBox(){
+    void showaboutDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.aboutus, null);
         builder.setView(DialogueView);
         final AlertDialog alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
+        ImageView afroz_call,hridoy_call,nayon_call,taki_call,gk_call;
+        ImageView fb_afroz,fb_hridoy,fb_nayon,fb_taki,fb_gk;
+        fb_afroz=DialogueView.findViewById(R.id.fb_afroz);
+        afroz_call=DialogueView.findViewById(R.id.call_afroz);
+        hridoy_call=DialogueView.findViewById(R.id.call_hridoy);
+        nayon_call=DialogueView.findViewById(R.id.call_nayon);
+        taki_call=DialogueView.findViewById(R.id.call_taki);
+        gk_call=DialogueView.findViewById(R.id.call_gk);
+
+        fb_afroz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent facebookIntent = openFacebook(ViewTodoActivity.this);
+                startActivity(facebookIntent);
+            }
+        });
+
+
+
+        afroz_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:01876089386"));
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
+
+        hridoy_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:0191362841"));
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
+
+
+
+        nayon_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:01521380974"));
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
+
+        taki_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:01571763107"));
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
+
+        afroz_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:01891891248"));
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
+
+        gk_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:01630197466"));
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
+
+
 
         alertDialog.show();
 
     }
 
-    void showShareIntent(){
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
-        String shareMessage= "\nLet me recommend you this application\n\n";
-        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-        startActivity(Intent.createChooser(shareIntent, "Choose One"));
-    }
 
 
 
 
 
-
-    void showAddTodoDialogueBox(){
+    void showDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.add_dialoguebox,null);
         final TextInputEditText titletext,description;
@@ -239,8 +328,8 @@ public class ViewTodoActivity extends AppCompatActivity {
         timesetter=DialogueView.findViewById(R.id.timesetter);
         datesetter=DialogueView.findViewById(R.id.daetsetter);
 
-        timesetter.setText(currentTime);
-        datesetter.setText(currentDate);
+        timesetter.setText(currenttime);
+        datesetter.setText(currentdate);
 
 
 
@@ -251,15 +340,15 @@ public class ViewTodoActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-                        timeFormatter(hourOfDay, minute);
+                        timeFormater(hourOfDay, minute);
 
                         cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
                         cal.set(Calendar.MINUTE,minute);
                         cal.set(Calendar.SECOND,0);
 
-                        userTime = timeFormatter(hourOfDay, minute);
+                        usertime = timeFormater(hourOfDay, minute);
 
-                        timesetter.setText(userTime);
+                        timesetter.setText(usertime);
 
 
 
@@ -282,12 +371,12 @@ public class ViewTodoActivity extends AppCompatActivity {
                         Log.e("month",String.valueOf(month));
                         Log.e("year",String.valueOf(year));
 
-                        userDate = dateFormatter(dayOfMonth,month,year);
+                        userdate = dateFormater(dayOfMonth,month,year);
 
                         cal.set(year,month,dayOfMonth);
 
 
-                        datesetter.setText(userDate);
+                        datesetter.setText(userdate);
 
                     }
                 }, year,month,day);
@@ -352,9 +441,9 @@ public class ViewTodoActivity extends AppCompatActivity {
 
 
 
-    private String timeFormatter(int hour, int minute){
+    private String timeFormater(int hour, int minute){
 
-        String tempTime;
+        String temptime;
         String sMinute, sHour;
 
         if (minute < 10){
@@ -369,13 +458,13 @@ public class ViewTodoActivity extends AppCompatActivity {
             sHour=""+hour;
         }
 
-        tempTime=sHour + ":" +sMinute;
+        temptime=sHour + ":" +sMinute;
         //tvTime.setText(sHour + ":" +sMinute );
 
-        return tempTime;
+        return temptime;
 
     }
-    private String dateFormatter(int day, int month, int year){
+    private String dateFormater(int day, int month, int year){
 
         String sDay, sMonth, sYear;
 
@@ -441,6 +530,23 @@ public class ViewTodoActivity extends AppCompatActivity {
             }
         });
     }
+
+    public static Intent openFacebook(Context context) {
+
+        try {
+            context.getPackageManager()
+                    .getPackageInfo("com.facebook.katana", 0);
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("fb://profile/100001737944023"));
+        } catch (Exception e){
+
+            return new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://www.facebook.com/shahariarnawshintaki"));
+        }
+
+
+    }
+
 
 
 
