@@ -12,6 +12,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -425,8 +426,6 @@ public class ViewTodoActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
 
 

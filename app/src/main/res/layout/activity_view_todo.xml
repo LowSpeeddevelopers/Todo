@@ -25,9 +25,19 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
+            android:layout_gravity="center"
             android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="top"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ToDo"
+
+                android:textSize="25dp"
+                android:textColor="@color/colorWhite"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_todo"
             android:layout_width="match_parent"
