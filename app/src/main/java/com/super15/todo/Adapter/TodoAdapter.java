@@ -41,16 +41,15 @@ import java.util.Calendar;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private Context mContext;
-    private ArrayList<TodoModel> mTodos;
+    private static ArrayList<TodoModel> mTodos;
     private Calendar cal;
-    private TodoModel todoModel;
     private TextInputEditText update_title, update_note;
     private TextView update_date, update_time;
     private ViewHolder holder;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodos) {
         this.mContext = mContext;
-        this.mTodos = mTodos;
+        TodoAdapter.mTodos = mTodos;
     }
     @NonNull
     @Override
@@ -60,7 +59,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     }
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        todoModel = mTodos.get(position);
+        TodoModel todoModel = mTodos.get(position);
         final String title;
         title = todoModel.getTitle();
         holder.title.setText(title);
@@ -106,7 +105,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         return mTodos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         SwipeRevealLayout swipeRevealLayout;
         TextView title, tvDelete, tvUpdate;
@@ -115,7 +114,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         View sideView;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             sideView = itemView.findViewById(R.id.side_view);
@@ -133,7 +132,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         }
 
-        public void bind(final int data) {
+        void bind(final int data) {
             tvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

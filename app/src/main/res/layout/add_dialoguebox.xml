@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:id="@+id/edt_note"
 
-            android:hint="Time"
+            android:hint="Note"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -80,16 +80,19 @@
 
 
       <ImageView
-          android:layout_width="40dp"
-          android:id="@+id/imgdate"
-          android:layout_height="40dp"
-          android:layout_margin="8dp"
-          android:src="@drawable/date"/>
+      android:layout_width="40dp"
+      android:id="@+id/imgdate"
+      android:layout_height="40dp"
+      android:layout_margin="8dp"
+      android:src="@drawable/date"/>
 
       <View
           android:layout_width="0dp"
           android:layout_height="0dp"
           android:layout_weight="1"/>
+
+
+
 
       <TextView
           android:layout_width="wrap_content"
