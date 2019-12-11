@@ -70,9 +70,14 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/tv_update_date"
-
-            android:textSize="30sp"
-            android:text="Date"/>
+            android:layout_gravity="center"
+            android:textColor="#000"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:id="@+id/imgdate"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/date"/>
 
         <View
             android:layout_width="0dp"
@@ -82,11 +87,15 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:id="@+id/tv_update_time"
-            android:textColor="#000"
-
-            android:textSize="30sp"
-            android:text="Time"/>
+            android:textColor="#000" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/imgtime"
+            android:layout_margin="8dp"
+            android:src="@drawable/time"/>
 
 
     </LinearLayout>
@@ -98,12 +107,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/ringid"
-                android:text="Ring"/>
+                android:text="Ring"
+                android:textColor="#000"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/vibratid"
-                android:text="Vibration"/>
+                android:text="Vibration"
+                android:textColor="#000"/>
         </LinearLayout>
 
     <Button

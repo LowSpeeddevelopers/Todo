@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class ViewTodoActivity extends AppCompatActivity {
     private RecyclerView rvTodo;
     private FloatingActionButton fabAdd;
 
+    private RelativeLayout fabPriority;
+
     private TodoAdapter todoAdapter;
     private TodoDb todoDb;
     int hour, minute;
@@ -53,10 +56,13 @@ public class ViewTodoActivity extends AppCompatActivity {
     Calendar cal;
     private FlowingDrawer mDrawer;
 
-    TextView home, setting, share, aboutus, help, contact;
+    TextView home, setting, share, aboutus, help, contact, btnHigh, btnLow;
     ArrayList<TodoModel> todoModels;
 
     String userdate,usertime,currenttime,currentdate;
+
+    int visibility;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,10 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         rvTodo = findViewById(R.id.rv_todo);
         fabAdd = findViewById(R.id.fab_add);
+
+        fabPriority = findViewById(R.id.fab_priority);
+        btnHigh = findViewById(R.id.btn_high);
+        btnLow = findViewById(R.id.btn_low);
 
 
         Calendar calendar = Calendar.getInstance();
@@ -78,12 +88,12 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         mDrawer=findViewById(R.id.drawerlayout);
 
-        home=findViewById(R.id.barighor);
-        share=findViewById(R.id.choriyedao);
-        setting=findViewById(R.id.genjam);
-        help=findViewById(R.id.sahajjo);
-        contact=findViewById(R.id.jogajog);
-        aboutus=findViewById(R.id.amaderbepare);
+        home=findViewById(R.id.tv_home);
+        share=findViewById(R.id.tv_share);
+        setting=findViewById(R.id.tv_setting);
+        help=findViewById(R.id.tv_help);
+        contact=findViewById(R.id.tv_contact);
+        aboutus=findViewById(R.id.tv_about_us);
 
 
 
@@ -106,19 +116,37 @@ public class ViewTodoActivity extends AppCompatActivity {
         rvTodo.setAdapter(todoAdapter);
 
 
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-//        itemTouchHelper.attachToRecyclerView(rvTodo);
-
+        visibility = 0;
 
 
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(ViewTodoActivity.this,AddTodoActivity.class));
+                if (visibility == 0){
+                    visibility = 1;
+                    fabPriority.setVisibility(View.VISIBLE);
+                } else {
+                    visibility = 0;
+                    fabPriority.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        btnHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 showDialoguebox();
             }
         });
+
+        btnLow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialoguebox();
+            }
+        });
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,32 +174,10 @@ public class ViewTodoActivity extends AppCompatActivity {
     }
 
 
-    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
-
-        @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            Toast.makeText(ViewTodoActivity.this, "on Move", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-            Toast.makeText(ViewTodoActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
-            //Remove swiped item from list and notify the RecyclerView
-            int position = viewHolder.getAdapterPosition();
-            todoModels.remove(position);
-            todoAdapter.notifyDataSetChanged();
-
-        }
-    };
     void showhomeDialoguebox(){
         Intent i = new Intent(getApplicationContext(),ViewTodoActivity.class);
         startActivity(i);
-
     }
-
-
-
 
     void showhelpDialoguebox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
