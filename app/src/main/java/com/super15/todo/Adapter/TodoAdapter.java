@@ -46,6 +46,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private TextInputEditText update_title, update_note;
     private TextView update_date, update_time;
     private ViewHolder holder;
+    boolean b=true;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodos) {
         this.mContext = mContext;
@@ -69,6 +70,23 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 viewTodoItem(position);
+            }
+        });
+
+        holder.activatior.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // To-Do check if database has activator valu false or true
+                //if database value is false then on click button will turn on
+                //else if database value is true then on click button will will turn off an store the value in database.
+                if(b){
+                    holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+                    b=false;
+                }else {
+                    holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+                    b=true;
+                }
+
             }
         });
 

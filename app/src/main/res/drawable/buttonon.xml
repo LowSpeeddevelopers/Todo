@@ -6,7 +6,7 @@
         <shape android:shape="oval">
             <size android:width="40dp" android:height="40dp"/>
             <solid android:color="#FF0000" />
-            <stroke android:color="#B4B9B9" android:width="4dp"/>
+            <stroke android:color="#000000" android:width="2dp"/>
             <corners android:radius="8dp"/>
         </shape>
 
