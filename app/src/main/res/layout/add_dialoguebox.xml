@@ -19,8 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Add New Reminder"
+            android:text="New Reminder"
             android:textSize="25sp"
+            android:textColor="#000"
             android:layout_margin="8dp"/>
 
 
@@ -63,51 +64,54 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="8dp"
-      android:layout_marginBottom="4dp"
-      android:layout_marginEnd="8dp"
-      android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
 
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:id="@+id/daetsetter"/>
+            <TextView
+                android:id="@+id/daetsetter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_gravity="center" />
 
 
-      <ImageView
-      android:layout_width="40dp"
-      android:id="@+id/imgdate"
-      android:layout_height="40dp"
-      android:layout_margin="8dp"
-      android:src="@drawable/date"/>
+            <ImageView
+                android:id="@+id/imgdate"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/date" />
 
-      <View
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_weight="1"/>
-
-
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_gravity="center"
-          android:layout_height="wrap_content"
-          android:id="@+id/timesetter"/>
-
-      <ImageView
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          android:id="@+id/imgtime"
-          android:layout_margin="8dp"
-          android:src="@drawable/time"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
 
-  </LinearLayout>
-       <LinearLayout
+            <TextView
+                android:id="@+id/timesetter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/imgtime"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/time" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:padding="0dp">
@@ -115,11 +119,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/ringid"
+            android:textColor="#000"
             android:text="Ring"/>
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/vibratid"
+            android:textColor="#000"
             android:text="Vibration"/>
        </LinearLayout>
 
