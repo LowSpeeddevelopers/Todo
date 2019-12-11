@@ -38,14 +38,13 @@ public class AlarmActivity extends AppCompatActivity {
         date = intent.getStringExtra("date");
         time = intent.getStringExtra("time");
 
-        TextView tvTitle, tvNote, tvDate, tvTime;
-        Button btnTurnOff;
+        TextView tvTitle, tvNote, tvDate, tvTime, btnDismiss;
 
         tvTitle = findViewById(R.id.tv_title);
         tvNote = findViewById(R.id.tv_note);
         tvDate = findViewById(R.id.tv_date);
         tvTime = findViewById(R.id.tv_time);
-        btnTurnOff = findViewById(R.id.btn_turn_off);
+        btnDismiss = findViewById(R.id.btn_dismiss);
 
         Handler handler = new Handler();
 
@@ -65,7 +64,7 @@ public class AlarmActivity extends AppCompatActivity {
         player.setLooping(true);
         player.start();
 
-        btnTurnOff.setOnClickListener(new View.OnClickListener() {
+        btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 closeActivity();
