@@ -21,13 +21,48 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_margin="8dp"
+            android:background="@color/contactColor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/digbd" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/sdmg" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ictbd" />
+
+
+
+        </LinearLayout>
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/afroz_name"
+                android:text="ADVANCED PROFESSIONAL COACHING WITH INDUSTRY ATTACHMENT"
                 android:textColor="#000"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
 
@@ -36,7 +71,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/afroz_mail"
+                android:text="pd.sdmga@gmail.com"
                 android:textColor="#000"
                 android:textSize="20sp"/>
 
@@ -45,7 +80,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/afroz_fb"
+                android:text="+88-02-8181286"
                 android:textColor="#000"
                 android:textSize="20sp"/>
         </LinearLayout>
