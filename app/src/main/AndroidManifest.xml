@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <supports-screens android:anyDensity="true"
+    <supports-screens
+        android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
@@ -20,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activity.HelpActivity"></activity>
         <activity android:name=".Activity.AlarmActivity">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
@@ -35,6 +37,7 @@
         <activity android:name=".Activity.ViewTodoActivity" />
 
         <receiver android:name=".BroadcustReceiver.AlarmReceiver" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

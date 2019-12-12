@@ -176,13 +176,7 @@ public class ViewTodoActivity extends AppCompatActivity {
     }
 
     void showHelpDialogueBox(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
-        View DialogueView = getLayoutInflater().inflate(R.layout.help, null);
-        builder.setView(DialogueView);
-        final AlertDialog alertDialog=builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-
-        alertDialog.show();
+        startActivity(new Intent(ViewTodoActivity.this, HelpActivity.class));
 
     }
 

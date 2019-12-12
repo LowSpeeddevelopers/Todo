@@ -21,4 +21,41 @@
     <string name="gk_fb">fb.com/100010615418972</string>
 
 
+    <string name="text_on_off">How can I on or off my alarm?</string>
+    <string name="text_update_delete">How can I update or delete my remainder?</string>
+    <string name="text_priority">How does the priority work?</string>
+    <string name="text_add_remainder">How can I add my remainder?</string>
+    <string name="text_transfer">How do I transfer my tasks from one device to another?</string>
+    <string name="text_question">Did not find the answer to your questions?</string>
+    <string-array name="string_array_on_off">
+        <item>Please click On button to On Alarm</item>
+        <item>Please click Off button to Off Alarm</item>
+    </string-array>
+
+    <string-array name="string_array_update_delete">
+        <item>Please swap Right to update or delete Remainder</item>
+    </string-array>
+
+    <string-array name="string_array_priority">
+        <item>Please click round shape plus button for priority</item>
+        <item>In low priority, few specific button does not work such as only vibrate works, ring does not work </item>
+        <item>In high priority all button work properly </item>
+    </string-array>
+
+    <string-array name="string_array_remainder">
+        <item>Please click round shape add button to add remainder</item>
+        <item>In Title, you type your Remainder title </item>
+        <item>In Description, you type your Remainder description</item>
+        <item>Please click save button to save your Remainder details</item>
+    </string-array>
+    <string-array name="string_array_transfer">
+        <item>Please swap left to Menus</item>
+        <item>Please click share button to transfer your task</item>
+    </string-array>
+    <string-array name="string_array_question">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+
 </resources>
