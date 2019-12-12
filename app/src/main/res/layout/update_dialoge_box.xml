@@ -74,7 +74,7 @@
             android:textColor="#000"/>
         <ImageView
             android:layout_width="40dp"
-            android:id="@+id/imgdate"
+            android:id="@+id/imgDate"
             android:layout_height="40dp"
             android:layout_margin="8dp"
             android:src="@drawable/date"/>
@@ -93,7 +93,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/imgtime"
+            android:id="@+id/imgTime"
             android:layout_margin="8dp"
             android:src="@drawable/time"/>
 
@@ -106,13 +106,13 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/ringid"
+                android:id="@+id/cb_ring"
                 android:text="Ring"
                 android:textColor="#000"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/vibratid"
+                android:id="@+id/cb_vibration"
                 android:text="Vibration"
                 android:textColor="#000"/>
         </LinearLayout>

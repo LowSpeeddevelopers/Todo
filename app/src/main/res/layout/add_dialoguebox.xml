@@ -25,10 +25,6 @@
             android:layout_margin="8dp"/>
 
 
-
-
-
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,13 +114,13 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/ringid"
+            android:id="@+id/cb_ring"
             android:textColor="#000"
             android:text="Ring"/>
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/vibratid"
+            android:id="@+id/cb_vibration"
             android:textColor="#000"
             android:text="Vibration"/>
        </LinearLayout>

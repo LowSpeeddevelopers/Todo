@@ -2,29 +2,64 @@ package com.super15.todo.Model;
 
 public class TodoModel {
 
-    private String id;
+    private Integer id;
+    private Integer alarmId;
+    private String priority;
     private String title;
     private String note;
     private String date;
     private String time;
+    private boolean ring;
+    private boolean vibration;
+    private String status;
 
-    public TodoModel(String id, String title, String note, String date, String time) {
+    public TodoModel(Integer id, Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, String status) {
         this.id = id;
+        this.alarmId = alarmId;
+        this.priority = priority;
         this.title = title;
         this.note = note;
         this.date = date;
         this.time = time;
+        this.ring = ring;
+        this.vibration = vibration;
+        this.status = status;
     }
 
-    public TodoModel() {
+    public TodoModel(Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, String status) {
+        this.alarmId = alarmId;
+        this.priority = priority;
+        this.title = title;
+        this.note = note;
+        this.date = date;
+        this.time = time;
+        this.ring = ring;
+        this.vibration = vibration;
+        this.status = status;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getAlarmId() {
+        return alarmId;
+    }
+
+    public void setAlarmId(Integer alarmId) {
+        this.alarmId = alarmId;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
     public String getTitle() {
@@ -57,5 +92,29 @@ public class TodoModel {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public boolean isRing() {
+        return ring;
+    }
+
+    public void setRing(boolean ring) {
+        this.ring = ring;
+    }
+
+    public boolean isVibration() {
+        return vibration;
+    }
+
+    public void setVibration(boolean vibration) {
+        this.vibration = vibration;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

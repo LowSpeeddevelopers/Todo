@@ -5,52 +5,45 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.google.android.material.textfield.TextInputEditText;
+import com.super15.todo.BroadcustReceiver.AlarmReceiver;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
-
-import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private Context mContext;
-    private static ArrayList<TodoModel> mTodos;
+    private ArrayList<TodoModel> mTodo;
     private Calendar cal;
     private TextInputEditText update_title, update_note;
     private TextView update_date, update_time;
+    private CheckBox cbRing, cbVibration;
     private ViewHolder holder;
-    boolean b=true;
+    private boolean b=true;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
-    public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodos) {
+    public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodo) {
         this.mContext = mContext;
-        TodoAdapter.mTodos = mTodos;
+        this.mTodo = mTodo;
     }
     @NonNull
     @Override
@@ -60,7 +53,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     }
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        TodoModel todoModel = mTodos.get(position);
+        TodoModel todoModel = mTodo.get(position);
         final String title;
         title = todoModel.getTitle();
         holder.title.setText(title);
@@ -93,8 +86,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
 
 
-        if (mTodos != null && 0 <= position && position < mTodos.size()) {
-//            TodoModel data = mTodos.get(position);
+        if (mTodo != null && position < mTodo.size()) {
+//            TodoModel data = mTodo.get(position);
 //
             // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
             // put an unique string id as value, can be any string which uniquely define the data
@@ -110,17 +103,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
     }
 
-    public void saveStates(Bundle outState) {
-        viewBinderHelper.saveStates(outState);
-    }
-
-    public void restoreStates(Bundle inState) {
-        viewBinderHelper.restoreStates(inState);
-    }
-
     @Override
     public int getItemCount() {
-        return mTodos.size();
+        return mTodo.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -178,11 +163,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         TodoDb todoDb = new TodoDb(mContext);
-                        todoDb.deleteData(mTodos.get(position).getId());
-                        mTodos.remove(position);
+                        todoDb.deleteData(mTodo.get(position).getId());
+                        AlarmReceiver.cancelAlarm(mContext, mTodo.get(position).getAlarmId());
+                        mTodo.remove(position);
 
                         notifyItemRemoved(position);
                         notifyDataSetChanged();
+
+
 
                         dialog.dismiss();
                     }
@@ -205,16 +193,25 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private void updateTodoItem(final int position){
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View dialogueView = li.inflate(R.layout.update_dialoge_box,null);
+        assert li != null;
+        View dialogueView = li.inflate(R.layout.update_dialoge_box,null);
         update_title = dialogueView.findViewById(R.id.edt_update_title);
         update_note = dialogueView.findViewById(R.id.edt_update_note);
         update_date = dialogueView.findViewById(R.id.tv_update_date);
         update_time = dialogueView.findViewById(R.id.tv_update_time);
+        ImageView imgDate = dialogueView.findViewById(R.id.imgDate);
+        ImageView imgTime = dialogueView.findViewById(R.id.imgTime);
+        cbRing = dialogueView.findViewById(R.id.cb_ring);
+        cbVibration = dialogueView.findViewById(R.id.cb_vibration);
         Button updateButtton = dialogueView.findViewById(R.id.btn_update);
-        update_title.setText(mTodos.get(position).getTitle());
-        update_note.setText(mTodos.get(position).getNote());
-        update_date.setText(mTodos.get(position).getDate());
-        update_time.setText(mTodos.get(position).getTime());
+        update_title.setText(mTodo.get(position).getTitle());
+        update_note.setText(mTodo.get(position).getNote());
+        update_date.setText(mTodo.get(position).getDate());
+        update_time.setText(mTodo.get(position).getTime());
+        cbRing.setChecked(mTodo.get(position).isRing());
+        cbVibration.setChecked(mTodo.get(position).isVibration());
+
+
         builder.setView(dialogueView);
         final AlertDialog alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
@@ -223,75 +220,107 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         update_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String date= update_date.getText().toString();
-                String[] strDate=date.split("/",3);
-                int day=Integer.parseInt(strDate[0]);
-                int month=Integer.parseInt(strDate[1]);
-                int year=Integer.parseInt(strDate[2]);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, final int year, final int month, final int dayOfMonth) {
-                        Log.e("day",String.valueOf(dayOfMonth));
-                        Log.e("month",String.valueOf(month));
-                        Log.e("year",String.valueOf(year));
-                        dateFormater(dayOfMonth,month,year);
-                        cal.set(year,month,dayOfMonth);
-                    }
-                }, year,month,day);
-                datePickerDialog.show();
+                datePicker();
+            }
+        });
+        imgDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePicker();
             }
         });
         update_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String time= update_time.getText().toString();
-                String[] strTime=time.split(":",2);
-                int hour=Integer.parseInt(strTime[0]);
-                int minute=Integer.parseInt(strTime[1]);
-                TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        timeFormater(hourOfDay, minute);
-                        cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                        cal.set(Calendar.MINUTE,minute);
-                        cal.set(Calendar.SECOND,0);
-
-                    }
-                },hour,minute, DateFormat.is24HourFormat(mContext));
-                timePickerDialog.show();
+                timePicker();
             }
         });
+        imgTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePicker();
+            }
+        });
+
         updateButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = update_title.getText().toString();
-                String note = update_note.getText().toString();
+                int id = mTodo.get(position).getId();
+                int alarmId = mTodo.get(position).getAlarmId();
+                String priority = mTodo.get(position).getPriority();
+                String title = Objects.requireNonNull(update_title.getText()).toString();
+                String note = Objects.requireNonNull(update_note.getText()).toString();
                 String date = update_date.getText().toString();
                 String time = update_time.getText().toString();
+                boolean ring = cbRing.isChecked();
+                boolean vibration = cbVibration.isChecked();
+                String status = mTodo.get(position).getStatus();
 
                 if (title.isEmpty() || note.isEmpty()){
                     Toast.makeText(mContext, "Fields must contain data", Toast.LENGTH_SHORT).show();
                 } else {
                     TodoDb todoDb = new TodoDb(mContext);
 
-                    TodoModel model = new TodoModel(mTodos.get(position).getId(),title,note,date,time);
+                    AlarmReceiver.cancelAlarm(mContext, alarmId);
 
-                    Log.e("mTodos", model.getId()+" "+model.getTitle()+" "+model.getNote()+" "+model.getDate()+" "+model.getTime());
+                    alarmId = (int) System.currentTimeMillis();
 
-                    Log.e("Position & ID",position+"   "+mTodos.get(position).getId());
+                    TodoModel model = new TodoModel(id,alarmId,priority,title,note,date,time,ring,vibration,status);
+
+                    Log.e("mTodo", model.getId()+" "+model.getTitle()+" "+model.getNote()+" "+model.getDate()+" "+model.getTime());
+
+                    Log.e("Position & ID",position+"   "+ mTodo.get(position).getId());
 
                     if (todoDb.updateData(model) != 1){
-                        Toast.makeText(mContext, "Someting went wrong!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                     } else {
+                        AlarmReceiver.setAlarm(mContext,cal,model);
                         alertDialog.cancel();
-                        mTodos.set(position, model);
+                        mTodo.set(position, model);
                         notifyItemChanged(position, model);
                         notifyDataSetChanged();
                     }
                 }
             }
         });
+    }
+
+    private void datePicker(){
+        String date= update_date.getText().toString();
+        String[] strDate=date.split("/",3);
+        int day=Integer.parseInt(strDate[0]);
+        int month=Integer.parseInt(strDate[1]);
+        int year=Integer.parseInt(strDate[2]);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, final int year, final int month, final int dayOfMonth) {
+                Log.e("day",String.valueOf(dayOfMonth));
+                Log.e("month",String.valueOf(month));
+                Log.e("year",String.valueOf(year));
+                dateFormater(dayOfMonth,month,year);
+                cal.set(year,month,dayOfMonth);
+            }
+        }, year,month,day);
+        datePickerDialog.show();
+    }
+
+    private void timePicker(){
+        String time= update_time.getText().toString();
+        String[] strTime=time.split(":",2);
+        int hour=Integer.parseInt(strTime[0]);
+        int minute=Integer.parseInt(strTime[1]);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                timeFormater(hourOfDay, minute);
+                cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                cal.set(Calendar.MINUTE,minute);
+                cal.set(Calendar.SECOND,0);
+
+            }
+        },hour,minute, DateFormat.is24HourFormat(mContext));
+        timePickerDialog.show();
     }
 
     private void dateFormater(int day, int month, int year){
@@ -313,6 +342,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private void viewTodoItem(final int position){
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        assert li != null;
         final View dialogueView = li.inflate(R.layout.itemview_dialoge_box,null);
 
         TextView itemTitle = dialogueView.findViewById(R.id.item_title);
@@ -323,10 +353,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         Button btnItemDelete = dialogueView.findViewById(R.id.btn_item_delete);
 
 
-        itemTitle.setText(mTodos.get(position).getTitle());
-        itemNote.setText(mTodos.get(position).getNote());
-        itemDate.setText(mTodos.get(position).getDate());
-        itemTime.setText(mTodos.get(position).getTime());
+        itemTitle.setText(mTodo.get(position).getTitle());
+        itemNote.setText(mTodo.get(position).getNote());
+        itemDate.setText(mTodo.get(position).getDate());
+        itemTime.setText(mTodo.get(position).getTime());
 
         builder.setView(dialogueView);
 

@@ -23,10 +23,15 @@ public class TodoDb extends DbHelper {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(DbHelper.COL_TITLE, todoModel.getTitle() );
-        contentValues.put(DbHelper.COL_DATE, todoModel.getDate() );
+        contentValues.put(DbHelper.COL_ALARM_ID, todoModel.getAlarmId());
+        contentValues.put(DbHelper.COL_PRIORITY, todoModel.getPriority());
+        contentValues.put(DbHelper.COL_TITLE, todoModel.getTitle());
+        contentValues.put(DbHelper.COL_DATE, todoModel.getDate());
         contentValues.put(DbHelper.COL_TIME, todoModel.getTime());
         contentValues.put(DbHelper.COL_NOTE, todoModel.getNote());
+        contentValues.put(DbHelper.COL_RING, todoModel.isRing());
+        contentValues.put(DbHelper.COL_VIBRATION, todoModel.isVibration());
+        contentValues.put(DbHelper.COL_STATUS, todoModel.getStatus());
 
         try {
             db.insert(DbHelper.TABLE_NAME,null,contentValues);
@@ -48,13 +53,18 @@ public class TodoDb extends DbHelper {
         Cursor c = db.query(TABLE_NAME,null,null,null,null,null,null);
 
         while (c.moveToNext()){
-            String id = c.getString(c.getColumnIndex(COL_ID));
+            int id = c.getInt(c.getColumnIndex(COL_ID));
+            int alarmId = c.getInt(c.getColumnIndex(COL_ALARM_ID));
+            String priority = c.getString(c.getColumnIndex(COL_PRIORITY));
             String title = c.getString(c.getColumnIndex(COL_TITLE));
             String note = c.getString(c.getColumnIndex(COL_NOTE));
             String date = c.getString(c.getColumnIndex(COL_DATE));
             String time = c.getString(c.getColumnIndex(COL_TIME));
+            boolean ring = c.getInt(c.getColumnIndex(COL_RING)) > 0;
+            boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
+            String status = c.getString(c.getColumnIndex(COL_STATUS));
 
-            TodoModel todoModel = new TodoModel(id,title,note,date,time);
+            TodoModel todoModel = new TodoModel(id,alarmId,priority,title,note,date,time,ring,vibration,status);
             data.add(todoModel);
 
         }
@@ -71,21 +81,25 @@ public class TodoDb extends DbHelper {
     public int updateData(TodoModel todoModels){
         SQLiteDatabase db = this.getWritableDatabase();
 
-
-
-        String id = todoModels.getId();
+        int id = todoModels.getId();
 
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put(DbHelper.COL_ALARM_ID, todoModels.getAlarmId());
+        contentValues.put(DbHelper.COL_PRIORITY, todoModels.getPriority());
         contentValues.put(DbHelper.COL_TITLE, todoModels.getTitle());
         contentValues.put(DbHelper.COL_DATE, todoModels.getDate() );
         contentValues.put(DbHelper.COL_TIME, todoModels.getTime());
         contentValues.put(DbHelper.COL_NOTE, todoModels.getNote());
+        contentValues.put(DbHelper.COL_RING, todoModels.isRing());
+        contentValues.put(DbHelper.COL_VIBRATION, todoModels.isVibration());
+        contentValues.put(DbHelper.COL_STATUS, todoModels.getStatus());
 
         return db.update(DbHelper.TABLE_NAME,contentValues,DbHelper.COL_ID+"="+id,null);
     }
 
-    public int deleteData(String id){
+    public int deleteData(Integer id){
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         return db.delete(DbHelper.TABLE_NAME,DbHelper.COL_ID+"="+id,null);
