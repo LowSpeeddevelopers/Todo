@@ -27,6 +27,33 @@
     <string name="text_add_remainder">How can I add my remainder?</string>
     <string name="text_transfer">How do I share my app to others?</string>
     <string name="text_question">Did not find the answer to your questions?</string>
+    <string name="todo">TODO</string>
+    <string name="project_title">ADVANCED PROFESSIONAL COACHING WITH INDUSTRY ATTACHMENT</string>
+    <string name="project_email">pd.sdmga@gmail.com</string>
+    <string name="project_number">+88–02–8181286</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="to_do">ToDo</string>
+    <string name="low">Low</string>
+    <string name="high">High</string>
+    <string name="home">Home</string>
+    <string name="share">Share</string>
+    <string name="setting">Setting</string>
+    <string name="help">Help</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="about">About</string>
+    <string name="new_reminder">New Reminder</string>
+    <string name="note">Note</string>
+    <string name="ring">Ring</string>
+    <string name="vibration">Vibration</string>
+    <string name="save">save</string>
+    <string name="update">update</string>
+    <string name="delete">Delete</string>
+    <string name="update_alarm">Update Alarm</string>
+    <string name="and_todo">AND TODO</string>
     <string-array name="string_array_on_off">
         <item>Click on the right side circular shaped red button to turn on an alarm.</item>
         <item>If the center of the circle shaped button is red it means your alarm is currently off and if it is green that means your alarm is on.</item>

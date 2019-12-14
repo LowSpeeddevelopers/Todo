@@ -4,8 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:padding="8dp">
+    android:layout_margin="@dimen/margin_8dp"
+    android:padding="@dimen/padding_8dp">
 
 
     <LinearLayout
@@ -18,24 +18,24 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="UPDATE ALARM"
-        android:textSize="25sp"
+        android:text="@string/update_alarm"
+        android:textSize="@dimen/textsize_25sp"
         android:textColor="#000"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8dp"
         android:textAlignment="center"/>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/marginstart_8dp"
+            android:layout_marginBottom="@dimen/marginbottom_4dp"
+            android:layout_marginEnd="@dimen/marginend_8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:id="@+id/edt_update_title"
 
-                android:hint="Title"
+                android:hint="@string/title"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -44,16 +44,16 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/marginstart_8dp"
+            android:layout_marginBottom="@dimen/marginbottom_4dp"
+            android:layout_marginEnd="@dimen/marginend_8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:id="@+id/edt_update_note"
 
-                android:hint="Note"
+                android:hint="@string/note"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -61,9 +61,9 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/marginstart_8dp"
+        android:layout_marginBottom="@dimen/marginbottom_4dp"
+        android:layout_marginEnd="@dimen/marginend_8dp"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -73,11 +73,12 @@
             android:layout_gravity="center"
             android:textColor="#000"/>
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="@dimen/imagewidhth_40dp"
             android:id="@+id/imgDate"
-            android:layout_height="40dp"
-            android:layout_margin="8dp"
-            android:src="@drawable/date"/>
+            android:layout_height="@dimen/imageheight_40dp"
+            android:layout_margin="@dimen/margin_8dp"
+            android:src="@drawable/date"
+            android:contentDescription="@string/todo" />
 
         <View
             android:layout_width="0dp"
@@ -91,11 +92,12 @@
             android:id="@+id/tv_update_time"
             android:textColor="#000" />
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/imagewidhth_40dp"
+            android:layout_height="@dimen/imageheight_40dp"
             android:id="@+id/imgTime"
-            android:layout_margin="8dp"
-            android:src="@drawable/time"/>
+            android:layout_margin="@dimen/margin_8dp"
+            android:src="@drawable/time"
+            android:contentDescription="@string/todo" />
 
 
     </LinearLayout>
@@ -107,13 +109,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/cb_ring"
-                android:text="Ring"
+                android:text="@string/ring"
                 android:textColor="#000"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/cb_vibration"
-                android:text="Vibration"
+                android:text="@string/vibration"
                 android:textColor="#000"/>
         </LinearLayout>
 
@@ -121,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/btn_update"
-        android:text="update"
+        android:text="@string/update"
         android:layout_gravity="center"/>
 
 

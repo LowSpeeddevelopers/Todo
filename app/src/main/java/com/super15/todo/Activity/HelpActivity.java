@@ -96,9 +96,8 @@ public class HelpActivity extends AppCompatActivity {
         List<String> remainderList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_transfer);
         List<String> transferList = new ArrayList<>(Arrays.asList(array));
-        List<String> questionList = new ArrayList<>();
         array = getResources().getStringArray(R.array.string_array_question);
-        questionList.addAll(Arrays.asList(array));
+        List<String> questionList = new ArrayList<>(Arrays.asList(array));
         // Adding child data
         listDataChild.put(listDataGroup.get(0), onList);
         listDataChild.put(listDataGroup.get(1), updateList);

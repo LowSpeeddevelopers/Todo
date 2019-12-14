@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="@dimen/paddig_normal_8">
 
 
     <TextView
         android:id="@+id/textViewGroup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:paddingTop="@dimen/paddig_normal_8"
+        android:paddingBottom="@dimen/paddig_normal_8"
         android:textColor="@color/colorAccent"
-        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="17dp" />
+        android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textSize="@dimen/textsize_normal_17"
+        tools:ignore="RtlSymmetry" />
 
 </LinearLayout>

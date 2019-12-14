@@ -24,7 +24,10 @@
             <TextView
                 android:id="@+id/tv_update"
                 android:layout_width="@dimen/textviewwidth_100dp"
-
+             
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_height="match_parent"
                 android:background="@android:color/holo_blue_dark"
                 android:gravity="center"

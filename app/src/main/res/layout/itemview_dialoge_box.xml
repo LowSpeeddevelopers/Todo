@@ -5,29 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#9CD7DF"
-    android:padding="5dp">
+    android:padding="@dimen/padding_5dp">
     <TextView
         android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="25sp"
-        android:text="Title"
+        android:textSize="@dimen/textsize_25sp"
+        android:text="@string/title"
         android:textStyle="bold"
-        android:textColor="#ff69b4"/>
+        android:textColor="#000"/>
     <TextView
         android:id="@+id/item_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="Description"
-        android:textStyle="bold"
-        android:textColor="#ff69b4"/>
+        android:textSize="@dimen/textsize_20sp"
+        android:text="@string/description"
+        android:textColor="#000"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="@dimen/marginbottom_4dp"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -35,8 +34,8 @@
             android:layout_width="wrap_content"
             android:id="@+id/item_date"
             android:textColor="#000"
-            android:textSize="25sp"
-            android:text="Date"
+            android:textSize="@dimen/textsize_25sp"
+            android:text="@string/date"
             android:textStyle="bold"/>
 
         <View
@@ -49,8 +48,8 @@
             android:layout_width="wrap_content"
             android:id="@+id/item_time"
             android:textColor="#000"
-            android:textSize="25sp"
-            android:text="Time"
+            android:textSize="@dimen/textsize_25sp"
+            android:text="@string/time"
             android:textStyle="bold"/>
 
     </LinearLayout>
@@ -69,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/alert_black"
-            />
+            android:contentDescription="@string/todo" />
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -79,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/vib_black"
-            />
+            android:contentDescription="@string/todo" />
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -101,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/btn_item_update"
-            android:text="update"
+            android:text="@string/update"
             android:textStyle="bold"
             android:layout_gravity="center"/>
 
@@ -114,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/btn_item_delete"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textStyle="bold"
             android:layout_gravity="center"/>
         <View

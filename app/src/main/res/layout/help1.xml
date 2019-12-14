@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="vertical"
 android:background="@android:color/white"
-android:padding="16dp">
+android:padding="@dimen/padding_size_normal_16">
 
 <TextView
     android:id="@+id/textViewChild"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textColor="@android:color/black"
-    android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-    android:textSize="17dp" />
+    android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
+    android:textSize="@dimen/textsize_normal_17"
+    tools:ignore="RtlSymmetry" />
 
 </LinearLayout>
