@@ -180,71 +180,83 @@
                     android:layout_weight="1"/>
             </LinearLayout>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_gravity="left"
                 android:text="Home"
                 android:id="@+id/tv_home"
                 android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_home_black_24dp"
-                />
+                android:focusable="true" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_gravity="left"
                 android:text="Share"
                 android:id="@+id/tv_share"
                 android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_share_black_24dp"
-                />
+                android:focusable="true" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_gravity="left"
                 android:text="Setting"
                 android:id="@+id/tv_setting"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:layout_margin="8dp"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_settings_black_24dp"
-                />
+                android:focusable="true" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_gravity="left"
                 android:text="Help"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:id="@+id/tv_help"
                 android:layout_margin="8dp"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_help_black_24dp"
-                />
+                android:focusable="true" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_gravity="left"
                 android:text="Contact Us"
                 android:id="@+id/tv_contact"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:layout_margin="8dp"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_contact_mail_black_24dp"
-                />
+                android:focusable="true" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:layout_gravity="left"
                 android:text="About"
                 android:id="@+id/tv_about_us"
                 android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_about_us_black_24dp"
-                />
+                android:focusable="true" />
         </LinearLayout>
     </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
 

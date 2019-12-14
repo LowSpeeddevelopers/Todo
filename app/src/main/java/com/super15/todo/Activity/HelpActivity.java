@@ -10,6 +10,7 @@ import com.super15.todo.Adapter.ExpandableListViewAdapter;
 import com.super15.todo.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -85,36 +86,19 @@ public class HelpActivity extends AppCompatActivity {
         listDataGroup.add(getString(R.string.text_transfer));
         listDataGroup.add(getString(R.string.text_question));
         String[] array;
-        List<String> onList = new ArrayList<>();
         array = getResources().getStringArray(R.array.string_array_on_off);
-        for (String item : array) {
-            onList.add(item);
-        }
-        List<String> updateList = new ArrayList<>();
+        List<String> onList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_update_delete);
-        for (String item : array) {
-            updateList.add(item);
-        }
-        List<String> priorityList = new ArrayList<>();
+        List<String> updateList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_priority);
-        for (String item : array) {
-            priorityList.add(item);
-        }
-        List<String> remainderList = new ArrayList<>();
+        List<String> priorityList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_remainder);
-        for (String item : array) {
-            remainderList.add(item);
-        }
-        List<String> transferList = new ArrayList<>();
+        List<String> remainderList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_transfer);
-        for (String item : array) {
-            transferList.add(item);
-        }
+        List<String> transferList = new ArrayList<>(Arrays.asList(array));
         List<String> questionList = new ArrayList<>();
         array = getResources().getStringArray(R.array.string_array_question);
-        for (String item : array) {
-            questionList.add(item);
-        }
+        questionList.addAll(Arrays.asList(array));
         // Adding child data
         listDataChild.put(listDataGroup.get(0), onList);
         listDataChild.put(listDataGroup.get(1), updateList);

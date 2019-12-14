@@ -130,8 +130,11 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/btn_add"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
         android:text="save"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:focusable="true" />
 
     </LinearLayout>
 

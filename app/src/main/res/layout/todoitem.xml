@@ -22,6 +22,9 @@
             <TextView
                 android:id="@+id/tv_update"
                 android:layout_width="100dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_height="match_parent"
                 android:background="@android:color/holo_blue_dark"
                 android:gravity="center"
@@ -35,6 +38,9 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/holo_red_dark"
                 android:gravity="center"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Delete"
                 android:textColor="@android:color/white" />
         </LinearLayout>
@@ -51,7 +57,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:background="#80F0F0F0"
+            android:id="@+id/mylayout"
             android:orientation="horizontal">
 
             <View
@@ -62,14 +72,12 @@
 
 
             <LinearLayout
-                android:id="@+id/mylayout"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:paddingLeft="10dp"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -103,6 +111,10 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
             <ImageView
                 android:id="@+id/activator"
                 android:layout_width="30dp"
@@ -113,6 +125,8 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/buttonon" />
+
+
 
         </LinearLayout>
     </FrameLayout>

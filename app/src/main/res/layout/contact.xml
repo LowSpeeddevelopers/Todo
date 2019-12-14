@@ -30,7 +30,10 @@
                 android:background="@color/contactColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,8 +83,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:background="@color/contactColor"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -135,8 +141,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/contactColor"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:layout_margin="8dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -189,8 +198,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:background="@color/contactColor"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -245,8 +257,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
                 android:background="@color/contactColor"
-                android:layout_margin="8dp">
+                android:layout_margin="8dp"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
