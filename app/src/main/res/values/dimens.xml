@@ -29,7 +29,6 @@
     <dimen name="menusize_260dp">260dp</dimen>
     <dimen name="marginend_30dp">30dp</dimen>
     <dimen name="textsize_25sp">25sp</dimen>
-    <dimen name="recycleviewheight_612dp">612dp</dimen>
     <dimen name="fabcardmargin_6dp">6dp</dimen>
     <dimen name="marginend_15dp">15dp</dimen>
     <dimen name="paddingbottom_30dp">30dp</dimen>
@@ -61,4 +60,5 @@
     <dimen name="marginend_12dp">12dp</dimen>
     <dimen name="marginbottom_8dp">8dp</dimen>
     <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="ringsize">12dp</dimen>
 </resources>

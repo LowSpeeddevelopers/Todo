@@ -119,13 +119,10 @@
                 android:layout_weight="1"/>
             <ImageView
                 android:id="@+id/activator"
-                android:layout_width="@dimen/imagewidth_30dp"
-                android:layout_height="@dimen/imageheight_30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/marginstart_12dp"
-                android:layout_marginTop="@dimen/margintop_8dp"
-                android:layout_marginEnd="@dimen/marginend_12dp"
-                android:layout_marginBottom="@dimen/marginbottom_8dp"
+                android:layout_margin="@dimen/margin_8dp"
                 android:src="@drawable/buttonon"
                 android:contentDescription="@string/todo" />
 
