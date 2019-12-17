@@ -1,4 +1,4 @@
-package com.super15.todo.BroadcustReceiver;
+package com.super15.todo.BroadcastReceiver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -52,7 +52,16 @@ public class AlarmReceiver extends BroadcastReceiver {
         i.putExtras(b);
 
         PendingIntent pi=PendingIntent.getBroadcast(mContext,alarmId,i,0);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,calender.getTimeInMillis(),pi);
+
+
+        if(calender.before(Calendar.getInstance())){
+            Log.e("time","before");
+        } else {
+            Log.e("time","after");
+
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP,calender.getTimeInMillis(),pi);
+        }
+
 
         Log.e("current time",String.valueOf(Calendar.getInstance().getTimeInMillis()));
         Log.e("current date",String.valueOf(Calendar.getInstance().getTime()));

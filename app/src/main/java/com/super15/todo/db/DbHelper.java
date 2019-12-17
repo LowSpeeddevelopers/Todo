@@ -6,26 +6,26 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DbHelper extends SQLiteOpenHelper {
-    public static final String TABLE_NAME = "todo";
-    public static final String COL_ID = "id";
-    public static final String COL_ALARM_ID = "alarm_id";
-    public static final String COL_PRIORITY = "priority";
-    public static final String COL_TITLE = "title";
-    public static final String COL_DATE = "date";
-    public static final String COL_TIME = "time";
-    public static final String COL_NOTE = "note";
-    public static final String COL_RING = "ring";
-    public static final String COL_VIBRATION = "vibration";
-    public static final String COL_STATUS = "status";
+    static final String TABLE_NAME = "todo";
+    static final String COL_ID = "id";
+    static final String COL_ALARM_ID = "alarm_id";
+    static final String COL_PRIORITY = "priority";
+    static final String COL_TITLE = "title";
+    static final String COL_DATE = "date";
+    static final String COL_TIME = "time";
+    static final String COL_NOTE = "note";
+    static final String COL_RING = "ring";
+    static final String COL_VIBRATION = "vibration";
+    static final String COL_STATUS = "status";
 
-    public DbHelper(Context context) {
+    DbHelper(Context context) {
         super(context, "database", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ("+COL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_ALARM_ID+" INTEGER,"+COL_PRIORITY+" TEXT,"+COL_TITLE+" TEXT,"+COL_NOTE+" TEXT, "+COL_DATE+" TEXT, "+COL_TIME+" TEXT,"+COL_RING+" BOOLEAN,"+COL_VIBRATION+" BOOLEAN,"+COL_STATUS+" TEXT )";
+        String query = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ("+COL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_ALARM_ID+" INTEGER,"+COL_PRIORITY+" TEXT,"+COL_TITLE+" TEXT,"+COL_NOTE+" TEXT, "+COL_DATE+" TEXT, "+COL_TIME+" TEXT,"+COL_RING+" BOOLEAN,"+COL_VIBRATION+" BOOLEAN,"+COL_STATUS+" BOOLEAN )";
 
         Log.d("query", query);
 

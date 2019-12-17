@@ -11,9 +11,9 @@ public class TodoModel {
     private String time;
     private boolean ring;
     private boolean vibration;
-    private String status;
+    private boolean status;
 
-    public TodoModel(Integer id, Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, String status) {
+    public TodoModel(Integer id, Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, boolean status) {
         this.id = id;
         this.alarmId = alarmId;
         this.priority = priority;
@@ -26,7 +26,7 @@ public class TodoModel {
         this.status = status;
     }
 
-    public TodoModel(Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, String status) {
+    public TodoModel(Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, boolean status) {
         this.alarmId = alarmId;
         this.priority = priority;
         this.title = title;
@@ -110,11 +110,11 @@ public class TodoModel {
         this.vibration = vibration;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }

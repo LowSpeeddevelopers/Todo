@@ -50,7 +50,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_todo"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/recycleviewheight_612dp" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <com.google.android.material.bottomappbar.BottomAppBar

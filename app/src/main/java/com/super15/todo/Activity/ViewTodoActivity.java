@@ -27,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.super15.todo.Adapter.TodoAdapter;
-import com.super15.todo.BroadcustReceiver.AlarmReceiver;
+import com.super15.todo.BroadcastReceiver.AlarmReceiver;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
@@ -274,7 +274,7 @@ public class ViewTodoActivity extends AppCompatActivity {
                 String time = timeSetter.getText().toString();
                 boolean ring = cbRing.isChecked();
                 boolean vibration = cbVibration.isChecked();
-                String status = "ON";
+                boolean status = true;
 
                 boolean isOk=true;
                 if(TextUtils.isEmpty(title)){

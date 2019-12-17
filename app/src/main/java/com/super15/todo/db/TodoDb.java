@@ -31,7 +31,7 @@ public class TodoDb extends DbHelper {
         contentValues.put(DbHelper.COL_NOTE, todoModel.getNote());
         contentValues.put(DbHelper.COL_RING, todoModel.isRing());
         contentValues.put(DbHelper.COL_VIBRATION, todoModel.isVibration());
-        contentValues.put(DbHelper.COL_STATUS, todoModel.getStatus());
+        contentValues.put(DbHelper.COL_STATUS, todoModel.isStatus());
 
         try {
             db.insert(DbHelper.TABLE_NAME,null,contentValues);
@@ -62,7 +62,7 @@ public class TodoDb extends DbHelper {
             String time = c.getString(c.getColumnIndex(COL_TIME));
             boolean ring = c.getInt(c.getColumnIndex(COL_RING)) > 0;
             boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
-            String status = c.getString(c.getColumnIndex(COL_STATUS));
+            boolean status = c.getInt(c.getColumnIndex(COL_STATUS)) > 0;
 
             TodoModel todoModel = new TodoModel(id,alarmId,priority,title,note,date,time,ring,vibration,status);
             data.add(todoModel);
@@ -93,7 +93,7 @@ public class TodoDb extends DbHelper {
         contentValues.put(DbHelper.COL_NOTE, todoModels.getNote());
         contentValues.put(DbHelper.COL_RING, todoModels.isRing());
         contentValues.put(DbHelper.COL_VIBRATION, todoModels.isVibration());
-        contentValues.put(DbHelper.COL_STATUS, todoModels.getStatus());
+        contentValues.put(DbHelper.COL_STATUS, todoModels.isStatus());
 
         return db.update(DbHelper.TABLE_NAME,contentValues,DbHelper.COL_ID+"="+id,null);
     }

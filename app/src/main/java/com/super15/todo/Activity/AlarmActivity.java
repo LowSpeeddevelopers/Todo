@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.super15.todo.R;
@@ -39,8 +38,7 @@ public class AlarmActivity extends AppCompatActivity {
         date = intent.getStringExtra("date");
         time = intent.getStringExtra("time");
 
-        TextView tvTitle, tvNote, tvDate, tvTime,btnDismiss;
-
+        TextView tvTitle, tvNote, tvDate, tvTime, btnDismiss;
 
         tvTitle = findViewById(R.id.tv_title);
         tvNote = findViewById(R.id.tv_note);

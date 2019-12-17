@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.google.android.material.textfield.TextInputEditText;
-import com.super15.todo.BroadcustReceiver.AlarmReceiver;
+import com.super15.todo.BroadcastReceiver.AlarmReceiver;
 import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
 import com.super15.todo.db.TodoDb;
@@ -39,7 +39,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private TextView update_date, update_time;
     private CheckBox cbRing, cbVibration;
     private ViewHolder holder;
-    private boolean b=true;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodo) {
         this.mContext = mContext;
@@ -53,10 +52,30 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     }
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        TodoModel todoModel = mTodo.get(position);
-        final String title;
-        title = todoModel.getTitle();
+        final TodoModel todoModel = mTodo.get(position);
+        String title = todoModel.getTitle();
         holder.title.setText(title);
+
+        if (todoModel.isStatus()){
+            holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+        } else {
+            holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+        }
+
+        if (todoModel.isRing()){
+            holder.ring.setVisibility(View.VISIBLE);
+        } else {
+            holder.ring.setVisibility(View.GONE);
+        }
+
+        if (todoModel.isVibration()){
+            holder.vib.setVisibility(View.VISIBLE);
+        } else {
+            holder.vib.setVisibility(View.GONE);
+        }
+
+
+
         cal=Calendar.getInstance();
         this.holder=holder;
         holder.myLayout.setOnClickListener(new View.OnClickListener() {
@@ -66,25 +85,54 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             }
         });
 
+
         holder.activatior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // To-Do check if database has activator valu false or true
                 //if database value is false then on click button will turn on
                 //else if database value is true then on click button will will turn off an store the value in database.
-                if(b){
-                    holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
-                    b=false;
-                }else {
+
+
+                TodoModel model = mTodo.get(position);
+
+                Log.e("position", position+"");
+
+                if(mTodo.get(position).isStatus()){
                     holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
-                    b=true;
+
+                    reminderStatusUpdate(position, model, false);
+
+                    AlarmReceiver.cancelAlarm(mContext, model.getAlarmId());
+                }else {
+                    holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+
+                    reminderStatusUpdate(position, model, true);
+
+                    Log.e("data", model.getTitle());
+
+                    Calendar calendar = Calendar.getInstance();
+
+                    String date= model.getDate();
+                    String[] strDate=date.split("/",3);
+                    int day=Integer.parseInt(strDate[0]);
+                    int month=Integer.parseInt(strDate[1]);
+                    int year=Integer.parseInt(strDate[2]);
+
+                    String time= model.getTime();
+                    String[] strTime=time.split(":",2);
+                    int hour=Integer.parseInt(strTime[0]);
+                    int minute=Integer.parseInt(strTime[1]);
+
+                    calendar.set(year,month,day,hour,minute,0);
+
+                    Log.e("CalendarValue", String.valueOf(calendar));
+
+                    AlarmReceiver.setAlarm(mContext,calendar,model);
                 }
 
             }
         });
-
-
-
 
         if (mTodo != null && position < mTodo.size()) {
 //            TodoModel data = mTodo.get(position);
@@ -132,22 +180,39 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         }
 
-        void bind(final int data) {
+        void bind(final int position) {
             tvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteTodoItem(data);
+                    deleteTodoItem(position);
                 }
             });
 
             tvUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateTodoItem(data);
+                    updateTodoItem(position);
                     holder.swipeRevealLayout.close(true);
                 }
             });
+
+
         }
+    }
+
+    private void reminderStatusUpdate(int position, TodoModel model, boolean status){
+        TodoDb todoDb = new TodoDb(mContext);
+
+        model.setStatus(status);
+
+        Log.d("dataid", model.getId().toString());
+        Log.d("datatitle", model.toString());
+
+        todoDb.updateData(model);
+
+        mTodo.set(position, model);
+        notifyItemChanged(position, model);
+        //notifyDataSetChanged();
     }
 
 
@@ -254,7 +319,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 String time = update_time.getText().toString();
                 boolean ring = cbRing.isChecked();
                 boolean vibration = cbVibration.isChecked();
-                String status = mTodo.get(position).getStatus();
+                boolean status = mTodo.get(position).isStatus();
 
                 if (title.isEmpty() || note.isEmpty()){
                     Toast.makeText(mContext, "Fields must contain data", Toast.LENGTH_SHORT).show();
