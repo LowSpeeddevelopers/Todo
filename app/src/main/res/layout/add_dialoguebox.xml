@@ -7,6 +7,7 @@
     android:padding="@dimen/padding_8dp"
     card_view:cardElevation="2dp"
     android:background="@color/colorGray"
+    android:layout_margin="@dimen/margin_8dp"
     android:orientation="vertical">
 
     <LinearLayout

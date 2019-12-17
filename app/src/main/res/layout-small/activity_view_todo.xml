@@ -157,9 +157,13 @@
         android:id="@+id/menulayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -236,7 +240,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="@dimen/textsize_20sp"
                 android:layout_gravity="start"
                 android:text="@string/contact_us"
                 android:id="@+id/tv_contact"
@@ -260,6 +264,8 @@
                 android:drawableStart="@drawable/ic_about_us_black_24dp"
                 android:focusable="true" />
         </LinearLayout>
+
+        </ScrollView>
     </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
 
 </com.mxn.soul.flowingdrawer_core.FlowingDrawer>

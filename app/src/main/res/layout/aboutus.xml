@@ -24,7 +24,7 @@
             >
 
         <LinearLayout
-            android:layout_margin="@dimen/margin_8dp"
+            android:layout_margin="@dimen/margin_4dp"
             android:background="@color/contactColor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -68,7 +68,8 @@
                 android:text="@string/project_title"
                 android:textColor="#000"
                 android:textSize="@dimen/textsize_20sp"
-                android:layout_margin="@dimen/margin_4dp"
+                android:layout_marginEnd="@dimen/margin_4dp"
+                android:layout_marginStart="4dp"
                 android:textStyle="bold"/>
 
 
