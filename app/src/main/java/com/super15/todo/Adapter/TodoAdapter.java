@@ -416,12 +416,33 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         TextView itemTime = dialogueView.findViewById(R.id.item_time);
         Button btnItemUpdate = dialogueView.findViewById(R.id.btn_item_update);
         Button btnItemDelete = dialogueView.findViewById(R.id.btn_item_delete);
+        ImageView imgItemRing = dialogueView.findViewById(R.id.img_item_ring);
+        ImageView imgItemVibration = dialogueView.findViewById(R.id.img_item_vibrate);
+        View viewSound = dialogueView.findViewById(R.id.view_sound);
 
 
         itemTitle.setText(mTodo.get(position).getTitle());
         itemNote.setText(mTodo.get(position).getNote());
         itemDate.setText(mTodo.get(position).getDate());
         itemTime.setText(mTodo.get(position).getTime());
+
+        if (mTodo.get(position).isRing()){
+            imgItemRing.setVisibility(View.VISIBLE);
+        } else {
+            imgItemRing.setVisibility(View.GONE);
+        }
+
+        if (mTodo.get(position).isVibration()){
+            imgItemVibration.setVisibility(View.VISIBLE);
+        } else {
+            imgItemVibration.setVisibility(View.GONE);
+        }
+
+        if (mTodo.get(position).isRing() && mTodo.get(position).isVibration()){
+            viewSound.setVisibility(View.VISIBLE);
+        } else {
+            viewSound.setVisibility(View.GONE);
+        }
 
         builder.setView(dialogueView);
 
