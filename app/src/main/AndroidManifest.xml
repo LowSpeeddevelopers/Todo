@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.HelpActivity" />
+        <activity android:name=".Activity.HelpActivity"
+            android:theme="@style/AppTheme2"/>
         <activity android:name=".Activity.AlarmActivity">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
