@@ -34,7 +34,6 @@ import java.util.Objects;
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private Context mContext;
     private ArrayList<TodoModel> mTodo;
-    private Calendar cal;
     private TextInputEditText update_title, update_note;
     private TextView update_date, update_time;
     private CheckBox cbRing, cbVibration;
@@ -56,11 +55,18 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         String title = todoModel.getTitle();
         holder.title.setText(title);
 
-        if (todoModel.isStatus()){
-            holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+        Calendar calendar = dateAndTimeParse(todoModel.getDate(), todoModel.getTime());
+
+        if (calendar.before(Calendar.getInstance())){
+            holder.activatior.setVisibility(View.GONE);
         } else {
-            holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+            if (todoModel.isStatus()){
+                holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+            } else {
+                holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+            }
         }
+
 
         if (todoModel.isRing()){
             holder.ring.setVisibility(View.VISIBLE);
@@ -76,7 +82,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
 
 
-        cal=Calendar.getInstance();
         this.holder=holder;
         holder.myLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,30 +195,39 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         if(todoDb.updateData(model) >= 0){
 
-            Calendar calendar = Calendar.getInstance();
 
-            String date= model.getDate();
-            String[] strDate=date.split("/",3);
-            int day=Integer.parseInt(strDate[0]);
-            int month=Integer.parseInt(strDate[1]);
-            int year=Integer.parseInt(strDate[2]);
+            Calendar calendar = dateAndTimeParse(model.getDate(), model.getTime());
 
-            String time= model.getTime();
-            String[] strTime=time.split(":",2);
-            int hour=Integer.parseInt(strTime[0]);
-            int minute=Integer.parseInt(strTime[1]);
-
-            calendar.set(year,month,day,hour,minute,0);
 
             Log.e("CalendarValue", String.valueOf(calendar));
 
             AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId());
+
+            mTodo.set(position, model);
+            notifyItemChanged(position, model);
 
         } else {
             Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
         }
 
 
+    }
+
+    private Calendar dateAndTimeParse(String date, String time){
+        Calendar calendar = Calendar.getInstance();
+
+        String[] strDate=date.split("/",3);
+        int day=Integer.parseInt(strDate[0]);
+        int month=Integer.parseInt(strDate[1]);
+        int year=Integer.parseInt(strDate[2]);
+
+        String[] strTime=time.split(":",2);
+        int hour=Integer.parseInt(strTime[0]);
+        int minute=Integer.parseInt(strTime[1]);
+
+        calendar.set(year,month,day,hour,minute,0);
+
+        return calendar;
     }
 
 
@@ -339,21 +353,21 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                     if (todoDb.updateData(model) <= 0){
                         Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                     } else {
+
+                        Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
+
                         AlarmReceiver.setAlarm(mContext,cal,model.getAlarmId());
                         alertDialog.cancel();
 
-                        notifyData(position, model);
+                        mTodo.set(position, model);
+                        notifyItemChanged(position, model);
+                        notifyDataSetChanged();
                     }
                 }
             }
         });
     }
 
-    private void notifyData(int position, TodoModel model){
-        mTodo.set(position, model);
-        notifyItemChanged(position, model);
-        notifyDataSetChanged();
-    }
 
     private void datePicker(){
         String date= update_date.getText().toString();
@@ -364,14 +378,17 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, final int year, final int month, final int dayOfMonth) {
+            public void onDateSet(DatePicker datePicker, final int year, int month, final int dayOfMonth) {
+
+                month++;
+
                 Log.e("day",String.valueOf(dayOfMonth));
                 Log.e("month",String.valueOf(month));
                 Log.e("year",String.valueOf(year));
                 dateFormater(dayOfMonth,month,year);
-                cal.set(year,month,dayOfMonth);
             }
-        }, year,month,day);
+        }, year,month-1,day);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
 
@@ -384,16 +401,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 timeFormater(hourOfDay, minute);
-                cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                cal.set(Calendar.MINUTE,minute);
-                cal.set(Calendar.SECOND,0);
-
             }
         },hour,minute, DateFormat.is24HourFormat(mContext));
         timePickerDialog.show();
     }
 
     private void dateFormater(int day, int month, int year){
+        month+=1;
         String sDay, sMonth, sYear;
         if (day<10){sDay="0"+day;}else{sDay=""+day; }
         if (month<10){sMonth="0"+month;}else{sMonth=""+month; }

@@ -360,7 +360,9 @@ public class ViewTodoActivity extends AppCompatActivity {
                 dateSetter.setText(userDate);
 
             }
-        }, year,month,day);
+        }, year,month-1,day);
+
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
 
         datePickerDialog.show();
     }
@@ -391,6 +393,8 @@ public class ViewTodoActivity extends AppCompatActivity {
 
     }
     private String dateFormatter(int day, int month, int year){
+
+        month+=1;
 
         String sDay, sMonth, sYear;
 
@@ -426,27 +430,5 @@ public class ViewTodoActivity extends AppCompatActivity {
             }
         });
     }
-
-    public static Intent openFacebook(Context context) {
-
-        try {
-            context.getPackageManager()
-                    .getPackageInfo("com.facebook.katana", 0);
-            return new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("fb://profile/100001737944023"));
-        } catch (Exception e){
-
-            return new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://www.facebook.com/shahariarnawshintaki"));
-        }
-
-
-    }
-
-
-
-
-
-
 
 }
