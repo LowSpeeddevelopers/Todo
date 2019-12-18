@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,9 +37,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private Context mContext;
     private ArrayList<TodoModel> mTodo;
     private TextInputEditText update_title, update_note;
-    private TextView update_date, update_time;
+    private TextView update_date, update_time, tvUpdate_title_count, tvUpdate_note_count;
     private CheckBox cbRing, cbVibration;
     private ViewHolder holder;
+
+
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodo) {
         this.mContext = mContext;
@@ -132,8 +136,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             // Bind your data here
             holder.bind(position);
         }
-
-
     }
 
     @Override
@@ -181,7 +183,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 }
             });
 
-
         }
     }
 
@@ -195,9 +196,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         if(todoDb.updateData(model) >= 0){
 
-
             Calendar calendar = dateAndTimeParse(model.getDate(), model.getTime());
-
 
             Log.e("CalendarValue", String.valueOf(calendar));
 
@@ -209,7 +208,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         } else {
             Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -250,8 +248,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                         notifyItemRemoved(position);
                         notifyDataSetChanged();
 
-
-
                         dialog.dismiss();
                     }
 
@@ -290,13 +286,16 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         cbRing = dialogueView.findViewById(R.id.cb_ring);
         cbVibration = dialogueView.findViewById(R.id.cb_vibration);
         Button updateButtton = dialogueView.findViewById(R.id.btn_update);
+
+        tvUpdate_title_count = dialogueView.findViewById(R.id.update_title_count);
+        tvUpdate_note_count = dialogueView.findViewById(R.id.update_note_count);
+
         update_title.setText(mTodo.get(position).getTitle());
         update_note.setText(mTodo.get(position).getNote());
         update_date.setText(mTodo.get(position).getDate());
         update_time.setText(mTodo.get(position).getTime());
         cbRing.setChecked(mTodo.get(position).isRing());
         cbVibration.setChecked(mTodo.get(position).isVibration());
-
 
         builder.setView(dialogueView);
         final AlertDialog alertDialog=builder.create();
@@ -325,6 +324,44 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 timePicker();
+            }
+        });
+
+        update_title.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String currentText = s.toString();
+                int count = currentText.length();
+                tvUpdate_title_count.setText(count + "/50");
+            }
+        });
+
+        update_note.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String currentText = s.toString();
+                int count = currentText.length();
+                tvUpdate_note_count.setText(count + "/50");
             }
         });
 
