@@ -22,12 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.HelpActivity"
-            android:theme="@style/AppTheme2">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.super5.todo.Activity.ViewTodoActivity" />
-        </activity>
+        <activity android:name=".Activity.HelpActivity" />
         <activity android:name=".Activity.AlarmActivity">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />

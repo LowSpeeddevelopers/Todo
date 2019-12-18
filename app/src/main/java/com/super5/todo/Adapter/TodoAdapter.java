@@ -123,11 +123,18 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 //            TodoModel data = mTodo.get(position);
 //
             // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
+
+//            if (holder.swipeRevealLayout.isOpened()){
+//
+//                viewBinderHelper.closeLayout(String.valueOf(position));
+//            }
+
             // put an unique string id as value, can be any string which uniquely define the data
             viewBinderHelper.bind(holder.swipeRevealLayout, String.valueOf(position));
 
-            viewBinderHelper.setOpenOnlyOne(true);
 
+
+            viewBinderHelper.setOpenOnlyOne(true);
 
             // Bind your data here
             holder.bind(position);
@@ -169,6 +176,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             tvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    if (holder.swipeRevealLayout.isOpened()){
+                        Toast.makeText(mContext, "Layout Open", Toast.LENGTH_SHORT).show();
+                        viewBinderHelper.closeLayout(String.valueOf(position));
+                    }
+
                     deleteTodoItem(position);
                 }
             });
@@ -233,6 +246,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
 
     private void deleteTodoItem(final int position) {
+
+        if (holder.swipeRevealLayout.isOpened()){
+            Toast.makeText(mContext,"Open",Toast.LENGTH_LONG);
+            holder.swipeRevealLayout.close(true);
+
+        }
 
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(mContext)
                 // set message & title
