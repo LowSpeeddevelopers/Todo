@@ -167,6 +167,12 @@ public class ViewTodoActivity extends AppCompatActivity {
                 showAboutDialogueBox();
             }
         });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShareDialougeBox();
+            }
+        });
     }
 
 
@@ -203,6 +209,17 @@ public class ViewTodoActivity extends AppCompatActivity {
         alertDialog.show();
 
     }
+
+    void showShareDialougeBox(){
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "https://play.google.com/store/apps/details?id=com.super5.todo";
+        String shareSub = "ToDo";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share using"));
+    }
+
 
     void showAddDialogueBox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
@@ -377,7 +394,7 @@ public class ViewTodoActivity extends AppCompatActivity {
     }
     private String dateFormatter(int day, int month, int year){
 
-        month++;
+        month+=1;
 
         String sDay, sMonth, sYear;
 
@@ -413,27 +430,5 @@ public class ViewTodoActivity extends AppCompatActivity {
             }
         });
     }
-
-    public static Intent openFacebook(Context context) {
-
-        try {
-            context.getPackageManager()
-                    .getPackageInfo("com.facebook.katana", 0);
-            return new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("fb://profile/100001737944023"));
-        } catch (Exception e){
-
-            return new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://www.facebook.com/shahariarnawshintaki"));
-        }
-
-
-    }
-
-
-
-
-
-
 
 }
