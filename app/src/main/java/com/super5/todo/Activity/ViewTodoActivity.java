@@ -167,6 +167,12 @@ public class ViewTodoActivity extends AppCompatActivity {
                 showAboutDialogueBox();
             }
         });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShareDialougeBox();
+            }
+        });
     }
 
 
@@ -203,6 +209,17 @@ public class ViewTodoActivity extends AppCompatActivity {
         alertDialog.show();
 
     }
+
+    void showShareDialougeBox(){
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "https://play.google.com/store/apps/details?id=com.super5.todo";
+        String shareSub = "ToDo";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share using"));
+    }
+
 
     void showAddDialogueBox(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);

@@ -22,22 +22,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.super5.todo.Activity.HelpActivity" />
-        <activity android:name="com.super5.todo.Activity.AlarmActivity">
+        <activity android:name=".Activity.HelpActivity" />
+        <activity android:name=".Activity.AlarmActivity">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-        <activity android:name="com.super5.todo.Activity.SplashActivity">
+        <activity android:name=".Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.super5.todo.Activity.ViewTodoActivity" />
+        <activity android:name=".Activity.ViewTodoActivity" />
 
-        <receiver android:name="com.super5.todo.BroadcastReceiver.AlarmReceiver"
+        <receiver android:name=".BroadcastReceiver.AlarmReceiver"
             android:enabled="true"
             android:exported="true"/>
 
