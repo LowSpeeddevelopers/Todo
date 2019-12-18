@@ -1,8 +1,12 @@
 package com.super5.todo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 
+import android.content.ClipData;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import com.super5.todo.Adapter.ExpandableListViewAdapter;
@@ -26,11 +30,26 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
         initViews();
         initListeners();
         initObjects();
         initListData();
 
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void initViews() {
