@@ -22,9 +22,9 @@
 
 
     <string name="text_on_off">How can I turn my alarm on or off?</string>
-    <string name="text_update_delete">How can I update or delete my remainder?</string>
-    <string name="text_priority">How does the priority work?</string>
     <string name="text_add_remainder">How can I add my remainder?</string>
+    <string name="text_priority">How does the priority work?</string>
+    <string name="text_update_delete">How can I update or delete my remainder?</string>
     <string name="text_transfer">How do I share my app to others?</string>
     <string name="text_question">Did not find the answer to your questions?</string>
     <string name="todo">TODO</string>
@@ -55,32 +55,30 @@
     <string name="update_alarm">Update Alarm</string>
     <string name="and_todo">AND TODO</string>
     <string-array name="string_array_on_off">
-        <item>Click on the right side circular shaped red button to turn on an alarm.</item>
-        <item>If the center of the circle shaped button is red it means your alarm is currently off and if it is green that means your alarm is on.</item>
-    </string-array>
-
-    <string-array name="string_array_update_delete">
-        <item>Swipe from right to left on your alarm to get the update or delete option.</item>
+        <item>Click on the right side circular shaped red green color mixed button to turn on an alarm.</item>
+        <item>If the center of the circle shaped button is green it means your alarm is currently on and if it is red that means your alarm is off.</item>
     </string-array>
 
     <string-array name="string_array_remainder">
-        <item>Click on the "+" button at the bottom of the screen to add an alarm.It will show you two buttons of priority you want.</item>
+        <item>Click on the "+" button at the bottom of the screen to add an remainder.It will show you two buttons of priority you want.</item>
         <item>Select the priority you want.</item>
-        <item>Type the title of your alarm at alarm field.</item>
-        <item>Type the information or description about your alarm in the description field to set your alarm description.</item>
-        <item>Pick the date you want to set alarm at from the calender icon.</item>
-        <item>Pick the time you want to set the alarm at from the watch icon.</item>
+        <item>Type the title of your remainder at alarm field.</item>
+        <item>Type the information or description about your remainder in the description field to set your remainder description.</item>
+        <item>Pick the date you want to set alarm from the calender icon.</item>
+        <item>Pick the time you want to set the alarm from the watch icon.</item>
         <item>Click save and you are good to go. Your alarm is set.</item>
     </string-array>
 
     <string-array name="string_array_priority">
-        <item>In low priority by default only vibration is selected you will get a vibration alarm at the specific time of your alarm. You can enable ringtone if you want.</item>
-        <item>In high priority both and ring and vibration will work.</item>
+        <item>In low priority by default only vibration is selected </item>
+        <item>In high priority both ring and vibration is selected </item>
     </string-array>
 
+    <string-array name="string_array_update_delete">
+        <item>Swipe from right to left on your remainder to get the update or delete option.</item>
+    </string-array>
 
     <string-array name="string_array_transfer">
-        <item>Swipe from left to right for menu. Or you can click the 3 lined icon from the top left of the screen to get the menu</item>
         <item>Click the share button to share your app with others.</item>
     </string-array>
     <string-array name="string_array_question">

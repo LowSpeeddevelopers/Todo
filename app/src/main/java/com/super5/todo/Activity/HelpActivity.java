@@ -78,19 +78,19 @@ public class HelpActivity extends AppCompatActivity {
     private void initListData() {
         // Adding group data
         listDataGroup.add(getString(R.string.text_on_off));
-        listDataGroup.add(getString(R.string.text_update_delete));
-        listDataGroup.add(getString(R.string.text_priority));
         listDataGroup.add(getString(R.string.text_add_remainder));
+        listDataGroup.add(getString(R.string.text_priority));
+        listDataGroup.add(getString(R.string.text_update_delete));
         listDataGroup.add(getString(R.string.text_transfer));
         listDataGroup.add(getString(R.string.text_question));
         String[] array;
         array = getResources().getStringArray(R.array.string_array_on_off);
         List<String> onList = new ArrayList<>(Arrays.asList(array));
-        array = getResources().getStringArray(R.array.string_array_update_delete);
+        array = getResources().getStringArray(R.array.string_array_remainder);
         List<String> updateList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_priority);
         List<String> priorityList = new ArrayList<>(Arrays.asList(array));
-        array = getResources().getStringArray(R.array.string_array_remainder);
+        array = getResources().getStringArray(R.array.string_array_update_delete);
         List<String> remainderList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_transfer);
         List<String> transferList = new ArrayList<>(Arrays.asList(array));
