@@ -53,7 +53,6 @@ public class TodoDb extends DbHelper {
         Cursor c = db.query(TABLE_NAME,null,null,null,null,null,null);
 
         while (c.moveToNext()){
-            int id = c.getInt(c.getColumnIndex(COL_ID));
             int alarmId = c.getInt(c.getColumnIndex(COL_ALARM_ID));
             String priority = c.getString(c.getColumnIndex(COL_PRIORITY));
             String title = c.getString(c.getColumnIndex(COL_TITLE));
@@ -64,7 +63,7 @@ public class TodoDb extends DbHelper {
             boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
             boolean status = c.getInt(c.getColumnIndex(COL_STATUS)) > 0;
 
-            TodoModel todoModel = new TodoModel(id,alarmId,priority,title,note,date,time,ring,vibration,status);
+            TodoModel todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
             data.add(todoModel);
 
         }
@@ -78,10 +77,41 @@ public class TodoDb extends DbHelper {
         return data;
     }
 
+    public TodoModel getDataByAlarmID(int alarmID){
+
+        TodoModel todoModel = null;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "select * from " + DbHelper.TABLE_NAME+ " where "+DbHelper.COL_ALARM_ID+"="+ alarmID +"";
+
+        Cursor c = db.rawQuery(query, null);
+
+        while (c.moveToNext()){
+            int alarmId = c.getInt(c.getColumnIndex(COL_ALARM_ID));
+            String priority = c.getString(c.getColumnIndex(COL_PRIORITY));
+            String title = c.getString(c.getColumnIndex(COL_TITLE));
+            String note = c.getString(c.getColumnIndex(COL_NOTE));
+            String date = c.getString(c.getColumnIndex(COL_DATE));
+            String time = c.getString(c.getColumnIndex(COL_TIME));
+            boolean ring = c.getInt(c.getColumnIndex(COL_RING)) > 0;
+            boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
+            boolean status = c.getInt(c.getColumnIndex(COL_STATUS)) > 0;
+
+            todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
+
+        }
+
+        db.close();
+
+        return todoModel;
+    }
+
+
     public int updateData(TodoModel todoModels){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        int id = todoModels.getId();
+        int id = todoModels.getAlarmId();
 
         ContentValues contentValues = new ContentValues();
 
@@ -95,14 +125,14 @@ public class TodoDb extends DbHelper {
         contentValues.put(DbHelper.COL_VIBRATION, todoModels.isVibration());
         contentValues.put(DbHelper.COL_STATUS, todoModels.isStatus());
 
-        return db.update(DbHelper.TABLE_NAME,contentValues,DbHelper.COL_ID+"="+id,null);
+        return db.update(DbHelper.TABLE_NAME,contentValues,DbHelper.COL_ALARM_ID+"="+id,null);
     }
 
     public int deleteData(Integer id){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        return db.delete(DbHelper.TABLE_NAME,DbHelper.COL_ID+"="+id,null);
+        return db.delete(DbHelper.TABLE_NAME,DbHelper.COL_ALARM_ID+"="+id,null);
 
     }
 

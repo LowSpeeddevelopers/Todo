@@ -274,7 +274,6 @@ public class ViewTodoActivity extends AppCompatActivity {
                 String time = timeSetter.getText().toString();
                 boolean ring = cbRing.isChecked();
                 boolean vibration = cbVibration.isChecked();
-                boolean status = true;
 
                 boolean isOk=true;
                 if(TextUtils.isEmpty(title)){
@@ -291,12 +290,12 @@ public class ViewTodoActivity extends AppCompatActivity {
                 }
                 if(isOk){
 
-                    TodoModel todoModel = new TodoModel(alarmID,priority,title,note,date,time,ring,vibration,status);
+                    TodoModel todoModel = new TodoModel(alarmID,priority,title,note,date,time,ring,vibration,true);
                     todoDb.insertData(todoModel);
                     todoModels.add(todoModel);
                     todoAdapter.notifyDataSetChanged();
 
-                    AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, todoModel);
+                    AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID);
 
                     alertDialog.dismiss();
                 }

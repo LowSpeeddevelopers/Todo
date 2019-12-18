@@ -2,7 +2,6 @@ package com.super15.todo.Model;
 
 public class TodoModel {
 
-    private Integer id;
     private Integer alarmId;
     private String priority;
     private String title;
@@ -12,19 +11,6 @@ public class TodoModel {
     private boolean ring;
     private boolean vibration;
     private boolean status;
-
-    public TodoModel(Integer id, Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, boolean status) {
-        this.id = id;
-        this.alarmId = alarmId;
-        this.priority = priority;
-        this.title = title;
-        this.note = note;
-        this.date = date;
-        this.time = time;
-        this.ring = ring;
-        this.vibration = vibration;
-        this.status = status;
-    }
 
     public TodoModel(Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, boolean status) {
         this.alarmId = alarmId;
@@ -38,13 +24,6 @@ public class TodoModel {
         this.status = status;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getAlarmId() {
         return alarmId;

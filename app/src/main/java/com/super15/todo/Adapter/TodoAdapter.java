@@ -109,26 +109,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
                     reminderStatusUpdate(position, model, true);
 
-                    Log.e("data", model.getTitle());
-
-                    Calendar calendar = Calendar.getInstance();
-
-                    String date= model.getDate();
-                    String[] strDate=date.split("/",3);
-                    int day=Integer.parseInt(strDate[0]);
-                    int month=Integer.parseInt(strDate[1]);
-                    int year=Integer.parseInt(strDate[2]);
-
-                    String time= model.getTime();
-                    String[] strTime=time.split(":",2);
-                    int hour=Integer.parseInt(strTime[0]);
-                    int minute=Integer.parseInt(strTime[1]);
-
-                    calendar.set(year,month,day,hour,minute,0);
-
-                    Log.e("CalendarValue", String.valueOf(calendar));
-
-                    AlarmReceiver.setAlarm(mContext,calendar,model);
                 }
 
             }
@@ -205,14 +185,35 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         model.setStatus(status);
 
-        Log.d("dataid", model.getId().toString());
+        Log.d("dataid", model.getAlarmId().toString());
         Log.d("datatitle", model.toString());
 
-        todoDb.updateData(model);
+        if(todoDb.updateData(model) >= 0){
 
-        mTodo.set(position, model);
-        notifyItemChanged(position, model);
-        //notifyDataSetChanged();
+            Calendar calendar = Calendar.getInstance();
+
+            String date= model.getDate();
+            String[] strDate=date.split("/",3);
+            int day=Integer.parseInt(strDate[0]);
+            int month=Integer.parseInt(strDate[1]);
+            int year=Integer.parseInt(strDate[2]);
+
+            String time= model.getTime();
+            String[] strTime=time.split(":",2);
+            int hour=Integer.parseInt(strTime[0]);
+            int minute=Integer.parseInt(strTime[1]);
+
+            calendar.set(year,month,day,hour,minute,0);
+
+            Log.e("CalendarValue", String.valueOf(calendar));
+
+            AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId());
+
+        } else {
+            Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 
@@ -228,7 +229,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         TodoDb todoDb = new TodoDb(mContext);
-                        todoDb.deleteData(mTodo.get(position).getId());
+                        todoDb.deleteData(mTodo.get(position).getAlarmId());
                         AlarmReceiver.cancelAlarm(mContext, mTodo.get(position).getAlarmId());
                         mTodo.remove(position);
 
@@ -251,6 +252,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 .create();
 
         myQuittingDialogBox.show();
+
+        Button btnPositive = myQuittingDialogBox.getButton(AlertDialog.BUTTON_POSITIVE);
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) btnPositive.getLayoutParams();
+        layoutParams.leftMargin=20;
+        btnPositive.setLayoutParams(layoutParams);
 
     }
 
@@ -310,7 +317,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         updateButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int id = mTodo.get(position).getId();
                 int alarmId = mTodo.get(position).getAlarmId();
                 String priority = mTodo.get(position).getPriority();
                 String title = Objects.requireNonNull(update_title.getText()).toString();
@@ -328,26 +334,25 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
                     AlarmReceiver.cancelAlarm(mContext, alarmId);
 
-                    alarmId = (int) System.currentTimeMillis();
+                    TodoModel model = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
 
-                    TodoModel model = new TodoModel(id,alarmId,priority,title,note,date,time,ring,vibration,status);
-
-                    Log.e("mTodo", model.getId()+" "+model.getTitle()+" "+model.getNote()+" "+model.getDate()+" "+model.getTime());
-
-                    Log.e("Position & ID",position+"   "+ mTodo.get(position).getId());
-
-                    if (todoDb.updateData(model) != 1){
+                    if (todoDb.updateData(model) <= 0){
                         Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                     } else {
-                        AlarmReceiver.setAlarm(mContext,cal,model);
+                        AlarmReceiver.setAlarm(mContext,cal,model.getAlarmId());
                         alertDialog.cancel();
-                        mTodo.set(position, model);
-                        notifyItemChanged(position, model);
-                        notifyDataSetChanged();
+
+                        notifyData(position, model);
                     }
                 }
             }
         });
+    }
+
+    private void notifyData(int position, TodoModel model){
+        mTodo.set(position, model);
+        notifyItemChanged(position, model);
+        notifyDataSetChanged();
     }
 
     private void datePicker(){

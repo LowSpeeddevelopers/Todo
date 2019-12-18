@@ -5,13 +5,9 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.super15.todo.Activity.AlarmActivity;
-import com.super15.todo.Model.TodoModel;
-
 import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -23,44 +19,38 @@ public class AlarmReceiver extends BroadcastReceiver {
         Toast.makeText(context,"Wake Up!",Toast.LENGTH_SHORT).show();
         Log.e("alarm","Alarm called");
 
+        int alarmID = intent.getIntExtra("alarm_id", 0);
+
+        if (alarmID == 0) {
+            Log.e("alarm","Alarm ID Null receive");
+        }
+
         Intent i = new Intent(context, AlarmActivity.class);
 
-        Bundle b = new Bundle();
-        b.putString("id",intent.getStringExtra("id"));
-        b.putString("title",intent.getStringExtra("title"));
-        b.putString("note",intent.getStringExtra("note"));
-        b.putString("time",intent.getStringExtra("time"));
-        b.putString("date",intent.getStringExtra("date"));
-        i.putExtras(b);
+
+        i.putExtra("alarm_id",alarmID);
 
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
 
 
-    public static void setAlarm(Context mContext, Calendar calender, TodoModel todoModel){
+    public static void setAlarm(Context mContext, Calendar calender, int alarmID){
         AlarmManager alarmManager=(AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(mContext, AlarmReceiver.class);
 
-        int alarmId = todoModel.getAlarmId();
+        i.putExtra("alarm_id",alarmID);
 
-        Bundle b = new Bundle();
-        b.putString("title",todoModel.getTitle());
-        b.putString("note",todoModel.getNote());
-        b.putString("time",todoModel.getTime());
-        b.putString("date",todoModel.getDate());
-        i.putExtras(b);
-
-        PendingIntent pi=PendingIntent.getBroadcast(mContext,alarmId,i,0);
+        PendingIntent pi=PendingIntent.getBroadcast(mContext,alarmID,i,0);
 
 
-        if(calender.before(Calendar.getInstance())){
-            Log.e("time","before");
-        } else {
-            Log.e("time","after");
+//        if(calender.before(Calendar.getInstance())){
+//            Log.e("time","before");
+//        } else {
+//            Log.e("time","after");
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP,calender.getTimeInMillis(),pi);
-        }
+//        }
 
 
         Log.e("current time",String.valueOf(Calendar.getInstance().getTimeInMillis()));

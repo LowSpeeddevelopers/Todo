@@ -7,7 +7,6 @@ import android.util.Log;
 
 public class DbHelper extends SQLiteOpenHelper {
     static final String TABLE_NAME = "todo";
-    static final String COL_ID = "id";
     static final String COL_ALARM_ID = "alarm_id";
     static final String COL_PRIORITY = "priority";
     static final String COL_TITLE = "title";
@@ -25,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ("+COL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_ALARM_ID+" INTEGER,"+COL_PRIORITY+" TEXT,"+COL_TITLE+" TEXT,"+COL_NOTE+" TEXT, "+COL_DATE+" TEXT, "+COL_TIME+" TEXT,"+COL_RING+" BOOLEAN,"+COL_VIBRATION+" BOOLEAN,"+COL_STATUS+" BOOLEAN )";
+        String query = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ("+COL_ALARM_ID+" INTEGER PRIMARY KEY,"+COL_PRIORITY+" TEXT,"+COL_TITLE+" TEXT,"+COL_NOTE+" TEXT, "+COL_DATE+" TEXT, "+COL_TIME+" TEXT,"+COL_RING+" BOOLEAN,"+COL_VIBRATION+" BOOLEAN,"+COL_STATUS+" BOOLEAN )";
 
         Log.d("query", query);
 

@@ -9,14 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.super15.todo.Model.TodoModel;
 import com.super15.todo.R;
+import com.super15.todo.db.TodoDb;
 
 public class AlarmActivity extends AppCompatActivity {
 
@@ -30,13 +28,22 @@ public class AlarmActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String id, title, note, date, time;
+        int alarmID = intent.getIntExtra("alarm_id",0);
 
-        id = intent.getStringExtra("id");
-        title = intent.getStringExtra("title");
-        note = intent.getStringExtra("note");
-        date = intent.getStringExtra("date");
-        time = intent.getStringExtra("time");
+        String title, note, date, time;
+
+        Log.e("AlarmID", alarmID+"");
+
+        if (alarmID == 0) {
+            Log.e("alarm","Alarm ID Null set");
+        }
+
+        TodoModel model = new TodoDb(this).getDataByAlarmID(alarmID);
+
+        title = model.getTitle();
+        note = model.getNote();
+        date = model.getDate();
+        time = model.getTime();
 
         TextView tvTitle, tvNote, tvDate, tvTime, btnDismiss;
 

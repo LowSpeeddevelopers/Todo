@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
-
 import com.super15.todo.Adapter.ExpandableListViewAdapter;
 import com.super15.todo.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
