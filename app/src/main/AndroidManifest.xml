@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.super15.todo">
+    package="com.super5.todo">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -22,22 +22,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.HelpActivity" />
-        <activity android:name=".Activity.AlarmActivity">
+        <activity android:name="com.super5.todo.Activity.HelpActivity" />
+        <activity android:name="com.super5.todo.Activity.AlarmActivity">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SplashActivity">
+        <activity android:name="com.super5.todo.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ViewTodoActivity" />
+        <activity android:name="com.super5.todo.Activity.ViewTodoActivity" />
 
-        <receiver android:name=".BroadcastReceiver.AlarmReceiver"
+        <receiver android:name="com.super5.todo.BroadcastReceiver.AlarmReceiver"
             android:enabled="true"
             android:exported="true"/>
 

@@ -1,4 +1,4 @@
-package com.super15.todo.db;
+package com.super5.todo.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

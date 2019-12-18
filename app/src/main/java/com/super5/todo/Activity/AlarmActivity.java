@@ -1,4 +1,4 @@
-package com.super15.todo.Activity;
+package com.super5.todo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.super15.todo.Model.TodoModel;
-import com.super15.todo.R;
-import com.super15.todo.db.TodoDb;
+import com.super5.todo.Model.TodoModel;
+import com.super5.todo.R;
+import com.super5.todo.db.TodoDb;
 
 public class AlarmActivity extends AppCompatActivity {
 

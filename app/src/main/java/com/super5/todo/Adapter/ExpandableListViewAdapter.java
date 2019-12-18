@@ -1,4 +1,4 @@
-package com.super15.todo.Adapter;
+package com.super5.todo.Adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.super15.todo.R;
+import com.super5.todo.R;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.super15.todo.db;
+package com.super5.todo.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.super15.todo.Model.TodoModel;
+import com.super5.todo.Model.TodoModel;
 
 import java.util.ArrayList;
 

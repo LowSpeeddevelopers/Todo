@@ -1,4 +1,4 @@
-package com.super15.todo.Adapter;
+package com.super5.todo.Adapter;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -23,10 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.google.android.material.textfield.TextInputEditText;
-import com.super15.todo.BroadcastReceiver.AlarmReceiver;
-import com.super15.todo.Model.TodoModel;
-import com.super15.todo.R;
-import com.super15.todo.db.TodoDb;
+import com.super5.todo.BroadcastReceiver.AlarmReceiver;
+import com.super5.todo.Model.TodoModel;
+import com.super5.todo.R;
+import com.super5.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.super15.todo.Activity;
+package com.super5.todo.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +26,11 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-import com.super15.todo.Adapter.TodoAdapter;
-import com.super15.todo.BroadcastReceiver.AlarmReceiver;
-import com.super15.todo.Model.TodoModel;
-import com.super15.todo.R;
-import com.super15.todo.db.TodoDb;
+import com.super5.todo.Adapter.TodoAdapter;
+import com.super5.todo.BroadcastReceiver.AlarmReceiver;
+import com.super5.todo.Model.TodoModel;
+import com.super5.todo.R;
+import com.super5.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
 

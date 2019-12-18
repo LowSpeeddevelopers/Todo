@@ -1,4 +1,4 @@
-package com.super15.todo.BroadcastReceiver;
+package com.super5.todo.BroadcastReceiver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-import com.super15.todo.Activity.AlarmActivity;
+import com.super5.todo.Activity.AlarmActivity;
 import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver {

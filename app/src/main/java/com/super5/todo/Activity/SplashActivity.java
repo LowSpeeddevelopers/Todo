@@ -1,4 +1,4 @@
-package com.super15.todo.Activity;
+package com.super5.todo.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.super15.todo.R;
+import com.super5.todo.R;
 
 public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
