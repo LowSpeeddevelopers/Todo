@@ -188,16 +188,17 @@ public class  ViewTodoActivity extends AppCompatActivity {
 
 
     void showHomeDialogueBox(){
-        Intent i = new Intent(getApplicationContext(),ViewTodoActivity.class);
-        startActivity(i);
+        mDrawer.closeMenu(true);
     }
 
     void showHelpDialogueBox(){
+        mDrawer.closeMenu(true);
         startActivity(new Intent(ViewTodoActivity.this, HelpActivity.class));
 
     }
 
     void showContactDialogueBox(){
+        mDrawer.closeMenu(true);
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.contact, null);
         builder.setView(DialogueView);
@@ -209,6 +210,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
     }
 
     void showAboutDialogueBox(){
+        mDrawer.closeMenu(true);
         final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
         View DialogueView = getLayoutInflater().inflate(R.layout.aboutus, null);
         builder.setView(DialogueView);
@@ -220,6 +222,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
     }
 
     void showShareDialougeBox(){
+        mDrawer.closeMenu(true);
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         String shareBody = "https://play.google.com/store/apps/details?id=com.super5.todo";
@@ -255,6 +258,13 @@ public class  ViewTodoActivity extends AppCompatActivity {
 
         timeSetter.setText(currentTime);
         dateSetter.setText(currentDate);
+
+        if(priority == "high"){
+            cbRing.setChecked(true);
+            cbVibration.setChecked(true);
+        } else {
+            cbRing.setChecked(true);
+        }
 
 
         timePicker.setOnClickListener(new View.OnClickListener() {
