@@ -7,126 +7,142 @@
     android:layout_margin="@dimen/margin_8dp"
     android:padding="@dimen/padding_8dp">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#9CD7DF"
-        android:orientation="vertical">
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/update_alarm"
-        android:textSize="@dimen/textsize_25sp"
-        android:textColor="#000"
-        android:layout_margin="@dimen/margin_8dp"
-        android:textAlignment="center"/>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/marginstart_8dp"
-            android:layout_marginBottom="@dimen/marginbottom_4dp"
-            android:layout_marginEnd="@dimen/marginend_8dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:id="@+id/edt_update_title"
-
-                android:hint="@string/title"
-                android:layout_height="wrap_content"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/marginstart_8dp"
-            android:layout_marginBottom="@dimen/marginbottom_4dp"
-            android:layout_marginEnd="@dimen/marginend_8dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:id="@+id/edt_update_note"
-
-                android:hint="@string/note"
-                android:layout_height="wrap_content"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_marginStart="@dimen/marginstart_8dp"
-        android:layout_marginBottom="@dimen/marginbottom_4dp"
-        android:layout_marginEnd="@dimen/marginend_8dp"
         android:layout_height="wrap_content" >
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/tv_update_date"
-            android:layout_gravity="center"
-            android:textColor="#000"/>
-        <ImageView
-            android:layout_width="@dimen/imagewidhth_40dp"
-            android:id="@+id/imgDate"
-            android:layout_height="@dimen/imageheight_40dp"
-            android:layout_margin="@dimen/margin_8dp"
-            android:src="@drawable/date"
-            android:contentDescription="@string/todo" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/tv_update_time"
-            android:textColor="#000" />
-        <ImageView
-            android:layout_width="@dimen/imagewidhth_40dp"
-            android:layout_height="@dimen/imageheight_40dp"
-            android:id="@+id/imgTime"
-            android:layout_margin="@dimen/margin_8dp"
-            android:src="@drawable/time"
-            android:contentDescription="@string/todo" />
-
-
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="0dp">
-            <CheckBox
+            android:background="#9CD7DF"
+            android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_alarm"
+            android:textSize="@dimen/textsize_25sp"
+            android:textColor="#000"
+            android:layout_margin="@dimen/margin_8dp"
+            android:textAlignment="center"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_8dp"
+                android:layout_marginBottom="@dimen/marginbottom_4dp"
+                android:layout_marginEnd="@dimen/marginend_8dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/edt_update_title"
+                    android:hint="@string/title"
+                    android:maxLength="50"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/update_title_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textSize="@dimen/textsize_12sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginstart_8dp"
+                android:layout_marginBottom="@dimen/marginbottom_4dp"
+                android:layout_marginEnd="@dimen/marginend_8dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/edt_update_note"
+                    android:hint="@string/note"
+                    android:maxLength="150"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/update_note_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textSize="@dimen/textsize_12sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/marginstart_8dp"
+            android:layout_marginBottom="@dimen/marginbottom_4dp"
+            android:layout_marginEnd="@dimen/marginend_8dp"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/cb_ring"
-                android:text="@string/ring"
+                android:id="@+id/tv_update_date"
+                android:layout_gravity="center"
                 android:textColor="#000"/>
-            <CheckBox
+            <ImageView
+                android:layout_width="@dimen/imagewidhth_40dp"
+                android:id="@+id/imgDate"
+                android:layout_height="@dimen/imageheight_40dp"
+                android:layout_margin="@dimen/margin_8dp"
+                android:src="@drawable/date"
+                android:contentDescription="@string/todo" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/cb_vibration"
-                android:text="@string/vibration"
-                android:textColor="#000"/>
+                android:layout_gravity="center"
+                android:id="@+id/tv_update_time"
+                android:textColor="#000" />
+            <ImageView
+                android:layout_width="@dimen/imagewidhth_40dp"
+                android:layout_height="@dimen/imageheight_40dp"
+                android:id="@+id/imgTime"
+                android:layout_margin="@dimen/margin_8dp"
+                android:src="@drawable/time"
+                android:contentDescription="@string/todo" />
+
+
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cb_ring"
+                    android:text="@string/ring"
+                    android:textColor="#000"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cb_vibration"
+                    android:text="@string/vibration"
+                    android:textColor="#000"/>
+            </LinearLayout>
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/btn_update"
+            android:text="@string/update"
+            android:layout_gravity="center"/>
+
+
         </LinearLayout>
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/btn_update"
-        android:text="@string/update"
-        android:layout_gravity="center"/>
-
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.cardview.widget.CardView>

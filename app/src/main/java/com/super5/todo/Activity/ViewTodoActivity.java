@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActionBar;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class ViewTodoActivity extends AppCompatActivity {
+public class  ViewTodoActivity extends AppCompatActivity {
 
     private RelativeLayout fabPriority;
 
@@ -117,6 +120,14 @@ public class ViewTodoActivity extends AppCompatActivity {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(todoAdapter.isopened && todoAdapter.positon!=null){
+                    todoAdapter.cloaseLayout();
+                }
+
+
+
+
                 if (visibility == 0){
                     visibility = 1;
                     fabPriority.setVisibility(View.VISIBLE);
@@ -204,8 +215,6 @@ public class ViewTodoActivity extends AppCompatActivity {
         final AlertDialog alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
 
-
-
         alertDialog.show();
 
     }
@@ -228,12 +237,16 @@ public class ViewTodoActivity extends AppCompatActivity {
         final CheckBox cbRing, cbVibration;
         Button add;
         ImageView date,timePicker;
+        final TextView tvTitleCount, tvNoteCount;
 
         txtTitle = DialogueView.findViewById(R.id.edt_title);
         txtNote = DialogueView.findViewById(R.id.edt_note);
         cbRing = DialogueView.findViewById(R.id.cb_ring);
         cbVibration = DialogueView.findViewById(R.id.cb_vibration);
         add=DialogueView.findViewById(R.id.btn_add);
+
+        tvTitleCount = DialogueView.findViewById(R.id.title_count);
+        tvNoteCount = DialogueView.findViewById(R.id.note_count);
 
         date=DialogueView.findViewById(R.id.imgdate);
         timePicker=DialogueView.findViewById(R.id.imgtime);
@@ -242,7 +255,6 @@ public class ViewTodoActivity extends AppCompatActivity {
 
         timeSetter.setText(currentTime);
         dateSetter.setText(currentDate);
-
 
 
         timePicker.setOnClickListener(new View.OnClickListener() {
@@ -274,12 +286,47 @@ public class ViewTodoActivity extends AppCompatActivity {
             }
         });
 
-
-
         builder.setView(DialogueView);
         final AlertDialog alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
 
+        txtTitle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String currentText = s.toString();
+                int count = currentText.length();
+                tvTitleCount.setText(count + "/50");
+            }
+        });
+
+        txtNote.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String currentText = s.toString();
+                int count = currentText.length();
+                tvNoteCount.setText(count + "/150");
+            }
+        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
