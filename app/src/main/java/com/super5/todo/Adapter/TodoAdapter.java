@@ -226,7 +226,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
             Log.e("CalendarValue", String.valueOf(calendar));
 
-            AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId());
+            AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId(),true);
 
             mTodo.set(position, model);
             notifyItemChanged(position, model);
@@ -387,7 +387,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
                         Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
 
-                        AlarmReceiver.setAlarm(mContext,cal,model.getAlarmId());
+                        AlarmReceiver.setAlarm(mContext,cal,model.getAlarmId(),true);
                         alertDialog.cancel();
 
                         mTodo.set(position, model);

@@ -22,7 +22,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         Toast.makeText(context,"Wake Up!",Toast.LENGTH_SHORT).show();
         Log.e("alarm","Alarm called");
 
+        if(intent.hasExtra("alarm_id")){
+            Log.e("status","true");
+        }else {
+            Log.e("status","false");
+        }
         int alarmID = intent.getIntExtra("alarm_id", 0);
+
+        Log.e("alarmireceive", String.valueOf(alarmID));
 
         Intent i = new Intent(context, AlarmActivity.class);
 
@@ -36,13 +43,19 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
 
-    public static void setAlarm(Context mContext, Calendar calender, int alarmID){
+    public static void setAlarm(Context mContext, Calendar calender, int alarmID,boolean alarmstatus){
         AlarmManager alarmManager=(AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(mContext, AlarmReceiver.class);
+        Intent ine = new Intent(mContext, AlarmReceiver.class);
 
-        i.putExtra("alarm_id",alarmID);
+        ine.putExtra("alarm_id",alarmID);
+        PendingIntent pi;
 
-        PendingIntent pi=PendingIntent.getBroadcast(mContext,alarmID,i,0);
+        if(alarmstatus){
+            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT);
+        }else {
+            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,0);
+        }
+
 
 
 //        if(calender.before(Calendar.getInstance())){
