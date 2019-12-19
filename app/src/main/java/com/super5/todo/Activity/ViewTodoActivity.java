@@ -342,7 +342,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int alarmID = (int) System.currentTimeMillis();
+                int alarmID = (int) cal.getTimeInMillis();
                 String title=String.valueOf(txtTitle.getText());
                 String note=String.valueOf(txtNote.getText());
                 String date = dateSetter.getText().toString();
