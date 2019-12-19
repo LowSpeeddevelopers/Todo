@@ -126,4 +126,5 @@ public class HelpActivity extends AppCompatActivity {
         expandableListViewAdapter.notifyDataSetChanged();
     }
 
+
 }
