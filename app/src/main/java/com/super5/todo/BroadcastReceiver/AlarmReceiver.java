@@ -24,10 +24,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         int alarmID = intent.getIntExtra("alarm_id", 0);
 
-        if (alarmID == 0) {
-            Log.e("alarm","Alarm ID Null receive");
-        }
-
         Intent i = new Intent(context, AlarmActivity.class);
 
 
