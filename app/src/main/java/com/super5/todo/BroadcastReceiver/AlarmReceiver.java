@@ -1,5 +1,6 @@
 package com.super5.todo.BroadcastReceiver;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -8,6 +9,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 import com.super5.todo.Activity.AlarmActivity;
+import com.super5.todo.Activity.ViewTodoActivity;
+
 import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -31,6 +34,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         i.putExtra("alarm_id",alarmID);
 
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        Log.e("receiver called","true");
         context.startActivity(i);
     }
 
@@ -59,6 +64,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Log.e("alarm","Alarm has been saved");
 
     }
+
 
     public static void cancelAlarm(Context mContext, int alarmId){
         Intent i = new Intent(mContext, AlarmReceiver.class);

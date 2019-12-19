@@ -2,9 +2,11 @@ package com.super5.todo.Adapter;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,7 +39,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private TextInputEditText update_title, update_note;
     private TextView update_date, update_time;
     private CheckBox cbRing, cbVibration;
-    private ViewHolder holder;
+
+    public boolean isopened =  false;
+    public String positon = null;
+  public void cloaseLayout(){
+       viewBinderHelper.closeLayout(positon);
+   }
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodo) {
         this.mContext = mContext;
@@ -66,59 +73,90 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
             }
         }
-
-
         if (todoModel.isRing()){
             holder.ring.setVisibility(View.VISIBLE);
         } else {
             holder.ring.setVisibility(View.GONE);
         }
-
         if (todoModel.isVibration()){
             holder.vib.setVisibility(View.VISIBLE);
         } else {
             holder.vib.setVisibility(View.GONE);
         }
-
-
-
-        this.holder=holder;
         holder.myLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 viewTodoItem(position);
+                Log.e("mylayout","called");
+                Log.e("isopened",String.valueOf(isopened));
+                if (isopened){
+
+
+                   viewBinderHelper.closeLayout(positon);
+                }
             }
         });
-
-
         holder.activatior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // To-Do check if database has activator valu false or true
                 //if database value is false then on click button will turn on
                 //else if database value is true then on click button will will turn off an store the value in database.
-
-
                 TodoModel model = mTodo.get(position);
-
                 Log.e("position", position+"");
-
                 if(mTodo.get(position).isStatus()){
                     holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
-
                     reminderStatusUpdate(position, model, false);
-
                     AlarmReceiver.cancelAlarm(mContext, model.getAlarmId());
                 }else {
                     holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
-
                     reminderStatusUpdate(position, model, true);
-
                 }
+            }
+        });
+        holder.tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.swipeRevealLayout.isOpened()){
+                    Toast.makeText(mContext, "Layout Open", Toast.LENGTH_SHORT).show();
+                    viewBinderHelper.closeLayout(String.valueOf(position));
+                }
+                deleteTodoItem(position);
+            }
+        });
+        holder.tvUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateTodoItem(position);
+                holder.swipeRevealLayout.close(true);
 
             }
         });
+        holder.swipeRevealLayout.setSwipeListener(new SwipeRevealLayout.SwipeListener() {
+            @Override
+            public void onClosed(SwipeRevealLayout view) {
 
+                //isopened=false;
+
+                if(isopened && positon==String.valueOf(position)){
+                    isopened=false;
+                }
+            }
+            @Override
+            public void onOpened(SwipeRevealLayout view) {
+
+                if(isopened && positon!=null){
+                    viewBinderHelper.closeLayout(positon);
+                }
+                isopened=true;
+                positon = String.valueOf(position);
+            }
+
+            @Override
+            public void onSlide(SwipeRevealLayout view, float slideOffset) {
+
+            }
+        });
         if (mTodo != null && position < mTodo.size()) {
 //            TodoModel data = mTodo.get(position);
 //
@@ -131,32 +169,21 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
             // put an unique string id as value, can be any string which uniquely define the data
             viewBinderHelper.bind(holder.swipeRevealLayout, String.valueOf(position));
-
-
-
-            viewBinderHelper.setOpenOnlyOne(true);
-
+            //viewBinderHelper.setOpenOnlyOne(true);
             // Bind your data here
-            holder.bind(position);
+
         }
-
-
     }
-
     @Override
     public int getItemCount() {
         return mTodo.size();
     }
-
     class ViewHolder extends RecyclerView.ViewHolder {
-
         SwipeRevealLayout swipeRevealLayout;
         TextView title, tvDelete, tvUpdate;
         ImageView vib,ring, activatior;
         LinearLayout myLayout;
         View sideView;
-
-
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -172,30 +199,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
         }
 
-        void bind(final int position) {
-            tvDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    if (holder.swipeRevealLayout.isOpened()){
-                        Toast.makeText(mContext, "Layout Open", Toast.LENGTH_SHORT).show();
-                        viewBinderHelper.closeLayout(String.valueOf(position));
-                    }
-
-                    deleteTodoItem(position);
-                }
-            });
-
-            tvUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    updateTodoItem(position);
-                    holder.swipeRevealLayout.close(true);
-                }
-            });
-
-
-        }
     }
 
     private void reminderStatusUpdate(int position, TodoModel model, boolean status){
@@ -238,6 +242,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         int hour=Integer.parseInt(strTime[0]);
         int minute=Integer.parseInt(strTime[1]);
 
+        month--;
+
         calendar.set(year,month,day,hour,minute,0);
 
         return calendar;
@@ -246,12 +252,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
 
     private void deleteTodoItem(final int position) {
-
-        if (holder.swipeRevealLayout.isOpened()){
-            Toast.makeText(mContext,"Open",Toast.LENGTH_LONG);
-            holder.swipeRevealLayout.close(true);
-
-        }
 
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(mContext)
                 // set message & title
