@@ -7,6 +7,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,11 +42,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private TextView update_date, update_time;
     private CheckBox cbRing, cbVibration;
 
+    public TextView update_title_count, update_note_count;
+
     public boolean isopened =  false;
     public String positon = null;
-  public void cloaseLayout(){
+    public void cloaseLayout(){
        viewBinderHelper.closeLayout(positon);
-   }
+    }
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     public TodoAdapter(Context mContext, ArrayList<TodoModel> mTodo) {
         this.mContext = mContext;
@@ -309,6 +313,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         cbRing = dialogueView.findViewById(R.id.cb_ring);
         cbVibration = dialogueView.findViewById(R.id.cb_vibration);
         Button updateButtton = dialogueView.findViewById(R.id.btn_update);
+
+        update_title_count = dialogueView.findViewById(R.id.update_title_count);
+        update_note_count = dialogueView.findViewById(R.id.update_note_count);
+
         update_title.setText(mTodo.get(position).getTitle());
         update_note.setText(mTodo.get(position).getNote());
         update_date.setText(mTodo.get(position).getDate());
@@ -364,7 +372,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                     Toast.makeText(mContext, "Fields must contain data", Toast.LENGTH_SHORT).show();
                 } else {
                     TodoDb todoDb = new TodoDb(mContext);
-
+                    Log.e("data",String.valueOf(alarmId));
                     AlarmReceiver.cancelAlarm(mContext, alarmId);
 
                     TodoModel model = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
@@ -383,6 +391,44 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                         notifyDataSetChanged();
                     }
                 }
+            }
+        });
+
+        update_title.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String currentText = s.toString();
+                int count = currentText.length();
+                update_title_count.setText(count + "/50");
+            }
+        });
+
+        update_note.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String currentText = s.toString();
+                int count = currentText.length();
+                update_note_count.setText(count + "/150");
             }
         });
     }
