@@ -33,14 +33,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/to_do"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/marginend_30dp"
+                        android:fontFamily="@font/aclonica"
+                        android:text="@string/to_do"
                         android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/textsize_25sp"/>
+                        android:textSize="@dimen/textsize_25sp" />
 
                 </LinearLayout>
 
@@ -211,19 +213,7 @@
                 android:drawablePadding="@dimen/drawablepadding_8dp"
                 android:drawableStart="@drawable/ic_share_black_24dp"
                 android:focusable="true" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize_20sp"
-                android:layout_gravity="start"
-                android:text="@string/setting"
-                android:id="@+id/tv_setting"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_margin="@dimen/margin_8dp"
-                android:drawablePadding="@dimen/drawablepadding_8dp"
-                android:drawableStart="@drawable/ic_settings_black_24dp"
-                android:focusable="true" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

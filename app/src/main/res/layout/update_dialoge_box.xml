@@ -18,14 +18,15 @@
             android:orientation="vertical">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/update_alarm"
-            android:textSize="@dimen/textsize_25sp"
-            android:textColor="#000"
-            android:layout_margin="@dimen/margin_8dp"
-            android:textAlignment="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8dp"
+                android:fontFamily="@font/aclonica"
+                android:text="@string/update_alarm"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="@dimen/textsize_25sp" />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,12 +134,13 @@
                     android:textColor="#000"/>
             </LinearLayout>
 
-        <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/btn_update"
-            android:text="@string/update"
-            android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/btn_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/update" />
 
 
         </LinearLayout>

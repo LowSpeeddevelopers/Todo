@@ -49,7 +49,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
     Calendar cal;
     private FlowingDrawer mDrawer;
 
-    TextView home, setting, share, aboutUs, help, contact, btnHigh, btnLow;
+    TextView home, share, aboutUs, help, contact, btnHigh, btnLow;
 
     ArrayList<TodoModel> todoModels;
 
@@ -87,7 +87,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
 
         home=findViewById(R.id.tv_home);
         share=findViewById(R.id.tv_share);
-        setting=findViewById(R.id.tv_setting);
         help=findViewById(R.id.tv_help);
         contact=findViewById(R.id.tv_contact);
         aboutUs =findViewById(R.id.tv_about_us);
