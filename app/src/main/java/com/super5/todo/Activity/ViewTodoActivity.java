@@ -112,7 +112,9 @@ public class  ViewTodoActivity extends AppCompatActivity {
         rvTodo.setAdapter(todoAdapter);
 
 
-        visibility = 0;
+
+
+                visibility = 0;
 
 
 

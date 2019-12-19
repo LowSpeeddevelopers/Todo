@@ -1,6 +1,10 @@
 package com.super5.todo.Adapter;
 
 import android.app.AlertDialog;
+
+//https://www.red5pro.com/docs/streaming/android.html#add-your-sdk-license-key-required
+
+
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;

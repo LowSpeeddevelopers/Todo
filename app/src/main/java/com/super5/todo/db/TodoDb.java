@@ -21,6 +21,11 @@ public class TodoDb extends DbHelper {
     public void insertData(TodoModel todoModel){
         SQLiteDatabase db = getWritableDatabase();
 
+
+
+
+        Log.e("todoid",String.valueOf(todoModel.getAlarmId()));
+
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(DbHelper.COL_ALARM_ID, todoModel.getAlarmId());
