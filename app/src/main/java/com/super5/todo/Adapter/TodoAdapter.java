@@ -226,7 +226,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
             Log.e("CalendarValue", String.valueOf(calendar));
 
-            AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId(),true);
+            AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId());
 
             mTodo.set(position, model);
             notifyItemChanged(position, model);
@@ -377,7 +377,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 } else {
                     TodoDb todoDb = new TodoDb(mContext);
                     Log.e("data",String.valueOf(alarmId));
-                    AlarmReceiver.cancelAlarm(mContext, alarmId);
+                    //AlarmReceiver.cancelAlarm(mContext, alarmId);
 
                     TodoModel model = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
 
@@ -387,7 +387,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
                         Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
 
-                        AlarmReceiver.setAlarm(mContext,cal,model.getAlarmId(),true);
+                        AlarmReceiver.setAlarm(mContext,cal,model.getAlarmId());
                         alertDialog.cancel();
 
                         mTodo.set(position, model);
@@ -476,7 +476,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     }
 
     private void dateFormater(int day, int month, int year){
-        month+=1;
+        //month+=1;
         String sDay, sMonth, sYear;
         if (day<10){sDay="0"+day;}else{sDay=""+day; }
         if (month<10){sMonth="0"+month;}else{sMonth=""+month; }

@@ -43,18 +43,18 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
 
-    public static void setAlarm(Context mContext, Calendar calender, int alarmID,boolean alarmstatus){
+    public static void setAlarm(Context mContext, Calendar calender, int alarmID){
         AlarmManager alarmManager=(AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         Intent ine = new Intent(mContext, AlarmReceiver.class);
 
         ine.putExtra("alarm_id",alarmID);
-        PendingIntent pi;
+        PendingIntent pi = PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT|Intent.FILL_IN_DATA);
 
-        if(alarmstatus){
-            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT);
-        }else {
-            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,0);
-        }
+//        if(alarmstatus){
+//            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT|Intent.FILL_IN_DATA);
+//        }else {
+//            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,0);
+//        }
 
 
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -60,7 +62,7 @@ public class AlarmActivity extends AppCompatActivity {
         tvTime = findViewById(R.id.tv_time);
         btnDismiss = findViewById(R.id.btn_dismiss);
 
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
 
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -83,6 +85,7 @@ public class AlarmActivity extends AppCompatActivity {
         btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                handler.removeCallbacksAndMessages(null);
                 closeActivity();
             }
         });
@@ -95,28 +98,51 @@ public class AlarmActivity extends AppCompatActivity {
 
     private void sendNotification(int alarmID, String title, String time){
 
-        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O){
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        String CHANNEL_ID = "todo_channel";// The id of the channel.
+        CharSequence name = "todo_channel";// The user-visible name of the channel.
 
-            mBuilder.setSmallIcon(R.drawable.icon);
-            mBuilder.setContentTitle(title);
-            mBuilder.setContentText("You missed an alarm at "+time);
+
+        int icon = R.drawable.icon;
+        String contentTitle = title;
+        String contentText = "You missed an alarm at "+time;
+
+        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O){
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, String.valueOf(alarmID));
+
+            mBuilder.setSmallIcon(icon);
+            mBuilder.setContentTitle(contentTitle);
+            mBuilder.setContentText(contentText);
 
             Intent resultIntent = new Intent(this, AlarmActivity.class);
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
             stackBuilder.addParentStack(AlarmActivity.class);
 
-// Adds the Intent that starts the Activity to the top of the stack
             stackBuilder.addNextIntent(resultIntent);
             PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(resultPendingIntent);
 
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-// notificationID allows you to update the notification later on.
             mNotificationManager.notify(alarmID, mBuilder.build());
-        } else {
-            Toast.makeText(this, "Notication for Upper Version", Toast.LENGTH_LONG).show();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+
+            Notification notification = new Notification.Builder(AlarmActivity.this, String.valueOf(alarmID))
+                    .setSmallIcon(icon)
+                    .setContentTitle(contentTitle)
+                    .setContentText(contentText)
+                    .setChannelId(CHANNEL_ID)
+                    .build();
+
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.createNotificationChannel(mChannel);
+
+// Issue the notification.
+            mNotificationManager.notify(alarmID , notification);
         }
 
             

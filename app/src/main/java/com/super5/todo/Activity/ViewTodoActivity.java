@@ -370,7 +370,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     todoModels.add(todoModel);
                     todoAdapter.notifyDataSetChanged();
 
-                    AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID,false);
+                    AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID);
 
                     alertDialog.dismiss();
                 }
