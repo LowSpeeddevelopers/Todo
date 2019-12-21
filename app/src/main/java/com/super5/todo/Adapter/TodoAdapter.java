@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.google.android.material.textfield.TextInputEditText;
@@ -33,7 +32,6 @@ import com.super5.todo.BroadcastReceiver.AlarmReceiver;
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
@@ -49,7 +47,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
 
     public boolean isopened =  false;
     public String positon = null;
-    public void cloaseLayout(){
+
+    AlertDialog.Builder builder;
+    LayoutInflater li;
+    View dialogView;
+
+    AlertDialog alertDialog;
+
+    public void closeLayout(){
        viewBinderHelper.closeLayout(positon);
     }
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
@@ -69,15 +74,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         String title = todoModel.getTitle();
         holder.title.setText(title);
 
-        Calendar calendar = dateAndTimeParse(todoModel.getDate(), todoModel.getTime());
+        builder = new AlertDialog.Builder(mContext);
+        li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        final Calendar calendar = dateAndTimeParse(todoModel.getDate(), todoModel.getTime());
 
         if (calendar.before(Calendar.getInstance())){
-            holder.activatior.setVisibility(View.GONE);
+            holder.activator.setVisibility(View.GONE);
         } else {
+            holder.activator.setVisibility(View.VISIBLE);
             if (todoModel.isStatus()){
-                holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+                holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
             } else {
-                holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+                holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
             }
         }
         if (todoModel.isRing()){
@@ -105,7 +114,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 }
             }
         });
-        holder.activatior.setOnClickListener(new View.OnClickListener() {
+        holder.activator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -118,11 +127,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 TodoModel model = mTodo.get(position);
                 Log.e("position", position+"");
                 if(mTodo.get(position).isStatus()){
-                    holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+                    holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
                     reminderStatusUpdate(position, model, false);
                     AlarmReceiver.cancelAlarm(mContext, model.getAlarmId());
                 }else {
-                    holder.activatior.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+                    holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
                     reminderStatusUpdate(position, model, true);
                 }
             }
@@ -204,7 +213,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder {
         SwipeRevealLayout swipeRevealLayout;
         TextView title, tvDelete, tvUpdate;
-        ImageView vib,ring, activatior;
+        ImageView vib,ring, activator;
         LinearLayout myLayout;
         View sideView;
         ViewHolder(@NonNull View itemView) {
@@ -217,7 +226,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             title = itemView.findViewById(R.id.tvTitle);
             vib=itemView.findViewById(R.id.imgVibrate);
             ring=itemView.findViewById(R.id.imgRing);
-            activatior=itemView.findViewById(R.id.activator);
+            activator =itemView.findViewById(R.id.activator);
             myLayout=itemView.findViewById(R.id.mylayout);
 
         }
@@ -288,21 +297,20 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         btnPositive.setLayoutParams(layoutParams);
     }
     private void updateTodoItem(final int position){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        assert li != null;
-        View dialogueView = li.inflate(R.layout.update_dialoge_box,null);
-        update_title = dialogueView.findViewById(R.id.edt_update_title);
-        update_note = dialogueView.findViewById(R.id.edt_update_note);
-        update_date = dialogueView.findViewById(R.id.tv_update_date);
-        update_time = dialogueView.findViewById(R.id.tv_update_time);
-        ImageView imgDate = dialogueView.findViewById(R.id.imgDate);
-        ImageView imgTime = dialogueView.findViewById(R.id.imgTime);
-        cbRing = dialogueView.findViewById(R.id.cb_ring);
-        cbVibration = dialogueView.findViewById(R.id.cb_vibration);
-        Button updateButtton = dialogueView.findViewById(R.id.btn_update);
-        update_title_count = dialogueView.findViewById(R.id.update_title_count);
-        update_note_count = dialogueView.findViewById(R.id.update_note_count);
+        dialogView = li.inflate(R.layout.update_dialoge_box,null);
+        update_title = dialogView.findViewById(R.id.edt_update_title);
+        update_note = dialogView.findViewById(R.id.edt_update_note);
+        update_date = dialogView.findViewById(R.id.tv_update_date);
+        update_time = dialogView.findViewById(R.id.tv_update_time);
+        ImageView imgDate = dialogView.findViewById(R.id.imgDate);
+        ImageView imgTime = dialogView.findViewById(R.id.imgTime);
+        cbRing = dialogView.findViewById(R.id.cb_ring);
+        cbVibration = dialogView.findViewById(R.id.cb_vibration);
+        Button updateButtton = dialogView.findViewById(R.id.btn_update);
+
+        update_title_count = dialogView.findViewById(R.id.update_title_count);
+        update_note_count = dialogView.findViewById(R.id.update_note_count);
+
         update_title.setText(mTodo.get(position).getTitle());
         update_note.setText(mTodo.get(position).getNote());
         update_date.setText(mTodo.get(position).getDate());
@@ -311,9 +319,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         cbVibration.setChecked(mTodo.get(position).isVibration());
 
 
-        builder.setView(dialogueView);
-        final AlertDialog alertDialog=builder.create();
+        builder.setView(null);
+        builder.setView(dialogView);
+
+        alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialogDismiss();
+
         alertDialog.show();
 
         update_date.setOnClickListener(new View.OnClickListener() {
@@ -354,27 +367,31 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 boolean vibration = cbVibration.isChecked();
                 boolean status = mTodo.get(position).isStatus();
 
+                TodoModel model = new TodoModel(alarmId, priority, title, note, date, time, ring, vibration, status);
+
+                Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
+
                 if (title.isEmpty() || note.isEmpty()){
                     Toast.makeText(mContext, "Fields must contain data", Toast.LENGTH_SHORT).show();
+                } else if (cal.before(Calendar.getInstance())) {
+                    Toast.makeText(mContext, "Your selected date before then now... Please check", Toast.LENGTH_LONG).show();
                 } else {
                     TodoDb todoDb = new TodoDb(mContext);
-                    Log.e("data",String.valueOf(alarmId));
+                    Log.e("data", String.valueOf(alarmId));
                     //AlarmReceiver.cancelAlarm(mContext, alarmId);
 
-                    TodoModel model = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
-
-                    if (todoDb.updateData(model) <= 0){
+                    if (todoDb.updateData(model) <= 0) {
                         Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                     } else {
 
-                        Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
-
-                        AlarmReceiver.setAlarm(mContext,cal,model.getAlarmId());
-                        alertDialog.cancel();
+                        AlarmReceiver.setAlarm(mContext, cal, model.getAlarmId());
+                        alertDialogDismiss();
 
                         mTodo.set(position, model);
                         notifyItemChanged(position, model);
                         notifyDataSetChanged();
+
+
                     }
                 }
             }
@@ -391,7 +408,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             public void afterTextChanged(Editable s) {
                 String currentText = s.toString();
                 int count = currentText.length();
-                update_title_count.setText(count + "/50");
+                update_title_count.setText(count+"/50");
             }
         });
         update_note.addTextChangedListener(new TextWatcher() {
@@ -461,20 +478,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     }
 
     private void viewTodoItem(final int position){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        assert li != null;
-        final View dialogueView = li.inflate(R.layout.itemview_dialoge_box,null);
+        dialogView = li.inflate(R.layout.itemview_dialoge_box,null);
 
-        TextView itemTitle = dialogueView.findViewById(R.id.item_title);
-        TextView itemNote = dialogueView.findViewById(R.id.item_note);
-        TextView itemDate = dialogueView.findViewById(R.id.item_date);
-        TextView itemTime = dialogueView.findViewById(R.id.item_time);
-        Button btnItemUpdate = dialogueView.findViewById(R.id.btn_item_update);
-        Button btnItemDelete = dialogueView.findViewById(R.id.btn_item_delete);
-        ImageView imgItemRing = dialogueView.findViewById(R.id.img_item_ring);
-        ImageView imgItemVibration = dialogueView.findViewById(R.id.img_item_vibrate);
-        View viewSound = dialogueView.findViewById(R.id.view_sound);
+        TextView itemTitle = dialogView.findViewById(R.id.item_title);
+        TextView itemNote = dialogView.findViewById(R.id.item_note);
+        TextView itemDate = dialogView.findViewById(R.id.item_date);
+        TextView itemTime = dialogView.findViewById(R.id.item_time);
+        Button btnItemUpdate = dialogView.findViewById(R.id.btn_item_update);
+        Button btnItemDelete = dialogView.findViewById(R.id.btn_item_delete);
+        ImageView imgItemRing = dialogView.findViewById(R.id.img_item_ring);
+        ImageView imgItemVibration = dialogView.findViewById(R.id.img_item_vibrate);
+        View viewSound = dialogView.findViewById(R.id.view_sound);
+
+
         itemTitle.setText(mTodo.get(position).getTitle());
         itemNote.setText(mTodo.get(position).getNote());
         itemDate.setText(mTodo.get(position).getDate());
@@ -498,17 +514,20 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             viewSound.setVisibility(View.GONE);
         }
 
-        builder.setView(dialogueView);
+        builder.setView(null);
+        builder.setView(dialogView);
 
-        final AlertDialog alertDialog=builder.create();
+        alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialogDismiss();
         alertDialog.show();
 
 
         btnItemUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
+                alertDialogDismiss();
                 updateTodoItem(position);
             }
         });
@@ -516,10 +535,16 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         btnItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss();
+                alertDialogDismiss();
                 deleteTodoItem(position);
             }
         });
+    }
+
+    private void alertDialogDismiss(){
+        if (alertDialog.isShowing()){
+            alertDialog.dismiss();
+        }
     }
 
 }

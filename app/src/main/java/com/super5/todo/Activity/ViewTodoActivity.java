@@ -1,5 +1,11 @@
 package com.super5.todo.Activity;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -20,14 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -36,7 +35,6 @@ import com.super5.todo.BroadcastReceiver.AlarmReceiver;
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -57,6 +55,11 @@ public class  ViewTodoActivity extends AppCompatActivity {
     TextView timeSetter,dateSetter;
     public static boolean visibility;
     String priority;
+
+    AlertDialog.Builder builder;
+    AlertDialog alertDialog;
+    View dialogView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,10 @@ public class  ViewTodoActivity extends AppCompatActivity {
         fabPriority = findViewById(R.id.fab_priority);
         btnHigh = findViewById(R.id.btn_high);
         btnLow = findViewById(R.id.btn_low);
+
+        builder = new AlertDialog.Builder(ViewTodoActivity.this);
+
+
         Calendar calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
@@ -95,7 +102,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(todoAdapter.isopened && todoAdapter.positon!=null){
-                    todoAdapter.cloaseLayout();
+                    todoAdapter.closeLayout();
                 }
                 fabhider();
             }
@@ -118,7 +125,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                    }
 
                     if(todoAdapter.isopened && todoAdapter.positon!=null){
-                        todoAdapter.cloaseLayout();
+                        todoAdapter.closeLayout();
                     }
 
                     return true;
@@ -206,21 +213,30 @@ public class  ViewTodoActivity extends AppCompatActivity {
 
     void showContactDialogueBox(){
         mDrawer.closeMenu(true);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
-        View DialogueView = getLayoutInflater().inflate(R.layout.contact, null);
-        builder.setView(DialogueView);
-        final AlertDialog alertDialog=builder.create();
+        dialogView = getLayoutInflater().inflate(R.layout.contact, null);
+        builder.setView(null);
+        builder.setView(dialogView);
+
+        alertDialog = builder.create();
+
         alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialogDismiss();
+
         alertDialog.show();
 
     }
     void showAboutDialogueBox(){
         mDrawer.closeMenu(true);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
-        View DialogueView = getLayoutInflater().inflate(R.layout.aboutus, null);
-        builder.setView(DialogueView);
-        final AlertDialog alertDialog=builder.create();
+
+        dialogView = getLayoutInflater().inflate(R.layout.aboutus, null);
+        builder.setView(null);
+        builder.setView(dialogView);
+
+        alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
+
+        alertDialogDismiss();
         alertDialog.show();
 
     }
@@ -236,24 +252,27 @@ public class  ViewTodoActivity extends AppCompatActivity {
     }
 
     void showAddDialogueBox(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(ViewTodoActivity.this);
-        View DialogueView = getLayoutInflater().inflate(R.layout.add_dialoguebox,null);
+        dialogView = getLayoutInflater().inflate(R.layout.add_dialoguebox,null);
         final TextInputEditText txtTitle,txtNote;
         final CheckBox cbRing, cbVibration;
         Button add;
         ImageView date,timePicker;
         final TextView tvTitleCount, tvNoteCount;
-        txtTitle = DialogueView.findViewById(R.id.edt_title);
-        txtNote = DialogueView.findViewById(R.id.edt_note);
-        cbRing = DialogueView.findViewById(R.id.cb_ring);
-        cbVibration = DialogueView.findViewById(R.id.cb_vibration);
-        add=DialogueView.findViewById(R.id.btn_add);
-        tvTitleCount = DialogueView.findViewById(R.id.title_count);
-        tvNoteCount = DialogueView.findViewById(R.id.note_count);
-        date=DialogueView.findViewById(R.id.imgdate);
-        timePicker=DialogueView.findViewById(R.id.imgtime);
-        timeSetter=DialogueView.findViewById(R.id.timesetter);
-        dateSetter=DialogueView.findViewById(R.id.daetsetter);
+
+        txtTitle = dialogView.findViewById(R.id.edt_title);
+        txtNote = dialogView.findViewById(R.id.edt_note);
+        cbRing = dialogView.findViewById(R.id.cb_ring);
+        cbVibration = dialogView.findViewById(R.id.cb_vibration);
+        add= dialogView.findViewById(R.id.btn_add);
+
+        tvTitleCount = dialogView.findViewById(R.id.title_count);
+        tvNoteCount = dialogView.findViewById(R.id.note_count);
+
+        date= dialogView.findViewById(R.id.imgdate);
+        timePicker= dialogView.findViewById(R.id.imgtime);
+        timeSetter= dialogView.findViewById(R.id.timesetter);
+        dateSetter= dialogView.findViewById(R.id.daetsetter);
+
         timeSetter.setText(currentTime);
         dateSetter.setText(currentDate);
         if(priority.equals("high")){
@@ -286,8 +305,12 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 datePicker();
             }
         });
-        builder.setView(DialogueView);
-        final AlertDialog alertDialog=builder.create();
+        alertDialog=builder.create();
+
+        builder.setView(null);
+        builder.setView(dialogView);
+
+        alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
         txtTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -342,6 +365,9 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 } else if (!cbRing.isChecked() && !cbVibration.isChecked()) {
                     isOk=false;
                     Toast.makeText(ViewTodoActivity.this, "Ring or Vibration must be checked", Toast.LENGTH_SHORT).show();
+                } else if (cal.before(Calendar.getInstance())){
+                    isOk=false;
+                    Toast.makeText(ViewTodoActivity.this, "Your selected time before then now... Please check", Toast.LENGTH_LONG).show();
                 }
                 if(isOk){
                     TodoModel todoModel = new TodoModel(alarmID,priority,title,note,date,time,ring,vibration,true);
@@ -353,7 +379,16 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        alertDialogDismiss();
         alertDialog.show();
+    }
+
+    private void alertDialogDismiss(){
+        if (alertDialog.isShowing()){
+            alertDialog.dismiss();
+        }
     }
     private void timePicker(){
         TimePickerDialog timePickerDialog = new TimePickerDialog(ViewTodoActivity.this, new TimePickerDialog.OnTimeSetListener() {
