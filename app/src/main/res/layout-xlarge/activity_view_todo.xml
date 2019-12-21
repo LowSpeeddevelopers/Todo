@@ -164,97 +164,106 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/navigationbarheight_180dp"
-                android:background="@color/colorGreen"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/ic_launcher_round"
-                    android:contentDescription="@string/todo" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize_20sp"
-                android:layout_gravity="start"
-                android:text="@string/home"
-                android:id="@+id/tv_home"
-                android:layout_margin="@dimen/margin_8dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="@dimen/drawablepadding_8dp"
-                android:drawableStart="@drawable/ic_home_black_24dp"
-                android:focusable="true" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize_20sp"
-                android:layout_gravity="start"
-                android:text="@string/share"
-                android:id="@+id/tv_share"
-                android:layout_margin="@dimen/margin_8dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="@dimen/drawablepadding_8dp"
-                android:drawableStart="@drawable/ic_share_black_24dp"
-                android:focusable="true" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize_20sp"
-                android:layout_gravity="start"
-                android:text="@string/help"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:id="@+id/tv_help"
-                android:layout_margin="@dimen/margin_8dp"
-                android:drawablePadding="@dimen/drawablepadding_8dp"
-                android:drawableStart="@drawable/ic_help_black_24dp"
-                android:focusable="true" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_gravity="start"
-                android:text="@string/contact_us"
-                android:id="@+id/tv_contact"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_margin="@dimen/margin_8dp"
-                android:drawablePadding="@dimen/drawablepadding_8dp"
-                android:drawableStart="@drawable/ic_contact_mail_black_24dp"
-                android:focusable="true" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize_20sp"
-                android:layout_gravity="start"
-                android:text="@string/about"
-                android:id="@+id/tv_about_us"
-                android:layout_margin="@dimen/margin_8dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="@dimen/drawablepadding_8dp"
-                android:drawableStart="@drawable/ic_about_us_black_24dp"
-                android:focusable="true" />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/navigationbarheight_180dp"
+                    android:background="@color/colorGreen"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/todo"
+                        android:src="@mipmap/ic_launcher_round" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/margin_8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_home_black_24dp"
+                    android:drawablePadding="@dimen/drawablepadding_8dp"
+                    android:focusable="true"
+                    android:text="@string/home"
+                    android:textSize="@dimen/textsize_20sp" />
+
+                <TextView
+                    android:id="@+id/tv_share"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/margin_8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_share_black_24dp"
+                    android:drawablePadding="@dimen/drawablepadding_8dp"
+                    android:focusable="true"
+                    android:text="@string/share"
+                    android:textSize="@dimen/textsize_20sp" />
+
+                <TextView
+                    android:id="@+id/tv_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/margin_8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_help_black_24dp"
+                    android:drawablePadding="@dimen/drawablepadding_8dp"
+                    android:focusable="true"
+                    android:text="@string/help"
+                    android:textSize="@dimen/textsize_20sp" />
+
+                <TextView
+                    android:id="@+id/tv_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/margin_8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_contact_mail_black_24dp"
+                    android:drawablePadding="@dimen/drawablepadding_8dp"
+                    android:focusable="true"
+                    android:text="@string/contact_us"
+                    android:textSize="@dimen/textsize_20sp" />
+
+                <TextView
+                    android:id="@+id/tv_about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/margin_8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_about_us_black_24dp"
+                    android:drawablePadding="@dimen/drawablepadding_8dp"
+                    android:focusable="true"
+                    android:text="@string/about"
+                    android:textSize="@dimen/textsize_20sp" />
+            </LinearLayout>
 
         </ScrollView>
     </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>

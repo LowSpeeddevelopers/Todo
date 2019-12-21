@@ -25,27 +25,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        >
 
 
 
         <activity android:name=".Activity.HelpActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme2">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".Activity.ViewTodoActivity"/>
         </activity>
-        <activity android:name=".Activity.AlarmActivity">
+        <activity android:name=".Activity.AlarmActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SplashActivity">
+        <activity android:name=".Activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ViewTodoActivity" />
+        <activity android:name=".Activity.ViewTodoActivity"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".BroadcastReceiver.AlarmReceiver"

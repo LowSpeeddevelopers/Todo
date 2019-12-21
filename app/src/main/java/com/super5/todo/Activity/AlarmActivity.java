@@ -106,7 +106,7 @@ public class AlarmActivity extends AppCompatActivity {
         String contentTitle = title;
         String contentText = "You missed an alarm at "+time;
 
-        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O){
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, String.valueOf(alarmID));
 
             mBuilder.setSmallIcon(icon);

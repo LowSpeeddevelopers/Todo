@@ -38,6 +38,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/edt_update_title"
                     android:hint="@string/title"
+                    android:inputType="text|textNoSuggestions"
                     android:maxLength="50"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -62,6 +63,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/edt_update_note"
                     android:hint="@string/note"
+                    android:inputType="textNoSuggestions|text"
                     android:maxLength="150"
                     android:layout_height="wrap_content"/>
                 <TextView
