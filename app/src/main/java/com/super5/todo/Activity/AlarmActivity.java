@@ -1,8 +1,5 @@
 package com.super5.todo.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -19,7 +16,9 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
@@ -103,14 +102,13 @@ public class AlarmActivity extends AppCompatActivity {
 
 
         int icon = R.drawable.icon;
-        String contentTitle = title;
         String contentText = "You missed an alarm at "+time;
 
         if (Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O){
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, String.valueOf(alarmID));
 
             mBuilder.setSmallIcon(icon);
-            mBuilder.setContentTitle(contentTitle);
+            mBuilder.setContentTitle(title);
             mBuilder.setContentText(contentText);
 
             Intent resultIntent = new Intent(this, AlarmActivity.class);
@@ -123,7 +121,9 @@ public class AlarmActivity extends AppCompatActivity {
 
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-            mNotificationManager.notify(alarmID, mBuilder.build());
+            if (mNotificationManager != null) {
+                mNotificationManager.notify(alarmID, mBuilder.build());
+            }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             int importance = NotificationManager.IMPORTANCE_HIGH;
@@ -132,7 +132,7 @@ public class AlarmActivity extends AppCompatActivity {
 
             Notification notification = new Notification.Builder(AlarmActivity.this, String.valueOf(alarmID))
                     .setSmallIcon(icon)
-                    .setContentTitle(contentTitle)
+                    .setContentTitle(title)
                     .setContentText(contentText)
                     .setChannelId(CHANNEL_ID)
                     .build();

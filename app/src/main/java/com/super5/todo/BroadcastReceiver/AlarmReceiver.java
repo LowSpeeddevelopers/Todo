@@ -62,7 +62,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 //        } else {
 //            Log.e("time","after");
 
+        if (alarmManager != null) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP,calender.getTimeInMillis(),pi);
+        }else {
+            Toast.makeText(mContext,"Internal Error!",Toast.LENGTH_LONG).show();
+        }
 //        }
 
 
@@ -78,7 +82,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent i = new Intent(mContext, AlarmReceiver.class);
         PendingIntent sender = PendingIntent.getBroadcast(mContext, alarmId, i, 0);
         AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(sender);
+        if (alarmManager != null) {
+            alarmManager.cancel(sender);
+        }else {
+            Toast.makeText(mContext,"Internal Error!",Toast.LENGTH_LONG).show();
+        }
 
         Log.e("cancel", "Alarm Cancel");
     }

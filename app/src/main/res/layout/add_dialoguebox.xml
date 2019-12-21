@@ -43,13 +43,14 @@
                 android:id="@+id/edt_title"
                 android:hint="@string/title"
                 android:maxLength="50"
-                android:inputType="textNoSuggestions|text"
+                android:textAllCaps="true"
+                android:inputType="textNoSuggestions|textCapSentences"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/title_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity=""
                 android:textSize="@dimen/textsize_12sp"/>
 
 
@@ -67,14 +68,14 @@
                 android:layout_width="match_parent"
                 android:id="@+id/edt_note"
                 android:hint="@string/note"
-                android:inputType="text|textNoSuggestions"
+                android:inputType="textNoSuggestions|textCapSentences"
                 android:maxLength="150"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/note_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity=""
                 android:textSize="@dimen/textsize_12sp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -92,6 +93,7 @@
                     android:id="@+id/daetsetter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_4dp"
                     android:textColor="#000"
                     android:layout_gravity="center" />
 

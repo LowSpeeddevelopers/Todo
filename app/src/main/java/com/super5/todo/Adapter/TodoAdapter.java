@@ -45,7 +45,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private TextView update_date, update_time;
     private CheckBox cbRing, cbVibration;
 
-    public TextView update_title_count, update_note_count;
+    private TextView update_title_count, update_note_count;
 
     public boolean isopened =  false;
     public String positon = null;

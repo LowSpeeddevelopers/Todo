@@ -62,4 +62,5 @@
     <dimen name="margin_12dp">12dp</dimen>
     <dimen name="ringsize">12dp</dimen>
     <dimen name="textsize_12sp">12sp</dimen>
+    <dimen name="viewmarginend">15dp</dimen>
 </resources>

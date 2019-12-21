@@ -31,8 +31,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this.listDataChild.get(this.listDataGroup.get(groupPosition))
-                .get(childPosititon);
+        return this.listDataChild.get(this.listDataGroup.get(groupPosition)).get(childPosititon);
     }
 
     @Override
@@ -41,28 +40,35 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+
 
         final String childText = (String) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this.context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.help1, null);
+            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            if (layoutInflater != null) {
+                convertView = layoutInflater.inflate(R.layout.help1, null);
+            }
         }
 
-        TextView textViewChild = convertView
-                .findViewById(R.id.textViewChild);
+        TextView textViewChild = null;
+        if (convertView != null) {
+            textViewChild = convertView.findViewById(R.id.textViewChild);
+        }
 
-        textViewChild.setText(childText);
+
+        if (textViewChild != null) {
+            textViewChild.setText(childText);
+        }
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.listDataChild.get(this.listDataGroup.get(groupPosition))
-                .size();
+        return this.listDataChild.get(this.listDataGroup.get(groupPosition)).size();
+
     }
 
     @Override

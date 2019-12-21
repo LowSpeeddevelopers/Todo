@@ -74,6 +74,7 @@ public class TodoDb extends DbHelper {
         }
 
         db.close();
+        c.close();
 
         Log.e("data 2", data.toString());
 
@@ -108,6 +109,7 @@ public class TodoDb extends DbHelper {
         }
 
         db.close();
+        c.close();
 
         return todoModel;
     }

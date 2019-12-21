@@ -71,7 +71,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/marginend_15dp"
+               android:layout_marginEnd="@dimen/viewmarginend"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"
@@ -80,12 +80,10 @@
                     android:text="@string/low"
                     android:layout_gravity="center"
                     android:textColor="#fff"
+
                     android:textSize="@dimen/textsize_25sp"
                     android:gravity="center"/>
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="#fff"/>
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
