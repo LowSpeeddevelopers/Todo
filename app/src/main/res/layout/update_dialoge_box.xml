@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#9CD7DF"
+            android:background="#fff"
             android:orientation="vertical">
 
 
@@ -79,17 +79,9 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/marginstart_8dp"
             android:layout_marginBottom="@dimen/marginbottom_4dp"
-            android:layout_marginEnd="@dimen/marginend_8dp"
+            android:layout_marginEnd="@dimen/marginend_4dp"
             android:layout_height="wrap_content" >
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/tv_update_date"
-                android:layout_gravity="center"
-                android:textColor="#000"/>
             <ImageView
                 android:layout_width="@dimen/imagewidhth_40dp"
                 android:id="@+id/imgDate"
@@ -98,17 +90,18 @@
                 android:src="@drawable/date"
                 android:contentDescription="@string/todo" />
 
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_update_date"
+                android:layout_gravity="center"
+                android:textColor="#000"/>
+
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/tv_update_time"
-                android:textColor="#000" />
             <ImageView
                 android:layout_width="@dimen/imagewidhth_40dp"
                 android:layout_height="@dimen/imageheight_40dp"
@@ -116,6 +109,15 @@
                 android:layout_margin="@dimen/margin_8dp"
                 android:src="@drawable/time"
                 android:contentDescription="@string/todo" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/tv_update_time"
+                android:padding="4dp"
+                android:textColor="#000" />
+
 
 
         </LinearLayout>
@@ -127,12 +129,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/cb_ring"
+                    android:layout_marginStart="@dimen/marginstart_8dp"
                     android:text="@string/ring"
                     android:textColor="#000"/>
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/cb_vibration"
+                    android:layout_marginStart="@dimen/marginstart_8dp"
                     android:text="@string/vibration"
                     android:textColor="#000"/>
             </LinearLayout>

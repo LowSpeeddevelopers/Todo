@@ -5,25 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_4dp"
-    android:background="#9CD7DF"
+    android:background="#fff"
     android:padding="@dimen/padding_5dp">
     <TextView
         android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="@dimen/textsize_25sp"
+        android:textSize="@dimen/textsize_32sp"
         android:text="@string/title"
         android:textStyle="bold"
-        android:textColor="#000"/>
+        android:textColor="@color/colorNavyBlue"/>
     <TextView
         android:id="@+id/item_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="@dimen/textsize_20sp"
+        android:textSize="@dimen/textsize_24sp"
         android:text="@string/description"
-        android:textColor="#000"/>
+        android:textColor="@color/colorNavyBlue"/>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
