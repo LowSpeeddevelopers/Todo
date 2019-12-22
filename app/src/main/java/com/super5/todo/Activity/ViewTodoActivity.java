@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -370,7 +369,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     Toast.makeText(ViewTodoActivity.this, "Your selected time before then now... Please check", Toast.LENGTH_LONG).show();
                 }
                 if(isOk){
-                    TodoModel todoModel = new TodoModel(alarmID,priority,title,note,date,time,ring,vibration,true);
+                    TodoModel todoModel = new TodoModel(alarmID,priority,title,note,date,time,ring,vibration,true, false);
                     todoDb.insertData(todoModel);
                     todoModels.add(todoModel);
                     todoAdapter.notifyDataSetChanged();

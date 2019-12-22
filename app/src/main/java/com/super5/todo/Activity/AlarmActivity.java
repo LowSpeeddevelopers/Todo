@@ -13,20 +13,24 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
 
+
 public class AlarmActivity extends AppCompatActivity {
 
     MediaPlayer player;
+    Vibrator v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class AlarmActivity extends AppCompatActivity {
         if (alarmID == 0) {
             Log.e("alarm","Alarm ID Null set");
         }
+
+        TodoDb todoDb = new TodoDb(getApplicationContext());
 
         TodoModel model = new TodoDb(this).getDataByAlarmID(alarmID);
 
@@ -76,10 +82,42 @@ public class AlarmActivity extends AppCompatActivity {
         tvDate.setText(date);
         tvTime.setText(time);
 
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        player = MediaPlayer.create(this, notification);
-        player.setLooping(true);
-        player.start();
+        Uri alarmTune = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+        model.setAlarmRes(true);
+
+        if (todoDb.updateData(model) > 0){
+            player = MediaPlayer.create(this, alarmTune);
+            player.setLooping(true);
+
+            v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+            long[] mVibratePattern = new long[]{0, 400, 800, 600, 800, 800, 800, 1000};
+            int[] mAmplitudes = new int[]{0, 255, 0, 255, 0, 255, 0, 255};
+
+            if (model.isRing() && model.isVibration()){
+
+                player.start();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createWaveform(mVibratePattern, mAmplitudes, 5));
+                } else {
+                    //deprecated in API 26
+                    v.vibrate(mVibratePattern, 0);
+                }
+            } else if (model.isRing()){
+                player.start();
+            } else if (model.isVibration()){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createWaveform(mVibratePattern, mAmplitudes, 5));
+                } else {
+                    //deprecated in API 26
+                    v.vibrate(mVibratePattern, 0);
+                }
+            }
+        }
+
+
 
         btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +130,7 @@ public class AlarmActivity extends AppCompatActivity {
 
     private void closeActivity(){
         player.stop();
+        v.cancel();
         finish();
     }
 

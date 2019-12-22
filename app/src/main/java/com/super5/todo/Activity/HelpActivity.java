@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
-
 import com.super5.todo.Adapter.ExpandableListViewAdapter;
 import com.super5.todo.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

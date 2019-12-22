@@ -11,8 +11,9 @@ public class TodoModel {
     private boolean ring;
     private boolean vibration;
     private boolean status;
+    private boolean alarmRes;
 
-    public TodoModel(Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, boolean status) {
+    public TodoModel(Integer alarmId, String priority, String title, String note, String date, String time, boolean ring, boolean vibration, boolean status, boolean alarmRes) {
         this.alarmId = alarmId;
         this.priority = priority;
         this.title = title;
@@ -22,6 +23,7 @@ public class TodoModel {
         this.ring = ring;
         this.vibration = vibration;
         this.status = status;
+        this.alarmRes = alarmRes;
     }
 
 
@@ -95,5 +97,13 @@ public class TodoModel {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public boolean isAlarmRes() {
+        return alarmRes;
+    }
+
+    public void setAlarmRes(boolean alarmRes) {
+        this.alarmRes = alarmRes;
     }
 }

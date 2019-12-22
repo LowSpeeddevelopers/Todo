@@ -37,6 +37,7 @@ public class TodoDb extends DbHelper {
         contentValues.put(DbHelper.COL_RING, todoModel.isRing());
         contentValues.put(DbHelper.COL_VIBRATION, todoModel.isVibration());
         contentValues.put(DbHelper.COL_STATUS, todoModel.isStatus());
+        contentValues.put(DbHelper.COL_ALARM_RES, todoModel.isAlarmRes());
 
         try {
             db.insert(DbHelper.TABLE_NAME,null,contentValues);
@@ -67,8 +68,9 @@ public class TodoDb extends DbHelper {
             boolean ring = c.getInt(c.getColumnIndex(COL_RING)) > 0;
             boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
             boolean status = c.getInt(c.getColumnIndex(COL_STATUS)) > 0;
+            boolean alarmRes = c.getInt(c.getColumnIndex(COL_ALARM_RES)) > 0;
 
-            TodoModel todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
+            TodoModel todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status, alarmRes);
             data.add(todoModel);
 
         }
@@ -103,8 +105,9 @@ public class TodoDb extends DbHelper {
             boolean ring = c.getInt(c.getColumnIndex(COL_RING)) > 0;
             boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
             boolean status = c.getInt(c.getColumnIndex(COL_STATUS)) > 0;
+            boolean alarmRes = c.getInt(c.getColumnIndex(COL_ALARM_RES)) > 0;
 
-            todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status);
+            todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status,alarmRes);
 
         }
 
@@ -131,6 +134,7 @@ public class TodoDb extends DbHelper {
         contentValues.put(DbHelper.COL_RING, todoModels.isRing());
         contentValues.put(DbHelper.COL_VIBRATION, todoModels.isVibration());
         contentValues.put(DbHelper.COL_STATUS, todoModels.isStatus());
+        contentValues.put(DbHelper.COL_ALARM_RES, todoModels.isAlarmRes());
 
         return db.update(DbHelper.TABLE_NAME,contentValues,DbHelper.COL_ALARM_ID+"="+id,null);
     }

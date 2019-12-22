@@ -11,18 +11,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-
-import com.super5.todo.Activity.AlarmActivity;
 import com.super5.todo.BroadcastReceiver.AlarmReceiver;
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
-
 import java.util.ArrayList;
 import java.util.Calendar;
+
 
 public class AlarmService extends Service {
 
@@ -50,7 +47,15 @@ public class AlarmService extends Service {
 
             if (cal.before(Calendar.getInstance())){
 
-                sendNotification(todoModel.getAlarmId(),todoModel.getTitle(),todoModel.getTime());
+                if (!todoModel.isAlarmRes()){
+                    todoModel.setAlarmRes(true);
+
+                    if (todoDb.updateData(todoModel) > 0){
+                        sendNotification(todoModel.getAlarmId(),todoModel.getTitle(),todoModel.getTime());
+                    }
+                }
+
+
 
             } else {
                 AlarmReceiver.setAlarm(getApplicationContext(),cal,todoModel.getAlarmId());

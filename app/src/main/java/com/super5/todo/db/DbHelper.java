@@ -16,6 +16,7 @@ public class DbHelper extends SQLiteOpenHelper {
     static final String COL_RING = "ring";
     static final String COL_VIBRATION = "vibration";
     static final String COL_STATUS = "status";
+    static final String COL_ALARM_RES = "alarm_res";
 
     DbHelper(Context context) {
         super(context, "database", null, 1);
@@ -24,7 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ("+COL_ALARM_ID+" INTEGER PRIMARY KEY,"+COL_PRIORITY+" TEXT,"+COL_TITLE+" TEXT,"+COL_NOTE+" TEXT, "+COL_DATE+" TEXT, "+COL_TIME+" TEXT,"+COL_RING+" BOOLEAN,"+COL_VIBRATION+" BOOLEAN,"+COL_STATUS+" BOOLEAN )";
+        String query = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ("+COL_ALARM_ID+" INTEGER PRIMARY KEY,"+COL_PRIORITY+" TEXT,"+COL_TITLE+" TEXT,"+COL_NOTE+" TEXT, "+COL_DATE+" TEXT, "+COL_TIME+" TEXT,"+COL_RING+" BOOLEAN,"+COL_VIBRATION+" BOOLEAN,"+COL_STATUS+" BOOLEAN ,"+COL_ALARM_RES+" BOOLEAN )";
 
         Log.d("query", query);
 

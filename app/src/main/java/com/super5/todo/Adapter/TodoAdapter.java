@@ -21,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
@@ -35,6 +34,7 @@ import com.super5.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
+
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private Context mContext;
@@ -144,7 +144,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                     ViewTodoActivity.fabhiderfromothers();
                 }
                 if (holder.swipeRevealLayout.isOpened()){
-                    Toast.makeText(mContext, "Layout Open", Toast.LENGTH_SHORT).show();
                     viewBinderHelper.closeLayout(String.valueOf(position));
                 }
                 deleteTodoItem(position);
@@ -367,7 +366,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 boolean vibration = cbVibration.isChecked();
                 boolean status = mTodo.get(position).isStatus();
 
-                TodoModel model = new TodoModel(alarmId, priority, title, note, date, time, ring, vibration, status);
+                TodoModel model = new TodoModel(alarmId, priority, title, note, date, time, ring, vibration, status, false);
 
                 Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
 
