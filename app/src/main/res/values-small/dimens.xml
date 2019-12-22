@@ -9,6 +9,7 @@
     <dimen name="margin_8dp">6dp</dimen>
     <dimen name="imageview_100dp">75dp</dimen>
     <dimen name="textsize_20sp">14sp</dimen>
+    <dimen name="textsize_2sp">15sp</dimen>
     <dimen name="constantlayoutmargin_30dp">30dp</dimen>
     <dimen name="constantlayoutmarginend_30dp">30dp</dimen>
     <dimen name="constantlayoutmarginend_50dp">20dp</dimen>

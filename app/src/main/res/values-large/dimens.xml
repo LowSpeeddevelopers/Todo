@@ -16,6 +16,7 @@
     <dimen name="constantlayoutmarginstart_30dp">30dp</dimen>
     <dimen name="margintop_10dp">10dp</dimen>
     <dimen name="textsize_30sp">35sp</dimen>
+    <dimen name="textsize_2sp">15sp</dimen>
     <dimen name="padding_50dp">50dp</dimen>
     <dimen name="marginstart_150dp">150dp</dimen>
     <dimen name="marginbottom_10dp">10dp</dimen>

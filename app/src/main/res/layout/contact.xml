@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/contactColor"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -17,18 +18,18 @@
 
         <androidx.cardview.widget.CardView
             android:orientation="vertical"
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_margin="@dimen/margin_8dp"
             app:cardCornerRadius="@dimen/card_corner_redious_5dp"
-            android:padding="@dimen/padding_8dp">
+            >
 
             <LinearLayout
                 android:layout_margin="@dimen/margin_8dp"
-                android:background="@color/contactColor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:orientation="vertical"
@@ -37,30 +38,30 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:text="@string/afroz_name"
                     android:textColor="#000"
-                    android:textSize="@dimen/textsize_30sp"
+                    android:textSize="@dimen/textsize_20sp"
                     android:textStyle="bold"/>
 
 
 
                 <TextView
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/afroz_mail"
                     android:textColor="#000"
-                    android:textSize="@dimen/textsize_20sp"/>
+                    android:textSize="@dimen/textsize_2sp"/>
 
 
                 <TextView
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/afroz_fb"
                     android:textColor="#000"
-                    android:textSize="@dimen/textsize_20sp"/>
+                    android:textSize="@dimen/textsize_2sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -72,51 +73,52 @@
         <androidx.cardview.widget.CardView
             android:orientation="vertical"
 
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_margin="@dimen/margin_8dp"
-            app:cardCornerRadius="@dimen/card_corner_redious_5dp"
-            android:padding="@dimen/padding_8dp">
+            app:cardCornerRadius="@dimen/card_corner_redious_5dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_8dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:background="@color/contactColor"
+                android:layout_gravity="right"
+                android:background="@color/colorWhite"
                 android:orientation="vertical"
                 android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="right"
                     android:text="@string/hridoy_name"
                     android:textColor="#000"
-                    android:textSize="@dimen/textsize_30sp"
+                    android:textSize="@dimen/textsize_20sp"
                     android:textStyle="bold"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/hridoy_mail"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
 
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/hridoy_fb"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -129,17 +131,16 @@
 
         <androidx.cardview.widget.CardView
             android:orientation="vertical"
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_margin="@dimen/margin_8dp"
-            app:cardCornerRadius="@dimen/card_corner_redious_5dp"
-            android:padding="@dimen/padding_8dp">
+            app:cardCornerRadius="@dimen/card_corner_redious_5dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/contactColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:layout_margin="@dimen/margin_8dp"
@@ -149,31 +150,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:text="@string/noyon_name"
                     android:textColor="#000"
-                    android:textSize="@dimen/textsize_30sp"
+                    android:textSize="@dimen/textsize_20sp"
                     android:textStyle="bold"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/noyon_mail"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/noyon_fb"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -186,53 +187,52 @@
 
         <androidx.cardview.widget.CardView
             android:orientation="vertical"
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_margin="@dimen/margin_8dp"
-            app:cardCornerRadius="@dimen/card_corner_redious_5dp"
-            android:padding="@dimen/padding_8dp">
+            app:cardCornerRadius="@dimen/card_corner_redious_5dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:background="@color/contactColor"
+                android:background="@color/colorWhite"
                 android:layout_margin="@dimen/margin_8dp"
                 android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="right"
                     android:text="@string/taki_name"
                     android:textColor="#000"
-                    android:textSize="@dimen/textsize_30sp"
+                    android:textSize="@dimen/textsize_20sp"
                     android:textStyle="bold"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/taki_mail"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
 
 
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="right"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="@string/taki_fb"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -245,61 +245,56 @@
 
         <androidx.cardview.widget.CardView
             android:orientation="vertical"
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_margin="@dimen/margin_8dp"
-            app:cardCornerRadius="@dimen/card_corner_redious_5dp"
-            android:padding="@dimen/padding_8dp">
+            app:cardCornerRadius="@dimen/card_corner_redious_5dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:background="@color/contactColor"
+                android:background="@color/colorWhite"
                 android:layout_margin="@dimen/margin_8dp"
                 android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:text="@string/gk_name"
                     android:textColor="#000"
-                    android:textSize="@dimen/textsize_30sp"
+                    android:textSize="@dimen/textsize_20sp"
                     android:textStyle="bold"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/gk_mail"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
 
                     <TextView
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/gk_fb"
                         android:textColor="#000"
-                        android:textSize="@dimen/textsize_20sp"/>
+                        android:textSize="@dimen/textsize_2sp"/>
 
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
     </LinearLayout>
 
 </ScrollView>
