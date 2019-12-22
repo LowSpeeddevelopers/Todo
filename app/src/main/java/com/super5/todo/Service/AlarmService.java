@@ -1,98 +1,78 @@
-package com.super5.todo.Activity;
+package com.super5.todo.Service;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.super5.todo.Activity.AlarmActivity;
+import com.super5.todo.BroadcastReceiver.AlarmReceiver;
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
 
-public class AlarmActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Calendar;
 
-    MediaPlayer player;
+public class AlarmService extends Service {
 
+    ArrayList<TodoModel> myRemainders;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alarm);
-
-
-        Intent intent = getIntent();
-
-        final int alarmID = intent.getIntExtra("alarm_id",0);
-
-        final String title, note, date, time;
-
-        Log.e("AlarmID", alarmID+"");
-
-        if (alarmID == 0) {
-            Log.e("alarm","Alarm ID Null set");
-        }
-
-        TodoModel model = new TodoDb(this).getDataByAlarmID(alarmID);
-
-        title = model.getTitle();
-        note = model.getNote();
-        date = model.getDate();
-        time = model.getTime();
-
-        TextView tvTitle, tvNote, tvDate, tvTime, btnDismiss;
-
-        tvTitle = findViewById(R.id.tv_title);
-        tvNote = findViewById(R.id.tv_note);
-        tvDate = findViewById(R.id.tv_date);
-        tvTime = findViewById(R.id.tv_time);
-        btnDismiss = findViewById(R.id.btn_dismiss);
-
-        final Handler handler = new Handler();
-
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                closeActivity();
-
-                sendNotification(alarmID, title, time);
-            }
-        }, 60000);
-
-        tvTitle.setText(title);
-        tvNote.setText(note);
-        tvDate.setText(date);
-        tvTime.setText(time);
-
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        player = MediaPlayer.create(this, notification);
-        player.setLooping(true);
-        player.start();
-
-        btnDismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handler.removeCallbacksAndMessages(null);
-                closeActivity();
-            }
-        });
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
-    private void closeActivity(){
-        player.stop();
-        finish();
+    @Override
+    public void onCreate() {
+
+        Log.e("started", "Service Started");
+
+        TodoDb todoDb = new TodoDb(getApplicationContext());
+
+        myRemainders = todoDb.getData();
+
+        for (int i = 0; i<myRemainders.size(); i++){
+            TodoModel todoModel = myRemainders.get(i);
+
+            Calendar cal = dateAndTimeParse(todoModel.getDate(),todoModel.getTime());
+
+            if (cal.before(Calendar.getInstance())){
+
+                sendNotification(todoModel.getAlarmId(),todoModel.getTitle(),todoModel.getTime());
+
+            } else {
+                AlarmReceiver.setAlarm(getApplicationContext(),cal,todoModel.getAlarmId());
+            }
+
+        }
+
+
+    }
+
+    private Calendar dateAndTimeParse(String date, String time){
+        Calendar calendar = Calendar.getInstance();
+        String[] strDate=date.split("/",3);
+        int day=Integer.parseInt(strDate[0]);
+        int month=Integer.parseInt(strDate[1]);
+        int year=Integer.parseInt(strDate[2]);
+        String[] strTime=time.split(":",2);
+        int hour=Integer.parseInt(strTime[0]);
+        int minute=Integer.parseInt(strTime[1]);
+        month--;
+        calendar.set(year,month,day,hour,minute,0);
+        return calendar;
     }
 
     private void sendNotification(int alarmID, String title, String time){
@@ -111,9 +91,9 @@ public class AlarmActivity extends AppCompatActivity {
             mBuilder.setContentTitle(title);
             mBuilder.setContentText(contentText);
 
-            Intent resultIntent = new Intent(this, AlarmActivity.class);
+            Intent resultIntent = new Intent(this, AlarmService.class);
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addParentStack(AlarmActivity.class);
+            stackBuilder.addParentStack(AlarmService.class);
 
             stackBuilder.addNextIntent(resultIntent);
             PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(alarmID,PendingIntent.FLAG_UPDATE_CURRENT);
@@ -130,7 +110,7 @@ public class AlarmActivity extends AppCompatActivity {
 
             NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
 
-            Notification notification = new Notification.Builder(AlarmActivity.this, String.valueOf(alarmID))
+            Notification notification = new Notification.Builder(getApplicationContext(), String.valueOf(alarmID))
                     .setSmallIcon(icon)
                     .setContentTitle(title)
                     .setContentText(contentText)
@@ -145,8 +125,10 @@ public class AlarmActivity extends AppCompatActivity {
             mNotificationManager.notify(alarmID , notification);
         }
 
-            
+
 
     }
+
+
 
 }

@@ -5,12 +5,14 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.super5.todo.Activity.AlarmActivity;
+import com.super5.todo.Service.AlarmService;
 
 import java.util.Calendar;
+
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -18,27 +20,51 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context,"Wake Up!",Toast.LENGTH_SHORT).show();
-        Log.e("alarm","Alarm called");
 
-        if(intent.hasExtra("alarm_id")){
-            Log.e("status","true");
-        }else {
-            Log.e("status","false");
+        Log.e("alarm", "Receive");
+
+        if(intent.getAction() != null && intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
+
+            Log.e("alarm", "Boot Completed Called");
+
+            Intent serviceIntent = new Intent(context, AlarmService.class);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                context.startForegroundService(serviceIntent);
+            } else {
+                context.startService(serviceIntent);
+            }
+
+
+
+        } else {
+
+            Log.e("alarm", "Boot not Completed Called");
+
+            Toast.makeText(context,"Wake Up!",Toast.LENGTH_SHORT).show();
+            Log.e("alarm","Alarm called");
+
+            if(intent.hasExtra("alarm_id")){
+                Log.e("status","true");
+            }else {
+                Log.e("status","false");
+            }
+            int alarmID = intent.getIntExtra("alarm_id", 0);
+
+            Log.e("alarmireceive", String.valueOf(alarmID));
+
+            Intent i = new Intent(context, AlarmActivity.class);
+
+
+            i.putExtra("alarm_id",alarmID);
+
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            Log.e("receiver called","true");
+            context.startActivity(i);
+
+
         }
-        int alarmID = intent.getIntExtra("alarm_id", 0);
-
-        Log.e("alarmireceive", String.valueOf(alarmID));
-
-        Intent i = new Intent(context, AlarmActivity.class);
-
-
-        i.putExtra("alarm_id",alarmID);
-
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        Log.e("receiver called","true");
-        context.startActivity(i);
     }
 
 
