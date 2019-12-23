@@ -62,6 +62,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         this.mContext = mContext;
         this.mTodo = mTodo;
     }
+
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -89,11 +92,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
             }
         }
+        //notifyDataSetChanged();
         if (todoModel.isRing()){
             holder.ring.setVisibility(View.VISIBLE);
         } else {
             holder.ring.setVisibility(View.GONE);
         }
+
         if (todoModel.isVibration()){
             holder.vib.setVisibility(View.VISIBLE);
         } else {
@@ -238,15 +243,22 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         Log.d("dataid", model.getAlarmId().toString());
         Log.d("datatitle", model.toString());
 
-        if(todoDb.updateData(model) >= 0){
-            Calendar calendar = dateAndTimeParse(model.getDate(), model.getTime());
-            Log.e("CalendarValue", String.valueOf(calendar));
-            AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId());
-            mTodo.set(position, model);
-            notifyItemChanged(position, model);
+        Calendar calendar = dateAndTimeParse(model.getDate(), model.getTime());
+        
+        if (calendar.after(Calendar.getInstance())){
+            if(todoDb.updateData(model) >= 0){
+                Log.e("CalendarValue", String.valueOf(calendar));
+                AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId(), true);
+                mTodo.set(position, model);
+                notifyItemChanged(position, model);
+            } else {
+                Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Alarm has been passed", Toast.LENGTH_SHORT).show();
         }
+
+        notifyDataSetChanged();
     }
 
     private Calendar dateAndTimeParse(String date, String time){
@@ -295,6 +307,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         layoutParams.leftMargin=20;
         btnPositive.setLayoutParams(layoutParams);
     }
+
+
+
+
     private void updateTodoItem(final int position){
         dialogView = li.inflate(R.layout.update_dialoge_box,null);
         update_title = dialogView.findViewById(R.id.edt_update_title);
@@ -383,16 +399,17 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                         Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                     } else {
 
-                        AlarmReceiver.setAlarm(mContext, cal, model.getAlarmId());
+                        AlarmReceiver.setAlarm(mContext, cal, model.getAlarmId(), true);
                         alertDialogDismiss();
 
                         mTodo.set(position, model);
                         notifyItemChanged(position, model);
-                        notifyDataSetChanged();
+
 
 
                     }
                 }
+                notifyDataSetChanged();
             }
         });
 
@@ -544,6 +561,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         if (alertDialog.isShowing()){
             alertDialog.dismiss();
         }
+    }
+
+    public void updateData(){
+        notifyDataSetChanged();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.super5.todo.BroadcastReceiver;
 
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -9,17 +10,24 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 import com.super5.todo.Activity.AlarmActivity;
+import com.super5.todo.Activity.ViewTodoActivity;
+import com.super5.todo.Adapter.TodoAdapter;
 import com.super5.todo.Service.AlarmService;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class AlarmReceiver extends BroadcastReceiver {
 
+    boolean isActivityFound;
 
+    Context mContext;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        mContext = context;
 
         Log.e("alarm", "Receive");
 
@@ -38,6 +46,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
         } else {
+
+
 
             Log.e("alarm", "Boot not Completed Called");
 
@@ -68,18 +78,20 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
 
-    public static void setAlarm(Context mContext, Calendar calender, int alarmID){
+    public static void setAlarm(Context mContext, Calendar calender, int alarmID, boolean alarmstatus){
         AlarmManager alarmManager=(AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         Intent ine = new Intent(mContext, AlarmReceiver.class);
 
         ine.putExtra("alarm_id",alarmID);
-        PendingIntent pi = PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT|Intent.FILL_IN_DATA);
+        PendingIntent pi;
 
-//        if(alarmstatus){
-//            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT|Intent.FILL_IN_DATA);
-//        }else {
-//            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,0);
-//        }
+        //PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT|Intent.FILL_IN_DATA);
+
+        if(alarmstatus){
+            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,PendingIntent.FLAG_UPDATE_CURRENT);
+        }else {
+            pi=PendingIntent.getBroadcast(mContext,alarmID,ine,0);
+        }
 
 
 
@@ -116,4 +128,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Log.e("cancel", "Alarm Cancel");
     }
+
+
 }

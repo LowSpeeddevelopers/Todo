@@ -1,21 +1,14 @@
 package com.super5.todo.Service;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.app.TaskStackBuilder;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
+
+import com.super5.todo.Activity.NotificationViewer;
 import com.super5.todo.BroadcastReceiver.AlarmReceiver;
 import com.super5.todo.Model.TodoModel;
-import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,14 +44,13 @@ public class AlarmService extends Service {
                     todoModel.setAlarmRes(true);
 
                     if (todoDb.updateData(todoModel) > 0){
-                        sendNotification(todoModel.getAlarmId(),todoModel.getTitle(),todoModel.getTime());
+                        new NotificationViewer(this, todoModel.getAlarmId(),todoModel.getTitle(),todoModel.getTime());
+
                     }
                 }
 
-
-
             } else {
-                AlarmReceiver.setAlarm(getApplicationContext(),cal,todoModel.getAlarmId());
+                AlarmReceiver.setAlarm(getApplicationContext(),cal,todoModel.getAlarmId(), false);
             }
 
         }
@@ -80,59 +72,6 @@ public class AlarmService extends Service {
         return calendar;
     }
 
-    private void sendNotification(int alarmID, String title, String time){
-
-        String CHANNEL_ID = "todo_channel";// The id of the channel.
-        CharSequence name = "todo_channel";// The user-visible name of the channel.
-
-
-        int icon = R.drawable.icon;
-        String contentText = "You missed an alarm at "+time;
-
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O){
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, String.valueOf(alarmID));
-
-            mBuilder.setSmallIcon(icon);
-            mBuilder.setContentTitle(title);
-            mBuilder.setContentText(contentText);
-
-            Intent resultIntent = new Intent(this, AlarmService.class);
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addParentStack(AlarmService.class);
-
-            stackBuilder.addNextIntent(resultIntent);
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(alarmID,PendingIntent.FLAG_UPDATE_CURRENT);
-            mBuilder.setContentIntent(resultPendingIntent);
-
-            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            if (mNotificationManager != null) {
-                mNotificationManager.notify(alarmID, mBuilder.build());
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-
-            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-
-            Notification notification = new Notification.Builder(getApplicationContext(), String.valueOf(alarmID))
-                    .setSmallIcon(icon)
-                    .setContentTitle(title)
-                    .setContentText(contentText)
-                    .setChannelId(CHANNEL_ID)
-                    .build();
-
-            NotificationManager mNotificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.createNotificationChannel(mChannel);
-
-// Issue the notification.
-            mNotificationManager.notify(alarmID , notification);
-        }
-
-
-
-    }
 
 
 

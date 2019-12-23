@@ -58,12 +58,31 @@ public class  ViewTodoActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
     AlertDialog alertDialog;
     View dialogView;
+    public RecyclerView rvTodo;
+
+
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("tag","onStart called");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        todoAdapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("tag","onCreate called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_todo);
-        RecyclerView rvTodo = findViewById(R.id.rv_todo);
+         rvTodo = findViewById(R.id.rv_todo);
         FloatingActionButton fabAdd = findViewById(R.id.fab_add);
         linearLayout=findViewById(R.id.linearLayout);
         fabPriority = findViewById(R.id.fab_priority);
@@ -373,7 +392,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     todoDb.insertData(todoModel);
                     todoModels.add(todoModel);
                     todoAdapter.notifyDataSetChanged();
-                    AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID);
+                    AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID, false);
                     alertDialog.dismiss();
                 }
             }
