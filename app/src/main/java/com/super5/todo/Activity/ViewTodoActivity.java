@@ -83,8 +83,8 @@ public class  ViewTodoActivity extends AppCompatActivity {
         Log.e("tag","onCreate called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_todo);
-         rvTodo = findViewById(R.id.rv_todo);
-         fabAdd = findViewById(R.id.fab_add);
+        rvTodo = findViewById(R.id.rv_todo);
+        fabAdd = findViewById(R.id.fab_add);
         linearLayout=findViewById(R.id.linearLayout);
         fabPriority = findViewById(R.id.fab_priority);
         btnHigh = findViewById(R.id.btn_high);
@@ -124,7 +124,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 if(todoAdapter.isopened && todoAdapter.positon!=null){
                     todoAdapter.closeLayout();
                 }
-                fabhider();
+                fabHider();
             }
         });
 
@@ -141,7 +141,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     return false;
                 } else {
                    if(visibility){
-                       fabhiderfromothers();
+                       fabHiderFromOthers();
                    }
 
                     if(todoAdapter.isopened && todoAdapter.positon!=null){
@@ -209,7 +209,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
         });
     }
 
-    public void fabhider(){
+    public void fabHider(){
         if (!visibility){
             visibility = true;
             fabPriority.setVisibility(View.VISIBLE);
@@ -220,7 +220,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
             fabAdd.setImageDrawable(this.getResources().getDrawable(R.drawable.fab_plus));
         }
     }
-    public static void fabhiderfromothers(){
+    public static void fabHiderFromOthers(){
         visibility = false;
         fabPriority.setVisibility(View.GONE);
     }

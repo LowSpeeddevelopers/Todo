@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -87,9 +88,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         } else {
             holder.activator.setVisibility(View.VISIBLE);
             if (todoModel.isStatus()){
-                holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+                holder.activator.setChecked(true);
             } else {
-                holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+                holder.activator.setChecked(false);
             }
         }
         //notifyDataSetChanged();
@@ -115,7 +116,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 }
 
                 if(ViewTodoActivity.visibility){
-                    ViewTodoActivity.fabhiderfromothers();
+                    ViewTodoActivity.fabHiderFromOthers();
                 }
             }
         });
@@ -124,7 +125,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             public void onClick(View v) {
 
                 if(ViewTodoActivity.visibility){
-                    ViewTodoActivity.fabhiderfromothers();
+                    ViewTodoActivity.fabHiderFromOthers();
                 }
                 // To-Do check if database has activator valu false or true
                 //if database value is false then on click button will turn on
@@ -132,11 +133,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 TodoModel model = mTodo.get(position);
                 Log.e("position", position+"");
                 if(mTodo.get(position).isStatus()){
-                    holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonoff));
+                    holder.activator.setChecked(false);
                     reminderStatusUpdate(position, model, false);
                     AlarmReceiver.cancelAlarm(mContext, model.getAlarmId());
                 }else {
-                    holder.activator.setImageDrawable(mContext.getResources().getDrawable(R.drawable.buttonon));
+                    holder.activator.setChecked(true);
                     reminderStatusUpdate(position, model, true);
                 }
             }
@@ -146,7 +147,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             public void onClick(View v) {
 
                 if(ViewTodoActivity.visibility){
-                    ViewTodoActivity.fabhiderfromothers();
+                    ViewTodoActivity.fabHiderFromOthers();
                 }
                 if (holder.swipeRevealLayout.isOpened()){
                     viewBinderHelper.closeLayout(String.valueOf(position));
@@ -158,7 +159,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 if(ViewTodoActivity.visibility){
-                    ViewTodoActivity.fabhiderfromothers();
+                    ViewTodoActivity.fabHiderFromOthers();
                 }
                 updateTodoItem(position);
                 holder.swipeRevealLayout.close(true);
@@ -189,7 +190,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             @Override
             public void onSlide(SwipeRevealLayout view, float slideOffset) {
                 if(ViewTodoActivity.visibility){
-                    ViewTodoActivity.fabhiderfromothers();
+                    ViewTodoActivity.fabHiderFromOthers();
                 }
             }
         });
@@ -217,7 +218,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     class ViewHolder extends RecyclerView.ViewHolder {
         SwipeRevealLayout swipeRevealLayout;
         TextView title, tvDelete, tvUpdate;
-        ImageView vib,ring, activator;
+        ImageView vib,ring;
+        Switch activator;
         LinearLayout myLayout;
         View sideView;
         ViewHolder(@NonNull View itemView) {
@@ -230,7 +232,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             title = itemView.findViewById(R.id.tvTitle);
             vib=itemView.findViewById(R.id.imgVibrate);
             ring=itemView.findViewById(R.id.imgRing);
-            activator =itemView.findViewById(R.id.activator);
+            activator =itemView.findViewById(R.id.item_switch);
             myLayout=itemView.findViewById(R.id.mylayout);
 
         }
