@@ -123,16 +123,16 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
-            <ImageView
-                android:id="@+id/activator"
+            
+
+            <Switch
+                android:id="@+id/item_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               android:layout_margin="@dimen/margin_8dp"
-                android:src="@drawable/buttonon"
-                android:contentDescription="@string/todo" />
-
-
+                android:layout_marginRight="@dimen/margintop_10dp"
+                android:textOff="OFF"
+                android:textOn="ON" />
 
         </LinearLayout>
     </FrameLayout>
