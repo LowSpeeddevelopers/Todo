@@ -44,6 +44,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
     private static RelativeLayout fabPriority;
     private TodoAdapter todoAdapter;
     private TodoDb todoDb;
+    private FloatingActionButton fabAdd;
     int hour, minute;
     int year,month,day;
     Calendar cal;
@@ -83,7 +84,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_todo);
          rvTodo = findViewById(R.id.rv_todo);
-        FloatingActionButton fabAdd = findViewById(R.id.fab_add);
+         fabAdd = findViewById(R.id.fab_add);
         linearLayout=findViewById(R.id.linearLayout);
         fabPriority = findViewById(R.id.fab_priority);
         btnHigh = findViewById(R.id.btn_high);
@@ -119,6 +120,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(todoAdapter.isopened && todoAdapter.positon!=null){
                     todoAdapter.closeLayout();
                 }
@@ -211,9 +213,11 @@ public class  ViewTodoActivity extends AppCompatActivity {
         if (!visibility){
             visibility = true;
             fabPriority.setVisibility(View.VISIBLE);
+            fabAdd.setImageDrawable(this.getResources().getDrawable(R.drawable.close_button));
         } else {
             visibility = false;
             fabPriority.setVisibility(View.GONE);
+            fabAdd.setImageDrawable(this.getResources().getDrawable(R.drawable.fab_plus));
         }
     }
     public static void fabhiderfromothers(){
