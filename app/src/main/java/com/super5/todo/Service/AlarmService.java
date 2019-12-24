@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.util.Log;
 import androidx.annotation.Nullable;
 
-import com.super5.todo.Activity.NotificationViewer;
+import com.super5.todo.Notification.NotificationViewer;
 import com.super5.todo.BroadcastReceiver.AlarmReceiver;
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.db.TodoDb;

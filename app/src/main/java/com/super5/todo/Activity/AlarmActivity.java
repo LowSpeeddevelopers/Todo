@@ -1,9 +1,5 @@
 package com.super5.todo.Activity;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -17,18 +13,12 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
-import com.super5.todo.Adapter.TodoAdapter;
 import com.super5.todo.Model.TodoModel;
+import com.super5.todo.Notification.NotificationViewer;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 
 public class AlarmActivity extends AppCompatActivity {
