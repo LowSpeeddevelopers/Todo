@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -44,7 +45,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
     private static RelativeLayout fabPriority;
     private TodoAdapter todoAdapter;
     private TodoDb todoDb;
-    private FloatingActionButton fabAdd;
+    private static FloatingActionButton fabAdd;
     int hour, minute;
     int year,month,day;
     Calendar cal;
@@ -113,6 +114,8 @@ public class  ViewTodoActivity extends AppCompatActivity {
         rvTodo.setHasFixedSize(true);
         rvTodo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         todoAdapter = new TodoAdapter(ViewTodoActivity.this,todoModels);
+
+        context=getApplicationContext();
         Log.e("data 1",todoModels.toString());
         setupToolbar();
         rvTodo.setAdapter(todoAdapter);
@@ -220,9 +223,12 @@ public class  ViewTodoActivity extends AppCompatActivity {
             fabAdd.setImageDrawable(this.getResources().getDrawable(R.drawable.fab_plus));
         }
     }
+
+    static Context context;
     public static void fabHiderFromOthers(){
         visibility = false;
         fabPriority.setVisibility(View.GONE);
+        fabAdd.setImageDrawable(context.getResources().getDrawable(R.drawable.fab_plus));
     }
     void showHomeDialogueBox(){
         mDrawer.closeMenu(true);

@@ -145,7 +145,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(ViewTodoActivity.visibility){
                     ViewTodoActivity.fabHiderFromOthers();
                 }
