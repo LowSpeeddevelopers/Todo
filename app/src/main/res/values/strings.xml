@@ -26,7 +26,6 @@
     <string name="text_priority">How does the priority work?</string>
     <string name="text_update_delete">How can I update or delete my remainder?</string>
     <string name="text_transfer">How do I share my app to others?</string>
-    <string name="text_question">Did not find the answer to your questions?</string>
     <string name="todo">TODO</string>
     <string name="project_title">ADVANCED PROFESSIONAL COACHING WITH INDUSTRY ATTACHMENT</string>
     <string name="project_email">pd.sdmga@gmail.com</string>
@@ -89,10 +88,7 @@
     <string-array name="string_array_transfer">
         <item>Click the share button to share your app with others.</item>
     </string-array>
-    <string-array name="string_array_question">
-        <item>Yes</item>
-        <item>No</item>
-    </string-array>
+
 
 
 </resources>

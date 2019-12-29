@@ -93,7 +93,6 @@ public class HelpActivity extends AppCompatActivity {
         listDataGroup.add(getString(R.string.text_priority));
         listDataGroup.add(getString(R.string.text_update_delete));
         listDataGroup.add(getString(R.string.text_transfer));
-        listDataGroup.add(getString(R.string.text_question));
         String[] array;
         array = getResources().getStringArray(R.array.string_array_on_off);
         List<String> onList = new ArrayList<>(Arrays.asList(array));
@@ -105,7 +104,6 @@ public class HelpActivity extends AppCompatActivity {
         List<String> remainderList = new ArrayList<>(Arrays.asList(array));
         array = getResources().getStringArray(R.array.string_array_transfer);
         List<String> transferList = new ArrayList<>(Arrays.asList(array));
-        array = getResources().getStringArray(R.array.string_array_question);
         List<String> questionList = new ArrayList<>(Arrays.asList(array));
         // Adding child data
         listDataChild.put(listDataGroup.get(0), onList);
@@ -113,7 +111,6 @@ public class HelpActivity extends AppCompatActivity {
         listDataChild.put(listDataGroup.get(2), priorityList);
         listDataChild.put(listDataGroup.get(3), remainderList);
         listDataChild.put(listDataGroup.get(4), transferList);
-        listDataChild.put(listDataGroup.get(5), questionList);
         // notify the adapter
         expandableListViewAdapter.notifyDataSetChanged();
     }
