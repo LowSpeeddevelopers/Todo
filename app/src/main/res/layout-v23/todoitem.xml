@@ -73,7 +73,7 @@
                 android:id="@+id/side_view"
                 android:layout_width="@dimen/viewwidth_10dp"
                 android:layout_height="match_parent"
-                android:background="#1E7090" />
+                android:background="@color/colorFab" />
 
 
             <LinearLayout

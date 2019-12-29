@@ -64,7 +64,9 @@
                     android:layout_width="match_parent"
                     android:id="@+id/edt_update_note"
                     android:hint="@string/note"
-                    android:inputType="textNoSuggestions|textCapSentences"
+                    android:scrollHorizontally="false"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
                     android:maxLength="150"
                     android:layout_height="wrap_content"/>
                 <TextView

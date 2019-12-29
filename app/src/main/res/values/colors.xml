@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#673AB7</color>
-    <color name="colorPrimaryDark">#1A2F68</color>
-    <color name="colorAccent">#800080</color>
+    <color name="colorPrimary">#307D7E</color>
+    // #E35433, #238844, #6D7B8D, #736AFF, #307D7E, #F75D59, #F778A1
+    <color name="colorPrimaryDark">#307D7E</color>
+    <color name="colorAccent">#307D7E</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#D9E5F0</color>
     <color name="contactColor">#D6D4D5</color>
-    <color name="colorNavyBlue">#4880D5</color>
-    <color name="colorGreen">#04D9C5</color>
+    <color name="colorNavyBlue">#000000</color>
+    <color name="colorFab">#1E7090</color>
     <color name="colorRose">#f498ad</color>
 
     <color name="colorOrange">#FA9B14</color>

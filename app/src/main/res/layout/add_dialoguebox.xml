@@ -5,7 +5,10 @@
     android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/padding_8dp"
-    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:contentPadding="30dp"
+    card_view:cardElevation="4dp"
+    card_view:cardMaxElevation="8dp"
     android:background="@color/colorWhite"
     android:layout_margin="@dimen/margin_8dp"
     android:orientation="vertical">
@@ -64,13 +67,17 @@
             android:layout_marginBottom="@dimen/marginbottom_4dp"
             android:layout_marginEnd="@dimen/marginend_8dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
                 android:id="@+id/edt_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="@string/note"
-                android:inputType="textNoSuggestions|textCapSentences"
-                android:maxLength="150"
-                android:layout_height="wrap_content"/>
+                android:scrollHorizontally="false"
+                 android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:maxLength="150" />
+
             <TextView
                 android:id="@+id/note_count"
                 android:layout_width="match_parent"
