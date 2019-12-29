@@ -19,6 +19,7 @@ import com.super5.todo.Notification.NotificationViewer;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
 
+import pl.droidsonroids.gif.GifImageView;
 
 
 public class AlarmActivity extends AppCompatActivity {
@@ -26,10 +27,17 @@ public class AlarmActivity extends AppCompatActivity {
     MediaPlayer player;
     Vibrator v;
 
+    GifImageView gifImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
+
+        gifImageView=findViewById(R.id.gifimageview);
+
+
+
 
 
         Intent intent = getIntent();

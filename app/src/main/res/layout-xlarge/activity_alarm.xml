@@ -59,6 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
             <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gifimageview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="@dimen/padding_50dp"
