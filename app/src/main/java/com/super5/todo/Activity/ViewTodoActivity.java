@@ -27,6 +27,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+
+//import com.google.android.gms.ads.AdListener;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.InterstitialAd;
+//import com.google.android.gms.ads.MobileAds;
+//import com.google.android.gms.ads.initialization.InitializationStatus;
+//import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -63,6 +70,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
     public RecyclerView rvTodo;
 
 
+//    private InterstitialAd mInterstitialAd;
 
 
 
@@ -114,6 +122,16 @@ public class  ViewTodoActivity extends AppCompatActivity {
         rvTodo.setHasFixedSize(true);
         rvTodo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         todoAdapter = new TodoAdapter(ViewTodoActivity.this,todoModels);
+
+
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+//        });
+//        mInterstitialAd = new InterstitialAd(this);
+//        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
 
         context=getApplicationContext();
         Log.e("data 1",todoModels.toString());
@@ -170,14 +188,25 @@ public class  ViewTodoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 priority = "high";
-                showAddDialogueBox();
+
+//                if (mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                } else {
+//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+//                }
+
             }
         });
         btnLow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 priority = "low";
-                showAddDialogueBox();
+
+//                if (mInterstitialAd.isLoaded()) {
+//                    mInterstitialAd.show();
+//                } else {
+//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+//                }
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +239,15 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 showShareDialougeBox();
             }
         });
+
+
+//        mInterstitialAd.setAdListener(new AdListener(){
+//            @Override
+//            public void onAdClosed() {
+//                showAddDialogueBox();
+//            }
+//        });
+
     }
 
     public void fabHider(){

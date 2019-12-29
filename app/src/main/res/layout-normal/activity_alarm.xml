@@ -58,11 +58,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-            <ImageView
+            <pl.droidsonroids.gif.GifImageView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="@dimen/padding_50dp"
-                android:src="@drawable/alarm_black"
+                android:src="@drawable/clock"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

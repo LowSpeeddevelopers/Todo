@@ -14,6 +14,10 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission  android:name="android.permission.GET_TASKS"/>
 
+<!--    <meta-data-->
+<!--        android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--        android:value="ca-app-pub-6856353031939866~8196916344"/>-->
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
