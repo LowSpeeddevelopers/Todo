@@ -27,9 +27,8 @@
     <string name="text_update_delete">How can I update or delete my remainder?</string>
     <string name="text_transfer">How do I share my app to others?</string>
     <string name="todo">TODO</string>
-    <string name="project_title">ADVANCED PROFESSIONAL COACHING WITH INDUSTRY ATTACHMENT</string>
-    <string name="project_email">pd.sdmga@gmail.com</string>
-    <string name="project_number">+88–02–8181286</string>
+    <string name="company_about">Next Tech Limited is a Software Development Company.</string>
+    <string name="company_email">Email : </string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="time">Time</string>
