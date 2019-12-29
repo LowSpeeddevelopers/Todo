@@ -84,7 +84,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         final Calendar calendar = dateAndTimeParse(todoModel.getDate(), todoModel.getTime());
 
         if (calendar.before(Calendar.getInstance())){
-            holder.activator.setVisibility(View.GONE);
+            holder.activator.setVisibility(View.INVISIBLE);
         } else {
             holder.activator.setVisibility(View.VISIBLE);
             if (todoModel.isStatus()){
@@ -93,7 +93,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 holder.activator.setChecked(false);
             }
         }
-        //notifyDataSetChanged();
+
         if (todoModel.isRing()){
             holder.ring.setVisibility(View.VISIBLE);
         } else {
@@ -381,9 +381,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 String time = update_time.getText().toString();
                 boolean ring = cbRing.isChecked();
                 boolean vibration = cbVibration.isChecked();
-                boolean status = mTodo.get(position).isStatus();
 
-                TodoModel model = new TodoModel(alarmId, priority, title, note, date, time, ring, vibration, status, false);
+                TodoModel model = new TodoModel(alarmId, priority, title, note, date, time, ring, vibration, true, false);
 
                 Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
 
