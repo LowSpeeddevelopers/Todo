@@ -27,13 +27,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-
-//import com.google.android.gms.ads.AdListener;
-//import com.google.android.gms.ads.AdRequest;
-//import com.google.android.gms.ads.InterstitialAd;
-//import com.google.android.gms.ads.MobileAds;
-//import com.google.android.gms.ads.initialization.InitializationStatus;
-//import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -64,13 +63,15 @@ public class  ViewTodoActivity extends AppCompatActivity {
     public static boolean visibility;
     String priority;
 
+    Calendar calendar;
+
     AlertDialog.Builder builder;
     AlertDialog alertDialog;
     View dialogView;
     public RecyclerView rvTodo;
 
 
-//    private InterstitialAd mInterstitialAd;
+    private InterstitialAd mInterstitialAd;
 
 
 
@@ -102,7 +103,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(ViewTodoActivity.this);
 
 
-        Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
@@ -124,13 +125,13 @@ public class  ViewTodoActivity extends AppCompatActivity {
         todoAdapter = new TodoAdapter(ViewTodoActivity.this,todoModels);
 
 
-//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-//            @Override
-//            public void onInitializationComplete(InitializationStatus initializationStatus) {}
-//        });
-//        mInterstitialAd = new InterstitialAd(this);
-//        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-//        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+        });
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
 
         context=getApplicationContext();
@@ -189,11 +190,11 @@ public class  ViewTodoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 priority = "high";
 
-//                if (mInterstitialAd.isLoaded()) {
-//                    mInterstitialAd.show();
-//                } else {
-//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-//                }
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    showAddDialogueBox();
+                }
 
             }
         });
@@ -202,11 +203,11 @@ public class  ViewTodoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 priority = "low";
 
-//                if (mInterstitialAd.isLoaded()) {
-//                    mInterstitialAd.show();
-//                } else {
-//                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-//                }
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    showAddDialogueBox();
+                }
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
@@ -241,12 +242,13 @@ public class  ViewTodoActivity extends AppCompatActivity {
         });
 
 
-//        mInterstitialAd.setAdListener(new AdListener(){
-//            @Override
-//            public void onAdClosed() {
-//                showAddDialogueBox();
-//            }
-//        });
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdClosed() {
+                showAddDialogueBox();
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
 
     }
 
@@ -467,9 +469,10 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 timeSetter.setText(userTime);
 
             }
-        },hour,minute, DateFormat.is24HourFormat(getApplicationContext()));
+        },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(getApplicationContext()));
         timePickerDialog.show();
     }
+
     private void datePicker(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(ViewTodoActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -481,7 +484,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 cal.set(year,month,dayOfMonth);
                 dateSetter.setText(userDate);
             }
-        }, year,month-1,day);
+        }, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)-1,calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
         datePickerDialog.show();
     }

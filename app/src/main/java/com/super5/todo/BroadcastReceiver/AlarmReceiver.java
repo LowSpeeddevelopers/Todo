@@ -51,7 +51,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             Log.e("alarm", "Boot not Completed Called");
 
-            Toast.makeText(context,"Wake Up!",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"Wake Up!",Toast.LENGTH_SHORT).show();
             Log.e("alarm","Alarm called");
 
             if(intent.hasExtra("alarm_id")){
