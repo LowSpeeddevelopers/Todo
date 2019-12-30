@@ -2,22 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.super5.todo">
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission  android:name="android.permission.GET_TASKS"/>
-
-
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -27,13 +22,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         >
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5998239289032756~4272107060"/>
-
-
-
         <activity android:name=".Activity.HelpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2">
@@ -41,7 +32,6 @@
         </activity>
         <activity android:name=".Activity.AlarmActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
@@ -50,13 +40,11 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.ViewTodoActivity"
             android:screenOrientation="portrait"/>
-
         <receiver
             android:name=".BroadcastReceiver.AlarmReceiver"
             android:directBootAware="true"
@@ -67,15 +55,12 @@
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
         <service android:name=".Service.AlarmService"
             android:enabled="true"
             android:exported="false"
             android:process=":remote" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>

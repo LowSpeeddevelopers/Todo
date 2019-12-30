@@ -3,24 +3,18 @@
     <string name="afroz_name">Afroz hossain</string>
     <string name="afroz_mail">afrozhossain@gmail.com</string>
     <string name="afroz_fb">fb.com/afroz.nero1</string>
-
     <string name="hridoy_name">Qazi Mahbubul Hasan</string>
     <string name="hridoy_mail">hridoyhasan14@gmail.com</string>
     <string name="hridoy_fb">fb.com/hridoy.prolife</string>
-
     <string name="noyon_name">Nayan Chakrabarty</string>
     <string name="noyon_mail">nayandcc5@gmail.com</string>
     <string name="noyon_fb">fb.com/ncbcse</string>
-
     <string name="taki_name">Shahariar Newaz Taki</string>
     <string name="taki_mail">shahariarnawshintaki@gmail.com</string>
     <string name="taki_fb">fb.com/shahariarnawshin.taki</string>
-
     <string name="gk_name">G.K.Snigdha</string>
     <string name="gk_mail">gksnigdhacse41@gmail.com</string>
     <string name="gk_fb">fb.com/100010615418972</string>
-
-
     <string name="text_on_off">How can I turn my alarm on or off?</string>
     <string name="text_add_remainder">How can I add my remainder?</string>
     <string name="text_priority">How does the priority work?</string>
@@ -87,7 +81,4 @@
     <string-array name="string_array_transfer">
         <item>Click the share button to share your app with others.</item>
     </string-array>
-
-
-
 </resources>

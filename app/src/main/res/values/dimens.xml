@@ -66,11 +66,8 @@
     <dimen name="textsize_12sp">12sp</dimen>
     <dimen name="viewmarginend">15dp</dimen>
     <dimen name="margintop_4dp">4dp</dimen>
-
     <dimen name="textsize_25sp">25sp</dimen>
     <dimen name="marginstart_8dp">8dp</dimen>
-
-
     <dimen name="marginbottom_2dp">2dp</dimen>
     <dimen name="marginend_8dp">8dp</dimen>
 </resources>

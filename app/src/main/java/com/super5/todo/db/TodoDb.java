@@ -100,6 +100,4 @@ public class TodoDb extends DbHelper {
         db.delete(DbHelper.TABLE_NAME, DbHelper.COL_ALARM_ID + "=" + id, null);
 
     }
-
-
 }
