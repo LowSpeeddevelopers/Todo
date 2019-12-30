@@ -74,9 +74,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     }
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        final TodoModel todoModel = mTodo.get(position);
+        TodoModel todoModel = mTodo.get(position);
+
         String title = todoModel.getTitle();
+        String date = todoModel.getDate();
+        String time = todoModel.getTime();
+
         holder.title.setText(title);
+        holder.dateText.setText(date);
+        holder.timeText.setText(time);
 
         builder = new AlertDialog.Builder(mContext);
         li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -216,7 +222,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     }
     class ViewHolder extends RecyclerView.ViewHolder {
         SwipeRevealLayout swipeRevealLayout;
-        TextView title, tvDelete, tvUpdate;
+        TextView title, tvDelete, tvUpdate, timeText, dateText;
         ImageView vib,ring;
         Switch activator;
         LinearLayout myLayout;
@@ -229,6 +235,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             tvDelete = itemView.findViewById(R.id.tv_delete);
             tvUpdate = itemView.findViewById(R.id.tv_update);
             title = itemView.findViewById(R.id.tvTitle);
+            timeText = itemView.findViewById(R.id.timetext);
+            dateText = itemView.findViewById(R.id.datetext);
             vib=itemView.findViewById(R.id.imgVibrate);
             ring=itemView.findViewById(R.id.imgRing);
             activator =itemView.findViewById(R.id.item_switch);
