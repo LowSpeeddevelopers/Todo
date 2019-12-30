@@ -54,8 +54,8 @@ public class  ViewTodoActivity extends AppCompatActivity {
     private static FloatingActionButton fabAdd;
     Calendar cal;
     private FlowingDrawer mDrawer;
-    TextView home, share, aboutUs, help, contact, btnHigh, btnLow;
-    ArrayList<TodoModel> todoModels;
+    TextView home, share, aboutUs, help, contact, btnHigh, btnLow, tvHigh, tvLow;
+    ArrayList<TodoModel> remainderData;
     String userDate, userTime;
     TextView timeSetter,dateSetter;
     public static boolean visibility;
@@ -98,6 +98,9 @@ public class  ViewTodoActivity extends AppCompatActivity {
         btnHigh = findViewById(R.id.btn_high);
         btnLow = findViewById(R.id.btn_low);
 
+        tvHigh = findViewById(R.id.tv_high);
+        tvLow = findViewById(R.id.tv_low);
+
         builder = new AlertDialog.Builder(ViewTodoActivity.this);
 
 
@@ -110,10 +113,10 @@ public class  ViewTodoActivity extends AppCompatActivity {
         aboutUs =findViewById(R.id.tv_about_us);
         cal=Calendar.getInstance();
         todoDb = new TodoDb(getApplicationContext());
-        todoModels = todoDb.getData();
+        remainderData = todoDb.getData();
         rvTodo.setHasFixedSize(true);
         rvTodo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        todoAdapter = new TodoAdapter(ViewTodoActivity.this,todoModels);
+        todoAdapter = new TodoAdapter(ViewTodoActivity.this, remainderData);
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -126,10 +129,54 @@ public class  ViewTodoActivity extends AppCompatActivity {
 
 
         context=getApplicationContext();
-        Log.e("data 1",todoModels.toString());
+        Log.e("data 1", remainderData.toString());
         setupToolbar();
         rvTodo.setAdapter(todoAdapter);
-                visibility = false;
+        visibility = false;
+
+        tvHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ArrayList<TodoModel> highRemainder = new ArrayList<>();
+
+                for (int i = 0; i<remainderData.size(); i++){
+                    if (remainderData.get(i).getPriority().equals("high")){
+                        highRemainder.add(remainderData.get(i));
+                    }
+                }
+
+                if (highRemainder!=null){
+                    todoAdapter = new TodoAdapter(ViewTodoActivity.this, highRemainder);
+                    rvTodo.setAdapter(todoAdapter);
+                } else {
+                    Toast.makeText(getApplicationContext(),"Data Null", Toast.LENGTH_LONG);
+                }
+            }
+        });
+
+        tvLow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<TodoModel> lowRemainder = new ArrayList<>();
+
+                for (int i = 0; i<remainderData.size(); i++){
+                    if (remainderData.get(i).getPriority().equals("low")){
+                        lowRemainder.add(remainderData.get(i));
+                    }
+                }
+
+                if (lowRemainder!=null){
+                    todoAdapter = new TodoAdapter(ViewTodoActivity.this, lowRemainder);
+                    rvTodo.setAdapter(todoAdapter);
+                } else {
+                    Toast.makeText(getApplicationContext(),"Data Null", Toast.LENGTH_LONG);
+                }
+
+
+            }
+        });
+
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -422,7 +469,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 if(isOk){
                     TodoModel todoModel = new TodoModel(alarmID,priority,title,note,date,time,ring,vibration,true, false);
                     todoDb.insertData(todoModel);
-                    todoModels.add(todoModel);
+                    remainderData.add(todoModel);
                     todoAdapter.notifyDataSetChanged();
                     AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID, false);
                     alertDialog.dismiss();
