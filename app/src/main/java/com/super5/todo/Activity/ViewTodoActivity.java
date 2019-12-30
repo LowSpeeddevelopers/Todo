@@ -38,6 +38,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.super5.todo.Adapter.TodoAdapter;
 import com.super5.todo.BroadcastReceiver.AlarmReceiver;
+import com.super5.todo.BuildConfig;
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
@@ -279,7 +280,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
         mDrawer.closeMenu(true);
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        String shareBody = "https://play.google.com/store/apps/details?id=com.super5.todo";
+        String shareBody = "https://play.google.com/store/apps/details?id="+ BuildConfig.APPLICATION_ID;
         String shareSub = "ToDo";
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
