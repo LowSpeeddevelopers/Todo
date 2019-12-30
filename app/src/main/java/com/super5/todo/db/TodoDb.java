@@ -6,28 +6,15 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
 import com.super5.todo.Model.TodoModel;
-
 import java.util.ArrayList;
-
 public class TodoDb extends DbHelper {
-
-
     public TodoDb(Context context) {
         super(context);
     }
-
     public void insertData(TodoModel todoModel){
         SQLiteDatabase db = getWritableDatabase();
-
-
-
-
-        Log.e("todoid",String.valueOf(todoModel.getAlarmId()));
-
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(DbHelper.COL_ALARM_ID, todoModel.getAlarmId());
         contentValues.put(DbHelper.COL_PRIORITY, todoModel.getPriority());
         contentValues.put(DbHelper.COL_TITLE, todoModel.getTitle());
@@ -38,10 +25,8 @@ public class TodoDb extends DbHelper {
         contentValues.put(DbHelper.COL_VIBRATION, todoModel.isVibration());
         contentValues.put(DbHelper.COL_STATUS, todoModel.isStatus());
         contentValues.put(DbHelper.COL_ALARM_RES, todoModel.isAlarmRes());
-
         try {
             db.insert(DbHelper.TABLE_NAME,null,contentValues);
-            Log.i("Insert", "Hoise");
         } catch (SQLException e)
         {
             Log.e("Insert Eroor", e.toString());
@@ -49,15 +34,10 @@ public class TodoDb extends DbHelper {
 
         db.close();
     }
-
     public ArrayList<TodoModel> getData(){
-
         ArrayList<TodoModel> data = new ArrayList<>();
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor c = db.query(TABLE_NAME,null,null,null,null,null,null);
-
         while (c.moveToNext()){
             int alarmId = c.getInt(c.getColumnIndex(COL_ALARM_ID));
             String priority = c.getString(c.getColumnIndex(COL_PRIORITY));
@@ -69,32 +49,19 @@ public class TodoDb extends DbHelper {
             boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
             boolean status = c.getInt(c.getColumnIndex(COL_STATUS)) > 0;
             boolean alarmRes = c.getInt(c.getColumnIndex(COL_ALARM_RES)) > 0;
-
             TodoModel todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status, alarmRes);
             data.add(todoModel);
-
         }
 
         db.close();
         c.close();
-
-        Log.e("data 2", data.toString());
-
-
-
         return data;
     }
-
     public TodoModel getDataByAlarmID(int alarmID){
-
         TodoModel todoModel = null;
-
         SQLiteDatabase db = this.getReadableDatabase();
-
         String query = "select * from " + DbHelper.TABLE_NAME+ " where "+DbHelper.COL_ALARM_ID+"="+ alarmID +"";
-
         Cursor c = db.rawQuery(query, null);
-
         while (c.moveToNext()){
             int alarmId = c.getInt(c.getColumnIndex(COL_ALARM_ID));
             String priority = c.getString(c.getColumnIndex(COL_PRIORITY));
@@ -106,25 +73,16 @@ public class TodoDb extends DbHelper {
             boolean vibration = c.getInt(c.getColumnIndex(COL_VIBRATION)) > 0;
             boolean status = c.getInt(c.getColumnIndex(COL_STATUS)) > 0;
             boolean alarmRes = c.getInt(c.getColumnIndex(COL_ALARM_RES)) > 0;
-
             todoModel = new TodoModel(alarmId,priority,title,note,date,time,ring,vibration,status,alarmRes);
-
         }
-
         db.close();
         c.close();
-
         return todoModel;
     }
-
-
     public int updateData(TodoModel todoModels){
         SQLiteDatabase db = this.getWritableDatabase();
-
         int id = todoModels.getAlarmId();
-
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(DbHelper.COL_ALARM_ID, todoModels.getAlarmId());
         contentValues.put(DbHelper.COL_PRIORITY, todoModels.getPriority());
         contentValues.put(DbHelper.COL_TITLE, todoModels.getTitle());
@@ -135,15 +93,11 @@ public class TodoDb extends DbHelper {
         contentValues.put(DbHelper.COL_VIBRATION, todoModels.isVibration());
         contentValues.put(DbHelper.COL_STATUS, todoModels.isStatus());
         contentValues.put(DbHelper.COL_ALARM_RES, todoModels.isAlarmRes());
-
         return db.update(DbHelper.TABLE_NAME,contentValues,DbHelper.COL_ALARM_ID+"="+id,null);
     }
-
-    public int deleteData(Integer id){
-
+    public void deleteData(Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
-
-        return db.delete(DbHelper.TABLE_NAME,DbHelper.COL_ALARM_ID+"="+id,null);
+        db.delete(DbHelper.TABLE_NAME, DbHelper.COL_ALARM_ID + "=" + id, null);
 
     }
 

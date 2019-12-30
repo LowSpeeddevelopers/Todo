@@ -6,7 +6,6 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.super5.todo.R;
-
 public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +18,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         },2000);
     }
-
     @Override
     protected void onPause() {
         super.onPause();

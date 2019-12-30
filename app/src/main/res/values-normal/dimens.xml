@@ -30,11 +30,8 @@
     <dimen name="marginend_30dp">30dp</dimen>
     <dimen name="textsize_25sp">25sp</dimen>
     <dimen name="marginstart_8dp">8dp</dimen>
-
-
     <dimen name="marginbottom_2dp">2dp</dimen>
     <dimen name="marginend_8dp">8dp</dimen>
-
     <dimen name="fabcardmargin_6dp">6dp</dimen>
     <dimen name="marginend_15dp">15dp</dimen>
     <dimen name="paddingbottom_30dp">30dp</dimen>

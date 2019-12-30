@@ -12,29 +12,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
 public class HelpActivity extends AppCompatActivity {
-
     private ExpandableListView expandableListView;
-
     private ExpandableListViewAdapter expandableListViewAdapter;
-
     private List<String> listDataGroup;
-
     private HashMap<String, List<String>> listDataChild;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         initViews();
         initListeners();
         initObjects();
         initListData();
-
     }
     public boolean onOptionsItemSelected(MenuItem item){
         if (item.getItemId() == android.R.id.home) {
@@ -43,16 +34,10 @@ public class HelpActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void initViews() {
-
         expandableListView = findViewById(R.id.expandableListView);
-
     }
-
     private void initListeners() {
-
-        // ExpandableListView on child click listener
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
             @Override
@@ -61,28 +46,16 @@ public class HelpActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        // ExpandableListView Group expanded listener
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
             @Override
             public void onGroupExpand(int groupPosition) {
             }
         });
-
     }
     private void initObjects() {
-
-        // initializing the list of groups
         listDataGroup = new ArrayList<>();
-
-        // initializing the list of child
         listDataChild = new HashMap<>();
-
-        // initializing the adapter object
         expandableListViewAdapter = new ExpandableListViewAdapter(this, listDataGroup, listDataChild);
-
-        // setting list adapter
         expandableListView.setAdapter(expandableListViewAdapter);
 
     }
@@ -105,15 +78,11 @@ public class HelpActivity extends AppCompatActivity {
         array = getResources().getStringArray(R.array.string_array_transfer);
         List<String> transferList = new ArrayList<>(Arrays.asList(array));
         List<String> questionList = new ArrayList<>(Arrays.asList(array));
-        // Adding child data
         listDataChild.put(listDataGroup.get(0), onList);
         listDataChild.put(listDataGroup.get(1), updateList);
         listDataChild.put(listDataGroup.get(2), priorityList);
         listDataChild.put(listDataGroup.get(3), remainderList);
         listDataChild.put(listDataGroup.get(4), transferList);
-        // notify the adapter
         expandableListViewAdapter.notifyDataSetChanged();
     }
-
-
 }

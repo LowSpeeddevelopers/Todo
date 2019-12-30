@@ -1,5 +1,4 @@
 package com.super5.todo.Adapter;
-//https://www.red5pro.com/docs/streaming/android.html#add-your-sdk-license-key-required
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -35,26 +34,19 @@ import com.super5.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
-
-
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     private Context mContext;
     private ArrayList<TodoModel> mTodo;
     private TextInputEditText update_title, update_note;
     private TextView update_date, update_time;
     private CheckBox cbRing, cbVibration;
-
     private TextView update_title_count, update_note_count;
-
     public boolean isopened =  false;
     public String positon = null;
-
-    AlertDialog.Builder builder;
-    LayoutInflater li;
-    View dialogView;
-
-    AlertDialog alertDialog;
-
+    private AlertDialog.Builder builder;
+    private LayoutInflater li;
+    private View dialogView;
+    private AlertDialog alertDialog;
     public void closeLayout(){
        viewBinderHelper.closeLayout(positon);
     }
@@ -63,9 +55,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         this.mContext = mContext;
         this.mTodo = mTodo;
     }
-
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,20 +64,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         TodoModel todoModel = mTodo.get(position);
-
         String title = todoModel.getTitle();
         String date = todoModel.getDate();
         String time = todoModel.getTime();
-
         holder.title.setText(title);
         holder.dateText.setText(date);
         holder.timeText.setText(time);
-
         builder = new AlertDialog.Builder(mContext);
         li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         final Calendar calendar = dateAndTimeParse(todoModel.getDate(), todoModel.getTime());
-
         if (calendar.before(Calendar.getInstance())){
             holder.activator.setVisibility(View.INVISIBLE);
         } else {
@@ -99,13 +83,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 holder.activator.setChecked(false);
             }
         }
-
         if (todoModel.isRing()){
             holder.ring.setVisibility(View.VISIBLE);
         } else {
             holder.ring.setVisibility(View.GONE);
         }
-
         if (todoModel.isVibration()){
             holder.vib.setVisibility(View.VISIBLE);
         } else {
@@ -115,12 +97,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 viewTodoItem(position);
-                Log.e("mylayout","called");
-                Log.e("isopened",String.valueOf(isopened));
                 if (isopened){
                    viewBinderHelper.closeLayout(positon);
                 }
-
                 if(ViewTodoActivity.visibility){
                     ViewTodoActivity.fabHiderFromOthers();
                 }
@@ -129,7 +108,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         holder.activator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(ViewTodoActivity.visibility){
                     ViewTodoActivity.fabHiderFromOthers();
                 }
@@ -137,7 +115,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 //if database value is false then on click button will turn on
                 //else if database value is true then on click button will will turn off an store the value in database.
                 TodoModel model = mTodo.get(position);
-                Log.e("position", position+"");
                 if(mTodo.get(position).isStatus()){
                     holder.activator.setChecked(false);
                     reminderStatusUpdate(position, model, false);
@@ -174,24 +151,18 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         holder.swipeRevealLayout.setSwipeListener(new SwipeRevealLayout.SwipeListener() {
             @Override
             public void onClosed(SwipeRevealLayout view) {
-
-
-                //isopened=false;
-
                 if(isopened && positon.equals(String.valueOf(position))){
                     isopened=false;
                 }
             }
             @Override
             public void onOpened(SwipeRevealLayout view) {
-
                 if(isopened && positon!=null){
                     viewBinderHelper.closeLayout(positon);
                 }
                 isopened=true;
                 positon = String.valueOf(position);
             }
-
             @Override
             public void onSlide(SwipeRevealLayout view, float slideOffset) {
                 if(ViewTodoActivity.visibility){
@@ -200,20 +171,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             }
         });
         if (mTodo != null && position < mTodo.size()) {
-//            TodoModel data = mTodo.get(position);
-//
-            // Use ViewBindHelper to restore and save the open/close state of the SwipeRevealView
-
-//            if (holder.swipeRevealLayout.isOpened()){
-//
-//                viewBinderHelper.closeLayout(String.valueOf(position));
-//            }
-
-            // put an unique string id as value, can be any string which uniquely define the data
             viewBinderHelper.bind(holder.swipeRevealLayout, String.valueOf(position));
-            //viewBinderHelper.setOpenOnlyOne(true);
-            // Bind your data here
-
         }
     }
     @Override
@@ -229,7 +187,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         View sideView;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             sideView = itemView.findViewById(R.id.side_view);
             swipeRevealLayout = itemView.findViewById(R.id.swipe_layout);
             tvDelete = itemView.findViewById(R.id.tv_delete);
@@ -241,22 +198,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             ring=itemView.findViewById(R.id.imgRing);
             activator =itemView.findViewById(R.id.item_switch);
             myLayout=itemView.findViewById(R.id.mylayout);
-
         }
     }
     private void reminderStatusUpdate(int position, TodoModel model, boolean status){
         TodoDb todoDb = new TodoDb(mContext);
-
         model.setStatus(status);
-
-        Log.d("dataid", model.getAlarmId().toString());
-        Log.d("datatitle", model.toString());
-
         Calendar calendar = dateAndTimeParse(model.getDate(), model.getTime());
-        
         if (calendar.after(Calendar.getInstance())){
             if(todoDb.updateData(model) >= 0){
-                Log.e("CalendarValue", String.valueOf(calendar));
                 AlarmReceiver.setAlarm(mContext,calendar,model.getAlarmId(), true);
                 mTodo.set(position, model);
                 notifyItemChanged(position, model);
@@ -266,10 +215,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         } else {
             Toast.makeText(mContext, "Alarm has been passed", Toast.LENGTH_SHORT).show();
         }
-
         notifyDataSetChanged();
     }
-
     private Calendar dateAndTimeParse(String date, String time){
         Calendar calendar = Calendar.getInstance();
         String[] strDate=date.split("/",3);
@@ -284,7 +231,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         return calendar;
     }
     private void deleteTodoItem(final int position) {
-
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(mContext)
                 // set message & title
                 .setTitle("Delete")
@@ -306,7 +252,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                     public void onClick(DialogInterface dialog, int which) {
 
                         dialog.dismiss();
-
                     }
                 })
                 .create();
@@ -316,10 +261,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         layoutParams.leftMargin=20;
         btnPositive.setLayoutParams(layoutParams);
     }
-
-
-
-
     private void updateTodoItem(final int position){
         dialogView = li.inflate(R.layout.update_dialoge_box,null);
         update_title = dialogView.findViewById(R.id.edt_update_title);
@@ -331,28 +272,20 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         cbRing = dialogView.findViewById(R.id.cb_ring);
         cbVibration = dialogView.findViewById(R.id.cb_vibration);
         Button updateButtton = dialogView.findViewById(R.id.btn_update);
-
         update_title_count = dialogView.findViewById(R.id.update_title_count);
         update_note_count = dialogView.findViewById(R.id.update_note_count);
-
         update_title.setText(mTodo.get(position).getTitle());
         update_note.setText(mTodo.get(position).getNote());
         update_date.setText(mTodo.get(position).getDate());
         update_time.setText(mTodo.get(position).getTime());
         cbRing.setChecked(mTodo.get(position).isRing());
         cbVibration.setChecked(mTodo.get(position).isVibration());
-
-
         builder.setView(null);
         builder.setView(dialogView);
-
         alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
-
         alertDialogDismiss();
-
         alertDialog.show();
-
         update_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -377,7 +310,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 timePicker();
             }
         });
-
         updateButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -389,38 +321,26 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 String time = update_time.getText().toString();
                 boolean ring = cbRing.isChecked();
                 boolean vibration = cbVibration.isChecked();
-
                 TodoModel model = new TodoModel(alarmId, priority, title, note, date, time, ring, vibration, true, false);
-
                 Calendar cal = dateAndTimeParse(model.getDate(), model.getTime());
-
                 if (title.isEmpty() || note.isEmpty()){
                     Toast.makeText(mContext, "Fields must contain data", Toast.LENGTH_SHORT).show();
                 } else if (cal.before(Calendar.getInstance())) {
                     Toast.makeText(mContext, "Your selected date before then now... Please check", Toast.LENGTH_LONG).show();
                 } else {
                     TodoDb todoDb = new TodoDb(mContext);
-                    Log.e("data", String.valueOf(alarmId));
-                    //AlarmReceiver.cancelAlarm(mContext, alarmId);
-
                     if (todoDb.updateData(model) <= 0) {
                         Toast.makeText(mContext, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                     } else {
-
                         AlarmReceiver.setAlarm(mContext, cal, model.getAlarmId(), true);
                         alertDialogDismiss();
-
                         mTodo.set(position, model);
                         notifyItemChanged(position, model);
-
-
-
                     }
                 }
                 notifyDataSetChanged();
             }
         });
-
         update_title.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -450,7 +370,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             }
         });
     }
-
     private void datePicker(){
         String date= update_date.getText().toString();
         String[] strDate=date.split("/",3);
@@ -461,9 +380,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             @Override
             public void onDateSet(DatePicker datePicker, final int year, int month, final int dayOfMonth) {
                 month++;
-                Log.e("day",String.valueOf(dayOfMonth));
-                Log.e("month",String.valueOf(month));
-                Log.e("year",String.valueOf(year));
                 dateFormater(dayOfMonth,month,year);
             }
         }, year,month-1,day);
@@ -483,7 +399,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         },hour,minute, DateFormat.is24HourFormat(mContext));
         timePickerDialog.show();
     }
-
     private void dateFormater(int day, int month, int year){
         //month+=1;
         String sDay, sMonth, sYear;
@@ -493,17 +408,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         String date= sDay + "/" +sMonth+"/" +sYear;
         update_date.setText(date);
     }
-
     private void timeFormater(int hour, int minute){
         String sMinute, sHour;
         if(minute < 10){sMinute="0"+minute;}else{sMinute=""+minute;}
         if(hour<10){sHour="0"+hour;}else{sHour=""+hour;}
         update_time.setText(sHour + ":" +sMinute );
     }
-
     private void viewTodoItem(final int position){
         dialogView = li.inflate(R.layout.itemview_dialoge_box,null);
-
         TextView itemTitle = dialogView.findViewById(R.id.item_title);
         TextView itemNote = dialogView.findViewById(R.id.item_note);
         TextView itemDate = dialogView.findViewById(R.id.item_date);
@@ -513,8 +425,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         ImageView imgItemRing = dialogView.findViewById(R.id.img_item_ring);
         ImageView imgItemVibration = dialogView.findViewById(R.id.img_item_vibrate);
         View viewSound = dialogView.findViewById(R.id.view_sound);
-
-
         itemTitle.setText(mTodo.get(position).getTitle());
         itemNote.setText(mTodo.get(position).getNote());
         itemDate.setText(mTodo.get(position).getDate());
@@ -525,29 +435,22 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         } else {
             imgItemRing.setVisibility(View.GONE);
         }
-
         if (mTodo.get(position).isVibration()){
             imgItemVibration.setVisibility(View.VISIBLE);
         } else {
             imgItemVibration.setVisibility(View.GONE);
         }
-
         if (mTodo.get(position).isRing() && mTodo.get(position).isVibration()){
             viewSound.setVisibility(View.VISIBLE);
         } else {
             viewSound.setVisibility(View.GONE);
         }
-
         builder.setView(null);
         builder.setView(dialogView);
-
         alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
-
         alertDialogDismiss();
         alertDialog.show();
-
-
         btnItemUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -555,7 +458,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
                 updateTodoItem(position);
             }
         });
-
         btnItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -564,15 +466,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
             }
         });
     }
-
     private void alertDialogDismiss(){
         if (alertDialog.isShowing()){
             alertDialog.dismiss();
         }
     }
-
-    public void updateData(){
-        notifyDataSetChanged();
-    }
-
 }

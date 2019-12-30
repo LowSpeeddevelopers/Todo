@@ -38,15 +38,13 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.super5.todo.Adapter.TodoAdapter;
 import com.super5.todo.BroadcastReceiver.AlarmReceiver;
+import com.super5.todo.BuildConfig;
 import com.super5.todo.Model.TodoModel;
 import com.super5.todo.R;
 import com.super5.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-
 public class  ViewTodoActivity extends AppCompatActivity {
-
     LinearLayout linearLayout;
     private static RelativeLayout fabPriority;
     private TodoAdapter todoAdapter;
@@ -60,35 +58,23 @@ public class  ViewTodoActivity extends AppCompatActivity {
     TextView timeSetter,dateSetter;
     public static boolean visibility;
     String priority;
-
     Calendar calendar;
-
     AlertDialog.Builder builder;
     AlertDialog alertDialog;
     View dialogView;
     public RecyclerView rvTodo;
-
-
     private InterstitialAd mInterstitialAd;
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e("tag","onStart called");
-
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         todoAdapter.notifyDataSetChanged();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.e("tag","onCreate called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_todo);
         rvTodo = findViewById(R.id.rv_todo);
@@ -97,13 +83,9 @@ public class  ViewTodoActivity extends AppCompatActivity {
         fabPriority = findViewById(R.id.fab_priority);
         btnHigh = findViewById(R.id.btn_high);
         btnLow = findViewById(R.id.btn_low);
-
         tvHigh = findViewById(R.id.tv_high);
         tvLow = findViewById(R.id.tv_low);
-
         builder = new AlertDialog.Builder(ViewTodoActivity.this);
-
-
         calendar = Calendar.getInstance();
         mDrawer=findViewById(R.id.drawerlayout);
         home=findViewById(R.id.tv_home);
@@ -119,8 +101,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
         rvTodo.setHasFixedSize(true);
         rvTodo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         todoAdapter = new TodoAdapter(ViewTodoActivity.this, remainderData);
-
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {}
@@ -128,70 +108,54 @@ public class  ViewTodoActivity extends AppCompatActivity {
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-
         context=getApplicationContext();
-        Log.e("data 1", remainderData.toString());
         setupToolbar();
         rvTodo.setAdapter(todoAdapter);
         visibility = false;
-
         tvHigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 highRemainder.clear();
-
                 for (int i = 0; i<remainderData.size(); i++){
                     if (remainderData.get(i).getPriority().equals("high")){
                         highRemainder.add(remainderData.get(i));
                     }
                 }
-
                 if (highRemainder!=null){
                     todoAdapter = new TodoAdapter(ViewTodoActivity.this, highRemainder);
                     rvTodo.setAdapter(todoAdapter);
                 } else {
-                    Toast.makeText(getApplicationContext(),"Data Null", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Data Null", Toast.LENGTH_LONG).show();
                 }
             }
         });
-
         tvLow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 lowRemainder.clear();
-
                 for (int i = 0; i<remainderData.size(); i++){
                     if (remainderData.get(i).getPriority().equals("low")){
                         lowRemainder.add(remainderData.get(i));
                     }
                 }
-
                 if (lowRemainder!=null){
                     todoAdapter = new TodoAdapter(ViewTodoActivity.this, lowRemainder);
                     rvTodo.setAdapter(todoAdapter);
                 } else {
-                    Toast.makeText(getApplicationContext(),"Data Null", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Data Null", Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
-
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(todoAdapter.isopened && todoAdapter.positon!=null){
                     todoAdapter.closeLayout();
                 }
                 fabHider();
             }
         });
-
         rvTodo.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
                 if (motionEvent.getAction() != MotionEvent.ACTION_UP) {
@@ -199,46 +163,35 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 }
                 View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
                 if (child != null) {
-                    // tapped on child
                     return false;
                 } else {
                    if(visibility){
                        fabHiderFromOthers();
                    }
-
                     if(todoAdapter.isopened && todoAdapter.positon!=null){
                         todoAdapter.closeLayout();
                     }
-
                     return true;
                 }
             }
-
             @Override
             public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
             }
-
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
             }
         });
-
-
         btnHigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 priority = "high";
-
                 showAddDialogueBox();
-
             }
         });
         btnLow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 priority = "low";
-
                 showAddDialogueBox();
             }
         });
@@ -272,17 +225,13 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 showShareDialougeBox();
             }
         });
-
-
         mInterstitialAd.setAdListener(new AdListener(){
             @Override
             public void onAdClosed() {
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
-
     }
-
     public void fabHider(){
         if (!visibility){
             visibility = true;
@@ -294,7 +243,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
             fabAdd.setImageDrawable(this.getResources().getDrawable(R.drawable.fab_plus));
         }
     }
-
     static Context context;
     public static void fabHiderFromOthers(){
         visibility = false;
@@ -304,52 +252,40 @@ public class  ViewTodoActivity extends AppCompatActivity {
     void showHomeDialogueBox(){
         mDrawer.closeMenu(true);
     }
-
     void showHelpDialogueBox(){
         mDrawer.closeMenu(true);
         startActivity(new Intent(ViewTodoActivity.this, HelpActivity.class));
     }
-
     void showContactDialogueBox(){
         mDrawer.closeMenu(true);
         dialogView = getLayoutInflater().inflate(R.layout.contact, null);
         builder.setView(null);
         builder.setView(dialogView);
-
         alertDialog = builder.create();
-
         alertDialog.setCanceledOnTouchOutside(true);
-
         alertDialogDismiss();
-
         alertDialog.show();
-
     }
     void showAboutDialogueBox(){
         mDrawer.closeMenu(true);
-
         dialogView = getLayoutInflater().inflate(R.layout.aboutus, null);
         builder.setView(null);
         builder.setView(dialogView);
-
         alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
-
         alertDialogDismiss();
         alertDialog.show();
-
     }
     void showShareDialougeBox(){
         mDrawer.closeMenu(true);
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        String shareBody = "https://play.google.com/store/apps/details?id=com.super5.todo";
+        String shareBody = "https://play.google.com/store/apps/details?id="+ BuildConfig.APPLICATION_ID;
         String shareSub = "ToDo";
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share using"));
     }
-
     void showAddDialogueBox(){
         dialogView = getLayoutInflater().inflate(R.layout.add_dialoguebox,null);
         final TextInputEditText txtTitle,txtNote;
@@ -357,21 +293,17 @@ public class  ViewTodoActivity extends AppCompatActivity {
         Button add;
         ImageView date,timePicker;
         final TextView tvTitleCount, tvNoteCount;
-
         txtTitle = dialogView.findViewById(R.id.edt_title);
         txtNote = dialogView.findViewById(R.id.edt_note);
         cbRing = dialogView.findViewById(R.id.cb_ring);
         cbVibration = dialogView.findViewById(R.id.cb_vibration);
         add= dialogView.findViewById(R.id.btn_add);
-
         tvTitleCount = dialogView.findViewById(R.id.title_count);
         tvNoteCount = dialogView.findViewById(R.id.note_count);
-
         date= dialogView.findViewById(R.id.imgdate);
         timePicker= dialogView.findViewById(R.id.imgtime);
         timeSetter= dialogView.findViewById(R.id.timesetter);
         dateSetter= dialogView.findViewById(R.id.daetsetter);
-
         timeSetter.setText(timeFormatter(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
         dateSetter.setText(dateFormatter(calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR)));
         if(priority.equals("high")){
@@ -405,10 +337,8 @@ public class  ViewTodoActivity extends AppCompatActivity {
             }
         });
         alertDialog=builder.create();
-
         builder.setView(null);
         builder.setView(dialogView);
-
         alertDialog=builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
         txtTitle.addTextChangedListener(new TextWatcher() {
@@ -425,7 +355,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 tvTitleCount.setText(count + "/50");
             }
         });
-
         txtNote.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -440,7 +369,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 tvNoteCount.setText(count + "/150");
             }
         });
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -451,7 +379,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 String time = timeSetter.getText().toString();
                 boolean ring = cbRing.isChecked();
                 boolean vibration = cbVibration.isChecked();
-
                 boolean isOk=true;
                 if(TextUtils.isEmpty(title)){
                     txtTitle.setError("Field Can Not Be Empty!");
@@ -481,22 +408,15 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID, false);
                     alertDialog.dismiss();
                     fabHiderFromOthers();
-
                     if (mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
-                    } else {
-
                     }
-
                 }
             }
         });
-
-
         alertDialogDismiss();
         alertDialog.show();
     }
-
     private void alertDialogDismiss(){
         if (alertDialog.isShowing()){
             alertDialog.dismiss();
@@ -511,19 +431,14 @@ public class  ViewTodoActivity extends AppCompatActivity {
                 cal.set(Calendar.SECOND,0);
                 userTime = timeFormatter(hourOfDay, minute);
                 timeSetter.setText(userTime);
-
             }
         },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(getApplicationContext()));
         timePickerDialog.show();
     }
-
     private void datePicker(){
         DatePickerDialog datePickerDialog = new DatePickerDialog(ViewTodoActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, final int year, final int month, final int dayOfMonth) {
-                Log.e("day",String.valueOf(dayOfMonth));
-                Log.e("month",String.valueOf(month));
-                Log.e("year",String.valueOf(year));
                 userDate = dateFormatter(dayOfMonth,month,year);
                 cal.set(year,month,dayOfMonth);
                 dateSetter.setText(userDate);
@@ -532,14 +447,12 @@ public class  ViewTodoActivity extends AppCompatActivity {
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
         datePickerDialog.show();
     }
-
     private String timeFormatter(int hour, int minute){
         String tempTime;
         String sMinute, sHour;
         if (minute < 10){ sMinute="0"+minute; } else { sMinute=""+minute; }
         if (hour < 10){ sHour="0"+hour; } else { sHour=""+hour; }
         tempTime=sHour + ":" +sMinute;
-        //tvTime.setText(sHour + ":" +sMinute );
         return tempTime;
     }
     private String dateFormatter(int day, int month, int year){
@@ -551,8 +464,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
         // tvDate.setText(date);
         return sDay + "/" +sMonth+"/" +sYear;
     }
-
-
     protected void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
