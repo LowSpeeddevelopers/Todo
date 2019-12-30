@@ -61,23 +61,25 @@
     <string name="contact_form_post_message">Please wait! We\'re sending your message to the support department…</string>
     <string name="contact_posted">Your message has been successfully delivered.</string>
     <string-array name="string_array_on_off">
-        <item>Click on the right side circular shaped red green color mixed button to turn on an alarm.</item>
-        <item>If the center of the circle shaped button is green it means your alarm is currently on and if it is red that means your alarm is off.</item>
+        <item>Click on the switch button to turn on and off an alarm.</item>
     </string-array>
 
     <string-array name="string_array_remainder">
-        <item>Click on the "+" button at the bottom of the screen to add an remainder.It will show you two buttons of priority you want.</item>
+        <item>Click on the "+" button at the bottom of the screen to add an remainder.It will show you two buttons of priority you want</item>
         <item>Select the priority you want.</item>
         <item>Type the title of your remainder at alarm field.</item>
         <item>Type the information or description about your remainder in the description field to set your remainder description.</item>
         <item>Pick the date you want to set alarm from the calender icon.</item>
         <item>Pick the time you want to set the alarm from the watch icon.</item>
         <item>Click save and you are good to go. Your alarm is set.</item>
+        <item>Hide priority again click on the "+" button</item>
     </string-array>
 
     <string-array name="string_array_priority">
-        <item>In low priority by default only vibration is selected </item>
-        <item>In high priority both ring and vibration is selected </item>
+        <item>In low priority by default only vibration is selected</item>
+        <item>In high priority both ring and vibration is selected</item>
+        <item>Click Low button to show low priority</item>
+        <item>Click High button to show high priority</item>
     </string-array>
 
     <string-array name="string_array_update_delete">
