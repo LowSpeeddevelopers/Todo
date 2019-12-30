@@ -44,10 +44,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginbottom20dp"
                 android:text="@string/company_email"
                 android:textColor="#000"
-                android:layout_marginBottom="@dimen/marginbottom20dp"
-                android:textSize="@dimen/textsize_20sp"/>
+                android:textSize="@dimen/textsize_20sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

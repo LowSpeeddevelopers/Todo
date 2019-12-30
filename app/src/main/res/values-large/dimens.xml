@@ -62,4 +62,9 @@
     <dimen name="marginbottom_8dp">8dp</dimen>
     <dimen name="margin_12dp">12dp</dimen>
     <dimen name="textsize_12sp">12sp</dimen>
+    <dimen name="margintop_4dp">4dp</dimen>
+
+
+
+
 </resources>

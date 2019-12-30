@@ -29,6 +29,12 @@
     <dimen name="menusize_260dp">260dp</dimen>
     <dimen name="marginend_30dp">30dp</dimen>
     <dimen name="textsize_25sp">25sp</dimen>
+    <dimen name="marginstart_8dp">8dp</dimen>
+
+
+    <dimen name="marginbottom_2dp">2dp</dimen>
+    <dimen name="marginend_8dp">8dp</dimen>
+
     <dimen name="fabcardmargin_6dp">6dp</dimen>
     <dimen name="marginend_15dp">15dp</dimen>
     <dimen name="paddingbottom_30dp">30dp</dimen>
@@ -40,7 +46,7 @@
     <dimen name="navigationbarheight_180dp">180dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="drawablepadding_8dp">8dp</dimen>
-    <dimen name="marginstart_8dp">8dp</dimen>
+
     <dimen name="margin_12dp">12dp</dimen>
     <dimen name="imagewidhth_40dp">40dp</dimen>
     <dimen name="imageheight_40dp">40dp</dimen>
@@ -50,10 +56,10 @@
     <dimen name="textviewwidth_100dp">100dp</dimen>
     <dimen name="viewwidth_10dp">10dp</dimen>
     <dimen name="margintop_2dp">2dp</dimen>
-    <dimen name="marginbottom_2dp">2dp</dimen>
+
     <dimen name="padding_10dp">10dp</dimen>
     <dimen name="margintop_8dp">8dp</dimen>
-    <dimen name="marginend_8dp">8dp</dimen>
+
     <dimen name="marginbottom_4dp">4dp</dimen>
     <dimen name="imagewidth_30dp">30dp</dimen>
     <dimen name="ringsize">15dp</dimen>
@@ -62,4 +68,5 @@
     <dimen name="marginend_12dp">12dp</dimen>
     <dimen name="marginbottom_8dp">8dp</dimen>
     <dimen name="textsize_12sp">12sp</dimen>
+    <dimen name="margintop_4dp">4dp</dimen>
 </resources>
