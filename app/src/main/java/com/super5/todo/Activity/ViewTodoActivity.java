@@ -55,7 +55,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
     Calendar cal;
     private FlowingDrawer mDrawer;
     TextView home, share, aboutUs, help, contact, btnHigh, btnLow, tvHigh, tvLow;
-    ArrayList<TodoModel> remainderData;
+    ArrayList<TodoModel> remainderData, lowRemainder, highRemainder;
     String userDate, userTime;
     TextView timeSetter,dateSetter;
     public static boolean visibility;
@@ -114,6 +114,8 @@ public class  ViewTodoActivity extends AppCompatActivity {
         cal=Calendar.getInstance();
         todoDb = new TodoDb(getApplicationContext());
         remainderData = todoDb.getData();
+        highRemainder = new ArrayList<>();
+        lowRemainder = new ArrayList<>();
         rvTodo.setHasFixedSize(true);
         rvTodo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         todoAdapter = new TodoAdapter(ViewTodoActivity.this, remainderData);
@@ -138,7 +140,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ArrayList<TodoModel> highRemainder = new ArrayList<>();
+                highRemainder.clear();
 
                 for (int i = 0; i<remainderData.size(); i++){
                     if (remainderData.get(i).getPriority().equals("high")){
@@ -158,7 +160,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
         tvLow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<TodoModel> lowRemainder = new ArrayList<>();
+                lowRemainder.clear();
 
                 for (int i = 0; i<remainderData.size(); i++){
                     if (remainderData.get(i).getPriority().equals("low")){
@@ -470,6 +472,11 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     TodoModel todoModel = new TodoModel(alarmID,priority,title,note,date,time,ring,vibration,true, false);
                     todoDb.insertData(todoModel);
                     remainderData.add(todoModel);
+                    if (priority.equals("high")){
+                        highRemainder.add(todoModel);
+                    } else {
+                        lowRemainder.add(todoModel);
+                    }
                     todoAdapter.notifyDataSetChanged();
                     AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID, false);
                     alertDialog.dismiss();
