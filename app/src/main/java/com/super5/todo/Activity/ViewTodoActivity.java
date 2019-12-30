@@ -52,13 +52,11 @@ public class  ViewTodoActivity extends AppCompatActivity {
     private TodoAdapter todoAdapter;
     private TodoDb todoDb;
     private static FloatingActionButton fabAdd;
-    int hour, minute;
-    int year,month,day;
     Calendar cal;
     private FlowingDrawer mDrawer;
     TextView home, share, aboutUs, help, contact, btnHigh, btnLow;
     ArrayList<TodoModel> todoModels;
-    String userDate, userTime, currentTime, currentDate;
+    String userDate, userTime;
     TextView timeSetter,dateSetter;
     public static boolean visibility;
     String priority;
@@ -104,13 +102,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
 
 
         calendar = Calendar.getInstance();
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        month = calendar.get(Calendar.MONTH);
-        year = calendar.get(Calendar.YEAR);
-        minute=calendar.get(Calendar.MINUTE);
-        hour=calendar.get(Calendar.HOUR_OF_DAY);
-        currentDate = dateFormatter(day,month,year);
-        currentTime = timeFormatter(hour, minute);
         mDrawer=findViewById(R.id.drawerlayout);
         home=findViewById(R.id.tv_home);
         share=findViewById(R.id.tv_share);
@@ -341,8 +332,8 @@ public class  ViewTodoActivity extends AppCompatActivity {
         timeSetter= dialogView.findViewById(R.id.timesetter);
         dateSetter= dialogView.findViewById(R.id.daetsetter);
 
-        timeSetter.setText(currentTime);
-        dateSetter.setText(currentDate);
+        timeSetter.setText(timeFormatter(calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)));
+        dateSetter.setText(dateFormatter(calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR)));
         if(priority.equals("high")){
             cbRing.setChecked(true);
             cbVibration.setChecked(true);
@@ -444,6 +435,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     todoAdapter.notifyDataSetChanged();
                     AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID, false);
                     alertDialog.dismiss();
+                    fabHiderFromOthers();
                 }
             }
         });
