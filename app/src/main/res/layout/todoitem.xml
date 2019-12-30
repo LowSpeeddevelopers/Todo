@@ -83,6 +83,9 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:maxLength="12"
+                    android:ellipsize="marquee"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/textsize22sp" />
 
@@ -147,8 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/margintop_10dp"
-                android:textOff="OFF"
-                android:textOn="ON" />
+                 />
 
 
 

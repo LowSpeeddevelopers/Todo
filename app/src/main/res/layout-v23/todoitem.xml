@@ -91,6 +91,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
+                    android:singleLine="true"
+                    android:maxLength="12"
+                    android:ellipsize="marquee"
                     android:textSize="@dimen/textsize22sp" />
 
                 <LinearLayout
@@ -153,9 +156,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="@dimen/margintop_10dp"
-                android:textOff="OFF"
-                android:textOn="ON" />
+                android:layout_marginEnd="@dimen/margintop_10dp"
+                 />
 
         </LinearLayout>
     </FrameLayout>
