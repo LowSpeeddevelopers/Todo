@@ -181,11 +181,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 priority = "high";
 
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    showAddDialogueBox();
-                }
+                showAddDialogueBox();
 
             }
         });
@@ -194,11 +190,7 @@ public class  ViewTodoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 priority = "low";
 
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    showAddDialogueBox();
-                }
+                showAddDialogueBox();
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
@@ -236,7 +228,6 @@ public class  ViewTodoActivity extends AppCompatActivity {
         mInterstitialAd.setAdListener(new AdListener(){
             @Override
             public void onAdClosed() {
-                showAddDialogueBox();
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
@@ -436,6 +427,13 @@ public class  ViewTodoActivity extends AppCompatActivity {
                     AlarmReceiver.setAlarm(ViewTodoActivity.this, cal, alarmID, false);
                     alertDialog.dismiss();
                     fabHiderFromOthers();
+
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+
+                    }
+
                 }
             }
         });
