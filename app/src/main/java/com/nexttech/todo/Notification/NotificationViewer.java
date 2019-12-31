@@ -1,4 +1,4 @@
-package com.super5.todo.Notification;
+package com.nexttech.todo.Notification;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -11,8 +11,8 @@ import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 
-import com.super5.todo.Activity.ViewTodoActivity;
-import com.super5.todo.R;
+import com.nexttech.todo.Activity.ViewTodoActivity;
+import com.nexttech.todo.R;
 
 public class NotificationViewer {
     private Context context;

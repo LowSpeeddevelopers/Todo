@@ -1,4 +1,4 @@
-package com.super5.todo.Model;
+package com.nexttech.todo.Model;
 
 public class TodoModel {
 

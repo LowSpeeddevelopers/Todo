@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.super5.todo">
+    package="com.nexttech.todo">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -34,19 +34,19 @@
 
 
 
-        <activity android:name=".Activity.HelpActivity"
+        <activity android:name="com.nexttech.todo.Activity.HelpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".Activity.ViewTodoActivity"/>
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.nexttech.todo.Activity.ViewTodoActivity"/>
         </activity>
-        <activity android:name=".Activity.AlarmActivity"
+        <activity android:name="com.nexttech.todo.Activity.AlarmActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SplashActivity"
+        <activity android:name="com.nexttech.todo.Activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,11 +54,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ViewTodoActivity"
+        <activity android:name="com.nexttech.todo.Activity.ViewTodoActivity"
             android:screenOrientation="portrait"/>
 
         <receiver
-            android:name=".BroadcastReceiver.AlarmReceiver"
+            android:name="com.nexttech.todo.BroadcastReceiver.AlarmReceiver"
             android:directBootAware="true"
             android:enabled="true"
             android:exported="true">
@@ -68,7 +68,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".Service.AlarmService"
+        <service android:name="com.nexttech.todo.Service.AlarmService"
             android:enabled="true"
             android:exported="false"
             android:process=":remote" />

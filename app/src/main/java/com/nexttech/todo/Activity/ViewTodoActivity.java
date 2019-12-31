@@ -1,4 +1,4 @@
-package com.super5.todo.Activity;
+package com.nexttech.todo.Activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -36,12 +35,12 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
-import com.super5.todo.Adapter.TodoAdapter;
-import com.super5.todo.BroadcastReceiver.AlarmReceiver;
-import com.super5.todo.BuildConfig;
-import com.super5.todo.Model.TodoModel;
-import com.super5.todo.R;
-import com.super5.todo.db.TodoDb;
+import com.nexttech.todo.Adapter.TodoAdapter;
+import com.nexttech.todo.BroadcastReceiver.AlarmReceiver;
+import com.nexttech.todo.BuildConfig;
+import com.nexttech.todo.Model.TodoModel;
+import com.nexttech.todo.R;
+import com.nexttech.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
 public class  ViewTodoActivity extends AppCompatActivity {

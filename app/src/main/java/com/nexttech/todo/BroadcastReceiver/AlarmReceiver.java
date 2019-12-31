@@ -1,4 +1,4 @@
-package com.super5.todo.BroadcastReceiver;
+package com.nexttech.todo.BroadcastReceiver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.widget.Toast;
 
-import com.super5.todo.Activity.AlarmActivity;
-import com.super5.todo.Service.AlarmService;
+import com.nexttech.todo.Activity.AlarmActivity;
+import com.nexttech.todo.Service.AlarmService;
 
 import java.util.Calendar;
 

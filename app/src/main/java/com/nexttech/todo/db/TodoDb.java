@@ -1,4 +1,4 @@
-package com.super5.todo.db;
+package com.nexttech.todo.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import com.super5.todo.Model.TodoModel;
+import com.nexttech.todo.Model.TodoModel;
 import java.util.ArrayList;
 public class TodoDb extends DbHelper {
     public TodoDb(Context context) {

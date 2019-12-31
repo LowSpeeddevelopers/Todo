@@ -1,12 +1,12 @@
-package com.super5.todo.Service;
+package com.nexttech.todo.Service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import androidx.annotation.Nullable;
-import com.super5.todo.BroadcastReceiver.AlarmReceiver;
-import com.super5.todo.Model.TodoModel;
-import com.super5.todo.Notification.NotificationViewer;
-import com.super5.todo.db.TodoDb;
+import com.nexttech.todo.BroadcastReceiver.AlarmReceiver;
+import com.nexttech.todo.Model.TodoModel;
+import com.nexttech.todo.Notification.NotificationViewer;
+import com.nexttech.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
 public class AlarmService extends Service {

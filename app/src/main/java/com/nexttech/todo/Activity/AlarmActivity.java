@@ -1,4 +1,4 @@
-package com.super5.todo.Activity;
+package com.nexttech.todo.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -9,14 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.super5.todo.Model.TodoModel;
-import com.super5.todo.Notification.NotificationViewer;
-import com.super5.todo.R;
-import com.super5.todo.db.TodoDb;
+import com.nexttech.todo.Model.TodoModel;
+import com.nexttech.todo.Notification.NotificationViewer;
+import com.nexttech.todo.R;
+import com.nexttech.todo.db.TodoDb;
 
 import pl.droidsonroids.gif.GifImageView;
 public class AlarmActivity extends AppCompatActivity {

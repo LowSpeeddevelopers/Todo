@@ -1,4 +1,4 @@
-package com.super5.todo;
+package com.nexttech.todo;
 
 import org.junit.Test;
 
