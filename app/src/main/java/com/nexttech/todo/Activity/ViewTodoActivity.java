@@ -474,5 +474,4 @@ public class  ViewTodoActivity extends AppCompatActivity {
             }
         });
     }
-
 }

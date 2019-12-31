@@ -60,10 +60,5 @@ public class NotificationViewer {
         if (noti != null) {
             noti.notify(alarmID, builder.build());
         }
-
-
     }
-
-
-
 }
