@@ -43,7 +43,7 @@ import com.nexttech.todo.R;
 import com.nexttech.todo.db.TodoDb;
 import java.util.ArrayList;
 import java.util.Calendar;
-public class  ViewTodoActivity extends AppCompatActivity {
+public class ViewTodoActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     private static RelativeLayout fabPriority;
     private TodoAdapter todoAdapter;
